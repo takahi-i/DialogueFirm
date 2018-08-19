@@ -33,7 +33,7 @@ namespace SimpleBot
                 }
                 intentConfigs.Add(new IntentConfig(name, type, expressions));
             }
-            return new Configuration();
+            return new Configuration(intentConfigs);
         }
     }
 }

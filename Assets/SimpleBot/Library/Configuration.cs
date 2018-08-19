@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SimpleBot {
     public class Configuration {
@@ -12,5 +13,10 @@ namespace SimpleBot {
         {
             this.intentConfigs = intentConfigs;
         }
+
+        public Int32 NumberofIntentions() {
+            return this.intentConfigs.Count;
+        }
+
     }
 }

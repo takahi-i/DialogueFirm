@@ -32,7 +32,7 @@ public class ConfigurationLoaderTest
 ";
 
         ConfigurationLoader configurationLoader = new ConfigurationLoader();
-        configurationLoader.loadFromString(jsonStr);
-        //Assert.AreEqual(2, (1 + 3));
+        var configuration = configurationLoader.loadFromString(jsonStr);
+        Assert.AreEqual(2, configuration.NumberofIntentions());
     }
 }
