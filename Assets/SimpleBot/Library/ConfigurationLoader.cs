@@ -13,7 +13,7 @@ namespace SimpleBot
 
         public Configuration loadFromFile(string configFilePath)
         {
-            System.IO.StreamReader sr = new System.IO.StreamReader("./sample.json");
+            System.IO.StreamReader sr = new System.IO.StreamReader(configFilePath);
             string jsonText = sr.ReadToEnd();
             return this.loadFromString(jsonText);
         }
@@ -21,6 +21,7 @@ namespace SimpleBot
         public Configuration loadFromString(string jsonText)
         {
             JsonNode json = JsonNode.Parse(jsonText);
+            return new Configuration();
         }
     }
 }

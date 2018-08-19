@@ -3,17 +3,18 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 
-public class TestIntentConfig {
+public class ConfigurationLoaderTest {
 
     [Test]
-    public void TestIntentConfigSimplePasses() {
+    public void ConfigurationLoaderTestSimplePasses() {
         // Use the Assert class to test conditions.
+        Assert.AreEqual(2, (1 + 1));
     }
 
     // A UnityTest behaves like a coroutine in PlayMode
     // and allows you to yield null to skip a frame in EditMode
     [UnityTest]
-    public IEnumerator TestIntentConfigWithEnumeratorPasses() {
+    public IEnumerator ConfigurationLoaderTestWithEnumeratorPasses() {
         // Use the Assert class to test conditions.
         // yield to skip a frame
         yield return null;
