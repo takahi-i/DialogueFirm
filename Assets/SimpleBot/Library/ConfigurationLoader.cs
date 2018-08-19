@@ -21,7 +21,8 @@ namespace SimpleBot
         public Configuration loadFromString(string jsonText)
         {
             JsonNode json = JsonNode.Parse(jsonText);
-            Debug.Log("hello: " + (string) json["name"].Get<string>());
+            Debug.Log("hello");
+            Debug.Log("hello: " + (string)json["intentions"][0]["name"].Get<string>());
             return new Configuration();
         }
     }
