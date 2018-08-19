@@ -15,16 +15,22 @@ public class ConfigurationLoaderTest
     ""intentions"": [
        {
             ""name"": ""repeat"",
-            ""pattern"" : {
+            ""match"" : {
                 ""type"" : ""verbatim"",
-                ""expression"" : [ ""repeat"", ""pardon me?"" ]
+                ""expressions"" : [ ""repeat"", ""pardon me?"" ]
             }
-        }
+       },
+       {
+            ""name"": ""question"",
+            ""match"" : {
+                ""type"" : ""verbatim"",
+                ""expressions"" : [ ""tell me"", ""show me"" ]
+            }
+       }
     ]
 }
 ";
-        //Debug.Log(jsonStr.Length);
-        //Debug.Log("length");
+
         ConfigurationLoader configurationLoader = new ConfigurationLoader();
         configurationLoader.loadFromString(jsonStr);
         //Assert.AreEqual(2, (1 + 3));

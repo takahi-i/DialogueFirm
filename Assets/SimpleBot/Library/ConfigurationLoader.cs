@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SimpleBot
@@ -20,9 +21,18 @@ namespace SimpleBot
 
         public Configuration loadFromString(string jsonText)
         {
+            var intentConfigs = new List<IntentConfig>();
             JsonNode json = JsonNode.Parse(jsonText);
-            Debug.Log("hello");
-            Debug.Log("hello: " + (string)json["intentions"][0]["name"].Get<string>());
+            foreach (var intention in json["intentions"])
+            {
+                var name = intention["name"].Get<string>();
+                var type = intention["match"]["type"].Get<string>();
+                var expressions = new List<string>();
+                foreach (var expression in intention["match"]["expressions"]) {
+                    expressions.Add(expression.Get<string>());
+                }
+                intentConfigs.Add(new IntentConfig(name, type, expressions));
+            }
             return new Configuration();
         }
     }
