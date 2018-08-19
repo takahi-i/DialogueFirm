@@ -8,7 +8,8 @@ namespace SimpleBot {
         {
         }
 
-        public Configuration(List<IntentConfig> intentConfigs) {
+        public Configuration(List<IntentConfig> intentConfigs)
+        {
             this.intentConfigs = intentConfigs;
         }
     }
