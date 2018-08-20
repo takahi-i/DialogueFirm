@@ -5,6 +5,15 @@ namespace SimpleBot
     public class IntentConfig
     {
         private string name;
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
         private MatchConfig match;
 
         public IntentConfig(string name, string type, List<string> patterns)

@@ -18,5 +18,9 @@ namespace SimpleBot {
             return this.intentConfigs.Count;
         }
 
+        public List<IntentConfig> GetIntentConfigs() {
+            return this.intentConfigs;
+        }
+
     }
 }

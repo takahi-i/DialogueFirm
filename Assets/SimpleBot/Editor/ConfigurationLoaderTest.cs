@@ -34,5 +34,6 @@ public class ConfigurationLoaderTest
         ConfigurationLoader configurationLoader = new ConfigurationLoader();
         var configuration = configurationLoader.loadFromString(jsonStr);
         Assert.AreEqual(2, configuration.NumberofIntentions());
+        Assert.AreEqual("repea", configuration.GetIntentConfigs()[0].Name);
     }
 }
