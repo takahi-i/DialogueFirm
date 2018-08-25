@@ -26,6 +26,11 @@ namespace SimpleBot
                 }
                 return false;
             }
+
+            public override string Name()
+            {
+                return this.name;
+            }
         }
     }
 }
