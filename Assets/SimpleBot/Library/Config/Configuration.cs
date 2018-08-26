@@ -21,6 +21,5 @@ namespace SimpleBot {
         public List<IntentConfig> GetIntentConfigs() {
             return this.intentConfigs;
         }
-
     }
 }
