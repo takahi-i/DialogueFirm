@@ -21,7 +21,7 @@ namespace SimpleBot
 
         public Configuration loadFromString(string jsonText)
         {
-            var intentConfigs = new List<IntentConfig>();
+            var builder = new ConfigurationBuilder();
             JsonNode json = JsonNode.Parse(jsonText);
             foreach (var intention in json["intentions"])
             {
@@ -31,9 +31,9 @@ namespace SimpleBot
                 foreach (var expression in intention["match"]["expressions"]) {
                     expressions.Add(expression.Get<string>());
                 }
-                intentConfigs.Add(new IntentConfig(name, type, expressions));
+                builder.AddIntent(name, type, expressions);
             }
-            return new Configuration(intentConfigs);
+            return builder.Build();
         }
     }
 }
