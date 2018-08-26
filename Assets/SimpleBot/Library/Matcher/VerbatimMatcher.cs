@@ -21,7 +21,7 @@ namespace SimpleBot
             public override bool Match(string input)
             {
                 var matched = patterns.Where(pattern => pattern.IsMatch(input) == true);
-                if (matched.Count() >= 0) {
+                if (matched.Count() > 0) {
                     return true;
                 }
                 return false;
