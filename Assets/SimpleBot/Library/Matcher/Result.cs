@@ -10,8 +10,8 @@ namespace SimpleBot {
 			public Dictionary<string, string> features;
 
 			public Result(string input,  bool success ,Dictionary<string, string> features) {
-				this.success = success;
 				this.input = input;
+				this.success = success;
 				this.features = features;
 			}
 		}	

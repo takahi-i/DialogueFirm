@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -10,8 +11,8 @@ namespace SimpleBot {
 			private List<string> slotNames;
 		    private Regex pattern;
 
-			public Template(Regex pattern, List<string> slots)  {
-				this.pattern = pattern;
+			public Template(string patternStr, List<string> slots)  {
+				this.pattern = new Regex(patternStr);
 				this.slotNames = slots;
 			}
 
