@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using SimpleBot.Matcher;
 
-namespace SimpleBot {
-    namespace Matcher {
-        public class TemplateMatcher : IntentMatcher {
-    	    private string name;
+namespace SimpleBot
+{
+    namespace Matcher
+    {
+        public class TemplateMatcher : IntentMatcher
+        {
+            private string name;
 
             public override bool Match(string input)
-        	{
-        		return false;
+            {
+                return false;
             }
 
             public override string Name()
@@ -18,5 +21,5 @@ namespace SimpleBot {
                 return this.name;
             }
         }
-    }  
+    }
 }

@@ -28,7 +28,8 @@ namespace SimpleBot
                 var name = intention["name"].Get<string>();
                 var type = intention["match"]["type"].Get<string>();
                 var expressions = new List<string>();
-                foreach (var expression in intention["match"]["expressions"]) {
+                foreach (var expression in intention["match"]["expressions"])
+                {
                     expressions.Add(expression.Get<string>());
                 }
                 builder.AddIntent(name, type, expressions);
