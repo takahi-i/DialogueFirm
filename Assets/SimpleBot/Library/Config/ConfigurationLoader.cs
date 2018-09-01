@@ -23,15 +23,29 @@ namespace SimpleBot
         {
             var builder = new ConfigurationBuilder();
             JsonNode json = JsonNode.Parse(jsonText);
+
+            // extract intents
             foreach (var intention in json["intentions"])
             {
                 var name = intention["name"].Get<string>();
                 var type = intention["match"]["type"].Get<string>();
                 var expressions = new List<string>();
-                foreach (var expression in intention["match"]["expressions"]) {
+                foreach (var expression in intention["match"]["expressions"])
+                {
                     expressions.Add(expression.Get<string>());
                 }
                 builder.AddIntent(name, type, expressions);
+            }
+
+            // extract types
+            foreach (var type in json["types"]) {
+                var name = type["name"].Get<string>();
+                var values = new List<string>();
+                foreach (var value in type["values"])
+                {
+                    values.Add(value.Get<string>());
+                }
+                builder.AddType(name, values);
             }
             return builder.Build();
         }

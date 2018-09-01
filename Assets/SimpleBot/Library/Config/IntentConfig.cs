@@ -24,11 +24,13 @@ namespace SimpleBot
             this.match = new MatchConfig(type, patterns);
         }
 
-        public string MatcherType() {
+        public string MatcherType()
+        {
             return this.match.MatchType;
         }
 
-        public List<string> Patterns() {
+        public List<string> Patterns()
+        {
             return this.match.Patterns;
         }
     }
