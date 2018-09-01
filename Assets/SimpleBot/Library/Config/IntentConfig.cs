@@ -18,10 +18,10 @@ namespace SimpleBot
             }
         }
 
-        public IntentConfig(string name, string type, List<string> patterns)
+        public IntentConfig(string name, string type, List<string> patterns, IDictionary<string, string> slots)
         {
             this.name = name;
-            this.match = new MatchConfig(type, patterns);
+            this.match = new MatchConfig(type, patterns, slots);
         }
 
         public string MatcherType()
@@ -39,6 +39,7 @@ namespace SimpleBot
     {
         private string matchType;
         private List<string> patterns;
+        private IDictionary<string, string> slots;
 
         public string MatchType
         {
@@ -56,10 +57,19 @@ namespace SimpleBot
             }
         }
 
-        public MatchConfig(string type, List<string> patterns)
+        public IDictionary<string, string> Slots
+        {
+            get
+            {
+                return slots;
+            }
+        }
+
+        public MatchConfig(string type, List<string> patterns, IDictionary<string, string> slots)
         {
             this.matchType = type;
             this.patterns = patterns;
+            this.slots = slots;
         }
     }
 }

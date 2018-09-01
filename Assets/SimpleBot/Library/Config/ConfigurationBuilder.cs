@@ -16,7 +16,7 @@ namespace SimpleBot {
 
         public ConfigurationBuilder AddIntent(string name, string type, List<string> patterns)
         {
-            this.intentConfigs.Add(new IntentConfig(name, type, patterns));
+            this.intentConfigs.Add(new IntentConfig(name, type, patterns, new Dictionary<string, string>())); // FIXME add slot dictionary loaded from configuration file
             return this;
         }
 
