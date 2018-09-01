@@ -30,11 +30,23 @@ namespace SimpleBot
                 var name = intention["name"].Get<string>();
                 var type = intention["match"]["type"].Get<string>();
                 var expressions = new List<string>();
+                IDictionary<string, string> slots = new Dictionary<string, string>();
+
                 foreach (var expression in intention["match"]["expressions"])
                 {
                     expressions.Add(expression.Get<string>());
                 }
-                builder.AddIntent(name, type, expressions);
+
+                try
+                {
+                    foreach (var slot in intention["match"]["slots"])
+                    {
+                        slots.Add(slot["name"].Get<string>(), slot["type"].Get<string>());
+                    }
+                } catch (System.NullReferenceException) {
+                    // do nothing
+                }
+                builder.AddIntent(name, type, expressions, slots);
             }
 
             // extract types

@@ -14,9 +14,9 @@ namespace SimpleBot {
             this.typeConfigs = new TypeConfig();
         }
 
-        public ConfigurationBuilder AddIntent(string name, string type, List<string> patterns)
+        public ConfigurationBuilder AddIntent(string name, string type, List<string> patterns, IDictionary<string, string> slots)
         {
-            this.intentConfigs.Add(new IntentConfig(name, type, patterns));
+            this.intentConfigs.Add(new IntentConfig(name, type, patterns, slots));
             return this;
         }
 
