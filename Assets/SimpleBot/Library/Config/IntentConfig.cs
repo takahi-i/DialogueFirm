@@ -33,6 +33,11 @@ namespace SimpleBot
         {
             return this.match.Patterns;
         }
+
+        public IDictionary<string, string> Slots()
+        {
+            return this.match.Slots;
+        }
     }
 
     internal class MatchConfig
