@@ -18,7 +18,7 @@ namespace SimpleBot
             this.types.Add(typeName, typeList);
         }
 
-        public List<string> Get(string typeName, List<string> typeList)
+        public List<string> Get(string typeName)
         {
             if (this.types.ContainsKey(typeName))
             {
