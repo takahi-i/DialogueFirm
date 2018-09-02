@@ -55,8 +55,8 @@ public class ConfigurationLoaderTest
         Assert.AreEqual(1, configuration.GetIntentConfigs()[1].Slots().Count);
         Assert.AreEqual("ingredients", configuration.GetIntentConfigs()[1].Slots()["ingredient1"]);
 
-        Assert.AreEqual(2, configuration.GetType("ingredients").Count);
-        Assert.AreEqual("tomato", configuration.GetType("ingredients")[0]);
-        Assert.AreEqual("potate", configuration.GetType("ingredients")[1]);
+        Assert.AreEqual(2, configuration.GetTypeConfig("ingredients").Count);
+        Assert.AreEqual("tomato", configuration.GetTypeConfig("ingredients")[0]);
+        Assert.AreEqual("potate", configuration.GetTypeConfig("ingredients")[1]);
     }
 }

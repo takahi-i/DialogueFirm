@@ -13,15 +13,15 @@ namespace SimpleBot
 
         public IntentIdentifier(Configuration config)
         {
-            this.matchers = config.GetIntentConfigs().Select(c => this.generateMatcher(c)).ToList().ConvertAll(instance => (IntentMatcher)instance); // TODO: support other matchers 
+            this.matchers = config.GetIntentConfigs().Select(c => this.generateMatcher(c, config.GetTypeConfigs())).ToList().ConvertAll(instance => (IntentMatcher)instance);
         }
 
-        public IntentMatcher generateMatcher(IntentConfig config) {
-            if (config.MatcherType() == "verbatim")
+        public IntentMatcher generateMatcher(IntentConfig intentConfig, TypeConfig typeConfig) {
+            if (intentConfig.MatcherType() == "verbatim")
             {
-                return new VerbatimMatcher(config.Name, config.Patterns());
+                return new VerbatimMatcher(intentConfig.Name, intentConfig.Patterns());
             } else {
-                throw new ArgumentException("No matcher type as " + config.MatcherType());
+                throw new ArgumentException("No matcher type as " + intentConfig.MatcherType());
             }
         }
 
