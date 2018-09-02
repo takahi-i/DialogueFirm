@@ -29,9 +29,13 @@ namespace SimpleBot
             return this.intentConfigs;
         }
 
-        public List<string> GetType(string name)
+        public List<string> GetTypeConfig(string name)
         {
             return this.typeConfigs.Get(name);
+        }
+
+        public TypeConfig GetTypeConfigs() {
+            return this.typeConfigs;
         }
     }
 }

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Linq;
-using SimpleBot;
+using System;
 using SimpleBot.Matcher;
 
 namespace SimpleBot
@@ -15,7 +13,16 @@ namespace SimpleBot
 
         public IntentIdentifier(Configuration config)
         {
-            this.matchers = config.GetIntentConfigs().Select(c => new VerbatimMatcher(c.Name, c.Patterns())).ToList().ConvertAll(instance => (IntentMatcher)instance); // TODO: support other matchers 
+            this.matchers = config.GetIntentConfigs().Select(c => this.generateMatcher(c, config.GetTypeConfigs())).ToList().ConvertAll(instance => (IntentMatcher)instance);
+        }
+
+        public IntentMatcher generateMatcher(IntentConfig intentConfig, TypeConfig typeConfig) {
+            if (intentConfig.MatcherType() == "verbatim")
+            {
+                return new VerbatimMatcher(intentConfig.Name, intentConfig.Patterns());
+            } else {
+                throw new ArgumentException("No matcher type as " + intentConfig.MatcherType());
+            }
         }
 
         public string Identify(string input)
