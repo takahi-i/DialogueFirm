@@ -15,7 +15,11 @@ namespace SimpleBot
 
         public IntentIdentifier(Configuration config)
         {
-            this.matchers = config.GetIntentConfigs().Select(c => new VerbatimMatcher(c.Name, c.Patterns())).ToList().ConvertAll(instance => (IntentMatcher)instance); // TODO: support other matchers 
+            this.matchers = config.GetIntentConfigs().Select(c => this.generateMatcher(c)).ToList().ConvertAll(instance => (IntentMatcher)instance); // TODO: support other matchers 
+        }
+
+        public IntentMatcher generateMatcher(IntentConfig config) {
+            return new VerbatimMatcher(config.Name, config.Patterns());
         }
 
         public string Identify(string input)
