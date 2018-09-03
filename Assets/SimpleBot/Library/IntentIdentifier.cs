@@ -20,6 +20,8 @@ namespace SimpleBot
             if (intentConfig.MatcherType() == "verbatim")
             {
                 return new VerbatimMatcher(intentConfig.Name, intentConfig.Patterns());
+            } else if (intentConfig.MatcherType() == "template") {
+                return new TemplateMatcher(intentConfig.Name, intentConfig.Patterns(), typeConfig);
             } else {
                 throw new ArgumentException("No matcher type as " + intentConfig.MatcherType());
             }
