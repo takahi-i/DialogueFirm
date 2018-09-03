@@ -23,9 +23,9 @@ namespace SimpleBot
                 var slotNames = new List<string>();
                 var inBrace = false;
 
-
-
-
+                while(endPosition < pattern.Length) {
+                    
+                }
                 return null;
             }
 
