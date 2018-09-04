@@ -1,10 +1,7 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.TestTools;
-using NUnit.Framework;
-using System.Collections;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
 using SimpleBot.Matcher;
+using SimpleBot;
 
 public class TemplateTest {
 

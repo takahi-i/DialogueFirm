@@ -9,14 +9,24 @@ namespace SimpleBot {
 	namespace Matcher {
 		public class Template  {
 			private List<string> slotNames;
-		    private Regex pattern;
+            private string patternStr;
+            private Regex pattern;
 
 			public Template(string patternStr, List<string> slots)  {
+                this.patternStr = patternStr;
 				this.pattern = new Regex(patternStr);
 				this.slotNames = slots;
 			}
 
-			public Result Match(string input) {
+            public string PatternStr
+            {
+                get
+                {
+                    return patternStr;
+                }
+            }
+
+            public Result Match(string input) {
 				var match = this.pattern.Match(input);
 				if (match.Success) {
 					return new Result(input, true, new Dictionary<string, string>());
