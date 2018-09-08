@@ -16,6 +16,6 @@ public class NewTestScript {
         TypeConfig typeconfig = new TypeConfig();
         typeconfig.Add("ingredient", new List<string>() { "potato", "tomato" });
         Template template = TemplateMatcher.GenerateTemplate(pattern, slots, typeconfig);
-        Assert.AreEqual("a potato|tomato", template.PatternStr);
+        Assert.AreEqual("a (?<ingredient1>potato|tomato)", template.PatternStr);
     }
 }

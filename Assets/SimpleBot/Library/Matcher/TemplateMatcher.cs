@@ -45,12 +45,10 @@ namespace SimpleBot
                         Debug.Log(startPosition);
                         Debug.Log(endPosition);
 
-                        var slotName = pattern.Substring(startPosition + 1, (endPosition - startPosition) -1);
-                        Debug.Log("slotname: " + slotName);
+                        var slotName = pattern.Substring(startPosition + 1, (endPosition - startPosition) - 1);
                         string typeName = slots[slotName];
                         var typeElements = typeconfig.Get(typeName);
-                        Debug.Log(string.Join("|", typeElements.ToArray()));
-                        elements.Add(string.Join("|", typeElements.ToArray()));
+                        elements.Add(generateSlotElement(typeElements, slotName));
                         slotNames.Add(slotName);
                         inBrace = false;
                     }
@@ -61,6 +59,14 @@ namespace SimpleBot
                     startPosition = endPosition + 1;
                 }
                 return new Template(string.Join("", elements.ToArray()), slotNames);
+            }
+
+            private static string generateSlotElement(List<string> typeElements, string slotName)
+            {
+                string element = "(?<" + slotName + ">";
+                element += string.Join("|", typeElements.ToArray());
+                element += ")";
+                return element;
             }
 
             public override bool Match(string input)
