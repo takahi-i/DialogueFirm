@@ -27,11 +27,8 @@ namespace SimpleBot {
             }
 
             public Result Match(string input) {
-				var match = this.pattern.Match(input);
-				if (match.Success) {
-					return new Result(input, true, new Dictionary<string, string>());
-				}
-				return new Result(input, false, new Dictionary<string, string>());
+                Match match = this.pattern.Match(input);
+                return new Result(input, match);
 			}
 		}
 	}
