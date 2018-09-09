@@ -37,14 +37,14 @@ namespace SimpleBot
             public Result Match(string input)
             {
                 var match = this.pattern.Match(input);
-                this.result = new Result(input, match);
                 foreach (var name in pattern.GetGroupNames()) {
                     if (this.slots.ContainsKey(name))
                     { // TODO: need to understand whey this trick is needed
                         continue;
                     }
-                    this.slots.Add(name, result.SlotValue(name));
+                    this.slots.Add(name, match.Groups[name].Value);
                 }
+                this.result = new Result(input, match.Success, this.slots);
                 return result;
             }
 
