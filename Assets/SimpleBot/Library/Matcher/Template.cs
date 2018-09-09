@@ -39,6 +39,10 @@ namespace SimpleBot
                 var match = this.pattern.Match(input);
                 this.result = new Result(input, match);
                 foreach (var name in pattern.GetGroupNames()) {
+                    if (this.slots.ContainsKey(name))
+                    { // TODO: need to understand whey this trick is needed
+                        continue;
+                    }
                     this.slots.Add(name, result.SlotValue(name));
                 }
                 return result;
