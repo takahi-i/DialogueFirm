@@ -9,9 +9,19 @@ namespace SimpleBot
         public class TemplateMatcher : IntentMatcher
         {
             private string name;
+            private IDictionary<string, string> slots;
+            private TypeConfig typeconfig;
+            private List<Template> templates;
 
             public TemplateMatcher(string name, List<string> patterns, IDictionary<string, string> slots, TypeConfig typeConfig) {
                 this.name = name;
+                this.slots = slots;
+                this.typeconfig = typeConfig;
+                this.templates = new List<Template>();
+
+                foreach (string patternStr in patterns) {
+                    this.templates.Add(GenerateTemplate(patternStr, this.slots, typeConfig));
+                }
             }
 
             // pattern: "please give me recipes on #{ingredients} with #{style}"
@@ -46,6 +56,7 @@ namespace SimpleBot
                         Debug.Log(endPosition);
 
                         var slotName = pattern.Substring(startPosition + 1, (endPosition - startPosition) - 1);
+                        Debug.Log("slotName:" + slotName);
                         string typeName = slots[slotName];
                         var typeElements = typeconfig.Get(typeName);
                         elements.Add(generateSlotElement(typeElements, slotName));
@@ -71,6 +82,12 @@ namespace SimpleBot
 
             public override bool Match(string input)
             {
+                foreach(var template in this.templates) {
+                    Result result = template.Match(input);
+                    if (result.Success) {
+                        return true;
+                    }
+                }
                 return false;
             }
 
