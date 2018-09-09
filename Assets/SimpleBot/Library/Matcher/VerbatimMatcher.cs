@@ -18,14 +18,14 @@ namespace SimpleBot
                 this.patterns = new HashSet<Regex>(regexPatterns.ToList());
             }
 
-            public override bool Match(string input)
+            public override Result Match(string input)
             {
                 var matched = patterns.Where(pattern => pattern.IsMatch(input) == true);
                 if (matched.Count() > 0)
                 {
-                    return true;
+                    return new Result(input, true, new Dictionary<string, string>());
                 }
-                return false;
+                return new Result(input, false, new Dictionary<string, string>());
             }
 
             public override string Name()

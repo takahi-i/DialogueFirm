@@ -1,4 +1,6 @@
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+
 
 namespace SimpleBot
 {
@@ -6,7 +8,6 @@ namespace SimpleBot
     {
         public class Result
         {
-            private Match match;
             public string input;
             public string Input
             {
@@ -21,25 +22,19 @@ namespace SimpleBot
                 set { this.success = value; }
             }
 
-            public Match Match
-            {
-                get
-                {
-                    return match;
-                }
-
-            }
-
             public string SlotValue(string slotName) {
-                return this.match.Groups[slotName].Value;
+                return this.slots[slotName];
             }
 
-            public Result(string input, Match match)
+            public Result(string input, bool isSuccess, IDictionary<string, string> slots)
             {
                 this.Input = input;
-                this.success = match.Success;
-                this.match = match;
+                this.success = isSuccess;
+                this.slots = slots;
             }
+
+            private IDictionary<string, string> slots;
+
         }
     }
 }
