@@ -21,15 +21,6 @@ namespace SimpleBot
                 set { this.success = value; }
             }
 
-            public Match Match
-            {
-                get
-                {
-                    return match;
-                }
-
-            }
-
             public string SlotValue(string slotName) {
                 return this.match.Groups[slotName].Value;
             }
