@@ -32,6 +32,6 @@ public class NewTestScript {
         Assert.AreEqual("a (?<ingredient1>potato|tomato)", template.PatternStr);
         Result result = template.Match("this is a potato or not.");
         Assert.AreEqual(true, result.Success);
-        Assert.AreEqual("potato", result.Match.Groups["ingredient1"].Value);
+        Assert.AreEqual("potato", result.SlotValue("ingredient1"));
     }
 }

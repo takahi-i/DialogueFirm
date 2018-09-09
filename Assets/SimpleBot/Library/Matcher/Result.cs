@@ -30,6 +30,10 @@ namespace SimpleBot
 
             }
 
+            public string SlotValue(string slotName) {
+                return this.match.Groups[slotName].Value;
+            }
+
             public Result(string input, Match match)
             {
                 this.Input = input;
