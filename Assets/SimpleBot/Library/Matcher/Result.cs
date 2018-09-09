@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Text.RegularExpressions;
 
 namespace SimpleBot
 {
@@ -8,6 +6,7 @@ namespace SimpleBot
     {
         public class Result
         {
+            private Match match;
             public string input;
             public string Input
             {
@@ -21,18 +20,25 @@ namespace SimpleBot
                 get { return this.success; }
                 set { this.success = value; }
             }
-            public Dictionary<string, string> features;
-            public Dictionary<string, string> Features
+
+            public Match Match
             {
-                get { return this.features; }
-                set { this.features = value; }
+                get
+                {
+                    return match;
+                }
+
             }
 
-            public Result(string input, bool success, Dictionary<string, string> features)
+            public string SlotValue(string slotName) {
+                return this.match.Groups[slotName].Value;
+            }
+
+            public Result(string input, Match match)
             {
                 this.Input = input;
-                this.Success = success;
-                this.features = features;
+                this.success = match.Success;
+                this.match = match;
             }
         }
     }
