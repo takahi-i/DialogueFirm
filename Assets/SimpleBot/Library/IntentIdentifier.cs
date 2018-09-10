@@ -29,10 +29,11 @@ namespace SimpleBot
 
         public string Identify(string input)
         {
-            var matches = this.matchers.Where(matcher => matcher.Match(input).Success == true);
-            if (matches.Count() > 0)
+            var results = this.matchers.Select(matcher => matcher.Match(input));
+            var matchResults = results.Where(result => result.Success == true);
+            if (matchResults.Count() > 0)
             {
-                return matches.First().Name();
+                return matchResults.First().Name;
             }
             return NO_MATCH_EXIST;
         }

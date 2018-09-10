@@ -30,8 +30,8 @@ public class NewTestScript {
         typeconfig.Add("ingredient", new List<string>() { "potato", "tomato" });
         Template template = TemplateMatcher.GenerateTemplate(pattern, slots, typeconfig);
         Assert.AreEqual("a (?<ingredient1>potato|tomato)", template.PatternStr);
-        Result result = template.Match("this is a potato or not.");
+        Result result = template.Match("this is a potato or not.", "ingredient-intent");
         Assert.AreEqual(true, result.Success);
-        Assert.AreEqual("potato", result.SlotValue("ingredient1"));
+        Assert.AreEqual("potato", result.SlotValue("ingredient1")); 
     }
 }
