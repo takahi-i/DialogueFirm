@@ -27,15 +27,15 @@ namespace SimpleBot
             }
         }
 
-        public string Identify(string input)
+        public Result Identify(string input)
         {
             var results = this.matchers.Select(matcher => matcher.Match(input));
             var matchResults = results.Where(result => result.Success == true);
             if (matchResults.Count() > 0)
             {
-                return matchResults.First().Name;
+                return matchResults.First();
             }
-            return NO_MATCH_EXIST;
+            return new Result(NO_MATCH_EXIST, false, new Dictionary<string, string>());
         }
     }
 }
