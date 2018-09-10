@@ -83,7 +83,7 @@ namespace SimpleBot
             public override Result Match(string input)
             {
                 foreach(var template in this.templates) {
-                    Result result = template.Match(input);
+                    Result result = template.Match(input, this.name);
                     if (result.Success) {
                         return result;
                     }

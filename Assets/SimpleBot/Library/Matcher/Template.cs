@@ -34,7 +34,7 @@ namespace SimpleBot
                 }
             }
 
-            public Result Match(string input)
+            public Result Match(string input, string intentName)
             {
                 var match = this.pattern.Match(input);
                 foreach (var name in pattern.GetGroupNames()) {
@@ -44,7 +44,7 @@ namespace SimpleBot
                     }
                     this.slots.Add(name, match.Groups[name].Value);
                 }
-                this.result = new Result(input, match.Success, this.slots);
+                this.result = new Result(intentName, match.Success, this.slots);
                 return result;
             }
 

@@ -8,11 +8,10 @@ namespace SimpleBot
     {
         public class Result
         {
-            public string input;
-            public string Input
+            public string name;
+            public string Name
             {
-                get { return this.input; }
-                set { this.input = value; }
+                get { return this.name; }
             }
 
             public bool success;
@@ -26,9 +25,9 @@ namespace SimpleBot
                 return this.slots[slotName];
             }
 
-            public Result(string input, bool isSuccess, IDictionary<string, string> slots)
+            public Result(string name, bool isSuccess, IDictionary<string, string> slots)
             {
-                this.Input = input;
+                this.name = name;
                 this.success = isSuccess;
                 this.slots = slots;
             }

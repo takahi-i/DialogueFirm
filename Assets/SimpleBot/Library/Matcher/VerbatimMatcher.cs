@@ -23,9 +23,9 @@ namespace SimpleBot
                 var matched = patterns.Where(pattern => pattern.IsMatch(input) == true);
                 if (matched.Count() > 0)
                 {
-                    return new Result(input, true, new Dictionary<string, string>());
+                    return new Result(name, true, new Dictionary<string, string>());
                 }
-                return new Result(input, false, new Dictionary<string, string>());
+                return new Result(name, false, new Dictionary<string, string>());
             }
 
             public override string Name()
