@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleBot;
+using SimpleBot.Matcher;
 
 namespace SimpleBot
 {
@@ -14,7 +15,7 @@ namespace SimpleBot
             this.identifier = new IntentIdentifier(config);
         }
 
-        public string IdenfityIntent(string input)
+        public Result IdenfityIntent(string input)
         {
             return this.identifier.Identify(input);
         }
