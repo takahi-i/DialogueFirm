@@ -6,7 +6,7 @@ namespace SimpleBot
 {
     namespace Matcher
     {
-        public class Result
+        public class Intent
         {
             public string name;
             public string Name
@@ -25,7 +25,7 @@ namespace SimpleBot
                 return this.slots[slotName];
             }
 
-            public Result(string name, bool isSuccess, IDictionary<string, string> slots)
+            public Intent(string name, bool isSuccess, IDictionary<string, string> slots)
             {
                 this.name = name;
                 this.success = isSuccess;
@@ -33,7 +33,6 @@ namespace SimpleBot
             }
 
             private IDictionary<string, string> slots;
-
         }
     }
 }

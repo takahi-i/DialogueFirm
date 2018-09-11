@@ -15,7 +15,7 @@ namespace SimpleBot
             this.identifier = new IntentIdentifier(config);
         }
 
-        public Result IdenfityIntent(string input)
+        public Intent IdenfityIntent(string input)
         {
             return this.identifier.Identify(input);
         }

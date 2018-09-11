@@ -80,15 +80,15 @@ namespace SimpleBot
                 return element;
             }
 
-            public override Result Match(string input)
+            public override Intent Match(string input)
             {
                 foreach(var template in this.templates) {
-                    Result result = template.Match(input, this.name);
+                    Intent result = template.Match(input, this.name);
                     if (result.Success) {
                         return result;
                     }
                 }
-                return new Result(input, false, new Dictionary<string, string>());
+                return new Intent(input, false, new Dictionary<string, string>());
             }
 
             public override string Name()
