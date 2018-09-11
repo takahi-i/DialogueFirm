@@ -32,6 +32,22 @@ public class NewTestScript {
         Assert.AreEqual("a (?<ingredient1>potato|tomato)", template.PatternStr);
         Result result = template.Match("this is a potato or not.", "ingredient-intent");
         Assert.AreEqual(true, result.Success);
-        Assert.AreEqual("potato", result.SlotValue("ingredient1")); 
+        Assert.AreEqual("potato", result.SlotValue("ingredient1"));
+    }
+
+    [Test]
+    public void TestGenerateTemplateWithJapaneseMatch()
+    {
+        string pattern = "${ingredient1}は好き";
+        Dictionary<string, string> slots = new Dictionary<string, string>(){
+            {"ingredient1", "ingredient"}
+        };
+        TypeConfig typeconfig = new TypeConfig();
+        typeconfig.Add("ingredient", new List<string>() { "ポテト", "トマト" });
+        Template template = TemplateMatcher.GenerateTemplate(pattern, slots, typeconfig);
+        Assert.AreEqual("(?<ingredient1>ポテト|トマト)は好き", template.PatternStr);
+        Result result = template.Match("美味しいポテトは好きですか？", "ingredient-intent");
+        Assert.AreEqual(true, result.Success);
+        Assert.AreEqual("ポテト", result.SlotValue("ingredient1"));
     }
 }
