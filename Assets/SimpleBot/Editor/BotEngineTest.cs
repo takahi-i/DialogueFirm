@@ -10,6 +10,6 @@ public class BotEngineTest {
     public void IdentifyIntent() {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>(){"aho"}, new Dictionary<string ,string>()).Build();
         var engine = new BotEngine(config);
-        Assert.AreEqual("foobar", engine.IdenfityIntent("aho is not a researcher."));
+        Assert.AreEqual("foobar", engine.IdenfityIntent("aho is not a researcher.").Name);
     }
 }
