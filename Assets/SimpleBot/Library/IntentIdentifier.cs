@@ -27,7 +27,7 @@ namespace SimpleBot
             }
         }
 
-        public Result Identify(string input)
+        public Intent Identify(string input)
         {
             var results = this.matchers.Select(matcher => matcher.Match(input));
             var matchResults = results.Where(result => result.Success == true);
@@ -35,7 +35,7 @@ namespace SimpleBot
             {
                 return matchResults.First();
             }
-            return new Result(NO_MATCH_EXIST, false, new Dictionary<string, string>());
+            return new Intent(NO_MATCH_EXIST, false, new Dictionary<string, string>());
         }
     }
 }

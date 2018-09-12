@@ -14,7 +14,7 @@ namespace SimpleBot
             private List<string> slotNames;
             private string patternStr;
             private Regex pattern;
-            private Result result;
+            private Intent result;
             private Dictionary<string, string> slots;
 
             public Template(string patternStr, List<string> slots)
@@ -34,7 +34,7 @@ namespace SimpleBot
                 }
             }
 
-            public Result Match(string input, string intentName)
+            public Intent Match(string input, string intentName)
             {
                 var match = this.pattern.Match(input);
                 foreach (var name in pattern.GetGroupNames()) {
@@ -44,7 +44,7 @@ namespace SimpleBot
                     }
                     this.slots.Add(name, match.Groups[name].Value);
                 }
-                this.result = new Result(intentName, match.Success, this.slots);
+                this.result = new Intent(intentName, match.Success, this.slots);
                 return result;
             }
 
