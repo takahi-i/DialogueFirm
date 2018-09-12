@@ -38,13 +38,11 @@ public class ConfigurationLoaderTest
     ""responders"": [
       {
          ""target"": ""question"",
-         ""type"": ""simple"",
-         ""respond"": ""Turn the corner and go straight for five minitues""
+         ""respond"": [""Turn the corner and go straight for five minitues.""]
       }
       {
          ""target"": ""default"",
-         ""type"": ""simple"",
-         ""respond"": ""Sorry I do not understand what you mean""
+         ""respond"": [""Sorry I do not understand what you mean.""]
       }
     ]
 }
