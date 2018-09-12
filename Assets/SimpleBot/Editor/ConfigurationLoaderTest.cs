@@ -34,6 +34,18 @@ public class ConfigurationLoaderTest
          ""name"": ""ingredients"",
          ""values"": [""tomato"", ""potate""]
       }
+    ],
+    ""responders"": [
+      {
+         ""target"": ""question"",
+         ""type"": ""simple"",
+         ""respond"": ""Turn the corner and go straight for five minitues""
+      }
+      {
+         ""target"": ""default"",
+         ""type"": ""simple"",
+         ""respond"": ""Sorry I do not understand what you mean""
+      }
     ]
 }
 ";
