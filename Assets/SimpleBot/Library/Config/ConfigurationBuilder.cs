@@ -14,6 +14,7 @@ namespace SimpleBot {
         {
             this.intentConfigs = new List<IntentConfig>();
             this.typeConfigs = new TypeConfig();
+            this.responderConfigs = new List<ResponderConfig>();
         }
 
         public ConfigurationBuilder AddIntent(string name, string type, List<string> patterns, IDictionary<string, string> slots)
@@ -28,15 +29,16 @@ namespace SimpleBot {
             return this;
         }
 
-        public Configuration Build()
-        {
-            return new Configuration(this.intentConfigs, this.typeConfigs);
-        }
-
         public ConfigurationBuilder AddResponds(string target, List<string> responds)
         {
             this.responderConfigs.Add(new ResponderConfig(target, responds));
             return this;
         }
+
+        public Configuration Build()
+        {
+            return new Configuration(this.intentConfigs, this.typeConfigs, this.responderConfigs);
+        }
+
     }
 }

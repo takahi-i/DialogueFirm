@@ -10,8 +10,12 @@ namespace SimpleBot
         private TypeConfig typeConfigs;
         private List<ResponderConfig> responderConfigs;
 
-        public Configuration(List<IntentConfig> intentConfigs)
+        public List<ResponderConfig> ResponderConfigs
         {
+            get
+            {
+                return responderConfigs;
+            }
         }
 
         public Configuration(List<IntentConfig> intentConfigs, TypeConfig typeConfigs, List<ResponderConfig> responderConfigs)
