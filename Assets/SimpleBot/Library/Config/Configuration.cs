@@ -8,15 +8,17 @@ namespace SimpleBot
     {
         private List<IntentConfig> intentConfigs;
         private TypeConfig typeConfigs;
+        private List<ResponderConfig> responderConfigs;
 
-        public Configuration()
+        public Configuration(List<IntentConfig> intentConfigs)
         {
         }
 
-        public Configuration(List<IntentConfig> intentConfigs, TypeConfig typeConfigs)
+        public Configuration(List<IntentConfig> intentConfigs, TypeConfig typeConfigs, List<ResponderConfig> responderConfigs)
         {
             this.intentConfigs = intentConfigs;
             this.typeConfigs = typeConfigs;
+            this.responderConfigs = responderConfigs;
         }
 
         public Int32 NumberofIntentions()

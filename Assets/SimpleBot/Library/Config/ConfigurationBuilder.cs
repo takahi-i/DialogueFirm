@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace SimpleBot {
     {
         private List<IntentConfig> intentConfigs;
         private TypeConfig typeConfigs;
+        private List<ResponderConfig> responderConfigs;
 
         public ConfigurationBuilder()
         {
@@ -29,6 +31,12 @@ namespace SimpleBot {
         public Configuration Build()
         {
             return new Configuration(this.intentConfigs, this.typeConfigs);
+        }
+
+        public ConfigurationBuilder AddResponds(string target, List<string> responds)
+        {
+            this.responderConfigs.Add(new ResponderConfig(target, responds));
+            return this;
         }
     }
 }

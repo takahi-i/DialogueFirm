@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResponderConfigs {
+public class ResponderConfig
+{
     private string target;
     public string Target
     {
@@ -21,7 +22,7 @@ public class ResponderConfigs {
         }
     }
 
-    public ResponderConfigs(string target, List<string> responds)
+    public ResponderConfig(string target, List<string> responds)
     {
         this.target = target;
         this.responds = responds;
