@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using SimpleBot;
-using SimpleBot.Matcher;
+﻿using System.Collections.Generic;
+using SimpleBot.Responder;
 
 namespace SimpleBot
 {
     public class BotEngine
     {
         private IntentIdentifier identifier;
+        private IDictionary<string, ReplyResponder> responders;
 
         public BotEngine(Configuration config)
         {

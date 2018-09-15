@@ -7,7 +7,7 @@ namespace SimpleBot
 {
     namespace Responder
     {
-        public class SimpleResponder : Responder
+        public class SimpleResponder : ReplyResponder
         {
             private List<string> responds;
             private Random cRandom;
