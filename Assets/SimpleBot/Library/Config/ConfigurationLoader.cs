@@ -59,6 +59,18 @@ namespace SimpleBot
                 }
                 builder.AddType(name, values);
             }
+
+            // extract responders
+            foreach (var responder in json["responders"])
+            {
+                var targetName = responder["target"].Get<string>();
+                var values = new List<string>();
+                foreach (var respond in responder["responds"])
+                {
+                    values.Add(respond.Get<string>());
+                }
+                builder.AddResponds(targetName, values);
+            }
             return builder.Build();
         }
     }
