@@ -31,8 +31,17 @@ namespace SimpleBot
             return this.identifier.Identify(input);
         }
 
-        //TODO
-        // - Reply sentence
-        // - Return properties from Identifier
+        public string replySentence(string input) {
+            Intent intent = this.identifier.Identify(input);
+            if (this.responders.ContainsKey(intent.Name))
+            {
+                return this.responders[intent.name].Respond(intent);
+            }
+            else if (this.responders.ContainsKey(IntentIdentifier.NO_MATCH_EXIST) && this.responders.ContainsKey("default"))
+            {
+                return this.responders["default"].Respond(intent);
+            }
+            throw new InvalidOperationException("No default responder is specified...");
+        }
     }
 }
