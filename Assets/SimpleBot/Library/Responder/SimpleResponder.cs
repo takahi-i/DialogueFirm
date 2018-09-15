@@ -7,7 +7,7 @@ namespace SimpleBot
 {
     namespace Responder
     {
-        public class SimpleResponder
+        public class SimpleResponder : Responder
         {
             private List<string> responds;
             private Random cRandom;
@@ -20,7 +20,7 @@ namespace SimpleBot
                 this.cRandom = new System.Random();
             }
 
-            public string Respond(Intent intent)
+            public override string Respond(Intent intent)
             {
                 if (this.responds.Count == 0)
                 {
