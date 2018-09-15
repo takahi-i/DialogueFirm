@@ -2,22 +2,32 @@
 using System.Collections.Generic;
 using SimpleBot;
 
-public class SimpleResponder {
-    private List<string> responds;
-    private Random cRandom;
-    private string targetIntent;
 
-    public SimpleResponder(string targetIntent, List<string> responds)
+namespace SimpleBot
+{
+    namespace Responder
     {
-        this.targetIntent = targetIntent;
-        this.responds = responds;
-        this.cRandom = new System.Random();
-    }
+        public class SimpleResponder
+        {
+            private List<string> responds;
+            private Random cRandom;
+            private string targetIntent;
 
-    public string Respond(Intent intent) {
-        if (this.responds.Count == 0) {
-            throw new InvalidOperationException("No responds are deployed in the responder for intent " + targetIntent);
+            public SimpleResponder(string targetIntent, List<string> responds)
+            {
+                this.targetIntent = targetIntent;
+                this.responds = responds;
+                this.cRandom = new System.Random();
+            }
+
+            public string Respond(Intent intent)
+            {
+                if (this.responds.Count == 0)
+                {
+                    throw new InvalidOperationException("No responds are deployed in the responder for intent " + targetIntent);
+                }
+                return this.responds[this.cRandom.Next(this.responds.Count - 1)];
+            }
         }
-        return this.responds[this.cRandom.Next(this.responds.Count-1)];
     }
 }
