@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO; //System.IO.FileInfo, System.IO.StreamReader, System.IO.StreamWriter
-using System; //Exception
-using System.Text; //Encoding
+﻿using UnityEngine;
+using System.IO;
+using SimpleBot;
 
 public class PornalefController : MonoBehaviour {
 
@@ -21,12 +18,13 @@ public class PornalefController : MonoBehaviour {
         transform.Rotate(0, 0, this.rotespeed);
 	}
 
-
     void loadConfig()
     {
         string settingFilePath = Application.dataPath + "/SimpleBot/Scenes/simple-bot-conf.json";
         string setting = File.ReadAllText(settingFilePath);
         Debug.Log(setting);
+        ConfigurationLoader configurationLoader = new ConfigurationLoader();
+        Configuration config = configurationLoader.loadFromString(setting);
+        BotEngine bot = new BotEngine(config);
     }
-
 }
