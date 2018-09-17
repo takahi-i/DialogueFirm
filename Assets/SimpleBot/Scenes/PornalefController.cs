@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PornalefController : MonoBehaviour {
 
+    float rotespeed = 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -11,6 +12,9 @@ public class PornalefController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (Input.GetMouseButton(0)) {
+            rotespeed = 10;
+        }
+        transform.Rotate(0, 0, this.rotespeed);
 	}
 }
