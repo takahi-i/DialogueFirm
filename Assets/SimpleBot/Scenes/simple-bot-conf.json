@@ -1,0 +1,43 @@
+{
+  "intentions": [
+    {
+    "name": "repeat",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "repeat", "pardon me?" ]
+      }
+    },
+    {
+      "name": "question",
+      "match": {
+        "type": "template",
+        "slots": [
+          {
+            "name": "ingredient1",
+            "type": "ingredients"
+          }
+        ],
+        "expressions": [
+          "tell me$ ${ingredient1}",
+          "show me ${ingredient1 }"
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "ingredients",
+      "values": [ "tomato", "potate" ]
+    }
+  ],
+  "responders": [
+    {
+      "target": "question",
+      "responds": [ "Turn the corner and go straight for five minitues." ]
+    },
+    {
+      "target": "default",
+      "responds": [ "Sorry I do not understand what you mean." ]
+    }
+  ]
+}
