@@ -14,17 +14,21 @@ public class BotController : MonoBehaviour {
 
     public void SaveText()
     {
+        if (this.bot == null) {
+            Debug.Log("loading config");
+            this.loadConfig();
+        } else {
+            Debug.Log("exist config");
+        }
+
         str = inputField.text;
-        text.text = str;
+        Debug.Log("input: " + str);
+        var reply = this.bot.replySentence(str);
+        text.text = reply;
         inputField.text = "";
     }
 
-    // Use this for initialization
-    void Start () {
-        this.loadConfig();
-    }
-
-    void loadConfig()
+    private void loadConfig()
     {
         string settingFilePath = Application.dataPath + "/SimpleBot/Scenes/simple-bot-conf.json";
         string setting = File.ReadAllText(settingFilePath);
@@ -32,5 +36,6 @@ public class BotController : MonoBehaviour {
         ConfigurationLoader configurationLoader = new ConfigurationLoader();
         Configuration config = configurationLoader.loadFromString(setting);
         this.bot = new BotEngine(config);
+        Debug.Log("Finished loading bot");
     }
 }
