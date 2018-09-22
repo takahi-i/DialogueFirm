@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SimpleBot.Responder;
+using UnityEngine;
 
 namespace SimpleBot
 {
@@ -33,11 +34,13 @@ namespace SimpleBot
 
         public string replySentence(string input) {
             Intent intent = this.identifier.Identify(input);
+            Debug.Log("intent: " + intent.name);
             if (this.responders.ContainsKey(intent.Name))
             {
                 return this.responders[intent.name].Respond(intent);
             }
-            else if (this.responders.ContainsKey(IntentIdentifier.NO_MATCH_EXIST) && this.responders.ContainsKey("default"))
+
+            if (this.responders.ContainsKey(IntentIdentifier.NO_MATCH_EXIST) && this.responders.ContainsKey("default"))
             {
                 return this.responders["default"].Respond(intent);
             }
