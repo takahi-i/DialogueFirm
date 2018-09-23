@@ -40,7 +40,7 @@ namespace SimpleBot
                 return this.responders[intent.name].Respond(intent);
             }
 
-            if (this.responders.ContainsKey(IntentIdentifier.NO_MATCH_EXIST) && this.responders.ContainsKey("default"))
+            if (this.responders.ContainsKey("default"))
             {
                 return this.responders["default"].Respond(intent);
             }
