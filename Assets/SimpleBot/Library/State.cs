@@ -25,4 +25,8 @@ public class State {
         }
         throw new InvalidOperationException("no such key as " + key);
     }
+
+    void DeleteAll() {
+        PlayerPrefs.DeleteAll();
+    }
 }
