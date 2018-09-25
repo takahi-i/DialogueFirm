@@ -22,19 +22,9 @@ public class ResponderConfig
         }
     }
 
-    private string type;
-    public string Type
-    {
-        get
-        {
-            return type;
-        }
-    }
-
-    public ResponderConfig(string target, List<string> responds, string type = "simple")
+    public ResponderConfig(string target, List<string> responds)
     {
         this.target = target;
         this.responds = responds;
-        this.type = type;
     }
 }
