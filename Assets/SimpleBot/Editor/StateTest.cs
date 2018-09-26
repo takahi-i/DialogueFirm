@@ -11,6 +11,13 @@ public class StateTest {
         Assert.AreEqual(1, this.state.GetInt("foobar"));
     }
 
+    [Test]
+    public void TestSetString()
+    {
+        this.state.SetString("aho", "uho");
+        Assert.AreEqual("uho", this.state.GetString("aho"));
+    }
+
     [TearDown]
     public void Dispose()
     {
