@@ -35,16 +35,17 @@ public class ConfigurationLoaderTest
          ""values"": [""tomato"", ""potate""]
       }
     ],
-    ""responders"": [
+    ""responders"": {
+      ""question"": [
       {
-         ""target"": ""question"",
          ""responds"": [""Turn the corner and go straight for five minitues.""]
-      }
+      }],
+      ""default"": [
       {
-         ""target"": ""default"",
          ""responds"": [""Sorry I do not understand what you mean.""]
       }
-    ]
+      ]
+    }
 }
 ";
 

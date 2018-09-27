@@ -61,15 +61,18 @@ namespace SimpleBot
             }
 
             // extract responders
-            foreach (var responder in json["responders"])
+            foreach (var responderName in json["responders"])
             {
-                var targetName = responder["target"].Get<string>();
-                var values = new List<string>();
-                foreach (var respond in responder["responds"])
-                {
-                    values.Add(respond.Get<string>());
+                var targetName = responderName.Get<string>();
+                var targetResponders = json["responders"][targetName];
+                foreach (var responder in targetResponders) {
+                    var values = new List<string>();
+                    foreach (var respond in responder["responds"])
+                    {
+                        values.Add(respond.Get<string>());
+                    }
+                    builder.AddResponds(targetName, values);
                 }
-                builder.AddResponds(targetName, values);
             }
             return builder.Build();
         }

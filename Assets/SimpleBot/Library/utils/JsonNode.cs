@@ -109,7 +109,8 @@ public class JsonNode : IEnumerable<JsonNode>, IDisposable
         }
         else if (obj is IDictionary)
         {
-            foreach (var o in (IDictionary)obj)
+            var dic = (IDictionary)obj;
+            foreach (var o in dic.Keys)
             {
                 yield return new JsonNode(o);
             }
