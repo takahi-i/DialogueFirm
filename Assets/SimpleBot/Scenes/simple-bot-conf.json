@@ -30,18 +30,18 @@
       "values": [ "tomato", "potate" ]
     }
   ],
-  "responders": [
-    {
-      "target": "question",
+  "responders":
+  {
+    "question": [{
       "responds": [ "Turn the corner and go straight for five minitues." ]
-    },
-    {
+    }],
+    "repeat": [{
       "target": "repeat",
       "responds": [ "Oh." ]
-    },
-    {
+    }],
+    "default": [{
       "target": "default",
       "responds": [ "Sorry I do not understand what you mean." ]
-    }
-  ]
+    }]
+  }
 }
