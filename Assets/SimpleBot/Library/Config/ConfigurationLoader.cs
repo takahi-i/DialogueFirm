@@ -71,7 +71,15 @@ namespace SimpleBot
                     {
                         values.Add(respond.Get<string>());
                     }
-                    builder.AddResponds(targetName, values);
+
+                    if (responder.Contains<string>("condition")) {
+                        builder.AddResponds(targetName, values, responder["condition"]);
+                    } else 
+                    {
+                        builder.AddResponds(targetName, values);
+                    }
+
+
                 }
             }
             return builder.Build();

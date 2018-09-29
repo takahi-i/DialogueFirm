@@ -29,7 +29,7 @@ namespace SimpleBot {
             return this;
         }
 
-        public ConfigurationBuilder AddResponds(string target, List<string> responds, IDictionary condition=null)
+        public ConfigurationBuilder AddResponds(string target, List<string> responds, JsonNode condition=null)
         {
             this.responderConfigs.Add(new ResponderConfig(target, responds, condition));
             return this;

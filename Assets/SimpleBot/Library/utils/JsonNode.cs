@@ -93,6 +93,19 @@ public class JsonNode : IEnumerable<JsonNode>, IDisposable
       
     }
 
+    public bool Contains<T>(T key)
+    {
+        if (obj is IDictionary)
+        {
+            var dic = (IDictionary)obj;
+            return dic.Contains(key);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public T Get<T>()
     {
         return (T)obj;
@@ -110,7 +123,7 @@ public class JsonNode : IEnumerable<JsonNode>, IDisposable
         else if (obj is IDictionary)
         {
             var dic = (IDictionary)obj;
-            foreach (var o in dic.Keys)
+            foreach (var o in dic.Keys) // return keys
             {
                 yield return new JsonNode(o);
             }
