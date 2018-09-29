@@ -38,7 +38,14 @@ public class ConfigurationLoaderTest
     ""responders"": {
       ""question"": [
       {
-         ""responds"": [""Turn the corner and go straight for five minitues.""]
+         ""responds"": [""Turn the corner and go straight for five minitues.""],
+         ""condition"": {
+           ""must"": [
+            {
+              ""range"": { ""anger-level"": { ""gte"": 3}}
+            }
+           ]
+         }
       }],
       ""default"": [
       {

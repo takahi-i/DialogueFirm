@@ -22,7 +22,7 @@ public class ResponderConfig
         }
     }
 
-    public ResponderConfig(string target, List<string> responds)
+    public ResponderConfig(string target, List<string> responds, IDictionary condition)
     {
         this.target = target;
         this.responds = responds;

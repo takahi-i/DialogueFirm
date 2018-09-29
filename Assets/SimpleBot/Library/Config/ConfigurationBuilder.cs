@@ -29,9 +29,9 @@ namespace SimpleBot {
             return this;
         }
 
-        public ConfigurationBuilder AddResponds(string target, List<string> responds)
+        public ConfigurationBuilder AddResponds(string target, List<string> responds, IDictionary condition=null)
         {
-            this.responderConfigs.Add(new ResponderConfig(target, responds));
+            this.responderConfigs.Add(new ResponderConfig(target, responds, condition));
             return this;
         }
 
