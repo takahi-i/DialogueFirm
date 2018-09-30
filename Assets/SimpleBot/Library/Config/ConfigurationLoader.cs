@@ -111,17 +111,27 @@ namespace SimpleBot
             {
                 foreach (var conditionType in conditionNode) {
                     string conditionTypeStr = conditionType.Get<string>();
-                    if (conditionTypeStr == "must" || conditionTypeStr == "should")
+                    if (conditionTypeStr == "must" || conditionTypeStr == "should") // intermidiate node
                     {
                         childConditions.Add(new ConditionConfig(conditionTypeStr, this.extractChildCondtions(conditionNode[conditionTypeStr])));
                     }
-                    else
+                    else // terminal node
                     {
-                        // FIXME: TerminalCondigNode
+                        childConditions.Add(this.extractTerminalConditions(conditionTypeStr, conditionNode[conditionTypeStr]));
                     }
                 }
             }
             return childConditions;
+        }
+
+        private ConditionConfig extractTerminalConditions(string conditionTypeStr, JsonNode terminalConditonNode)
+        {
+            string conditionFeild = "";
+            foreach (var field in terminalConditonNode) // NOTE: only one element exist 
+            {
+                conditionFeild = field.Get<string>();
+            }
+            return new ConditionConfig(conditionTypeStr, conditionFeild, new List<Pair>());
         }
     }
 }
