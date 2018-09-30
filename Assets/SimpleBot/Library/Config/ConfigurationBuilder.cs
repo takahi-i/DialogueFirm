@@ -29,16 +29,29 @@ namespace SimpleBot {
             return this;
         }
 
-        public ConfigurationBuilder AddResponds(string target, List<string> responds, JsonNode condition=null)
+        public ConfigurationBuilder AddResponds(string target, List<string> responds)
         {
             this.responderConfigs.Add(new ResponderConfig(target, responds));
             return this;
         }
 
+        public ConfigurationBuilder AddResponds(string target, List<string> responds, List<ConditionConfig> conditions=null)
+        {
+            this.responderConfigs.Add(new ResponderConfig(target, responds, conditions));
+            return this;
+        }
+
+        public ConfigurationBuilder AddCondition(ConditionConfig condition)
+        {
+            var lastResponder = this.responderConfigs[this.responderConfigs.Count - 1];
+            lastResponder.AddCondtion(condition);
+            return this;
+        }
+
+
         public Configuration Build()
         {
             return new Configuration(this.intentConfigs, this.typeConfigs, this.responderConfigs);
         }
-
     }
 }

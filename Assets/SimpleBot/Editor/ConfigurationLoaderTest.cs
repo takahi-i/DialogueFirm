@@ -42,7 +42,7 @@ public class ConfigurationLoaderTest
          ""condition"": {
            ""must"": [
             {
-              ""range"": { ""anger-level"": { ""gte"": 3}}
+              ""range"": { ""anger-level"": { ""gte"": 3} }
             }
            ]
          }
