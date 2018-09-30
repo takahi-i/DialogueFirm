@@ -127,11 +127,17 @@ namespace SimpleBot
         private ConditionConfig extractTerminalConditions(string conditionTypeStr, JsonNode terminalConditonNode)
         {
             string conditionFeild = "";
+            List<Pair> arguments = new List<Pair>();
             foreach (var field in terminalConditonNode) // NOTE: only one element exist 
             {
                 conditionFeild = field.Get<string>();
+                foreach (var argumentKey in terminalConditonNode[conditionFeild]) {
+                    string keyString = argumentKey.Get<string>();
+                    System.Object argValue = terminalConditonNode[keyString].Get<System.Object>();
+                    arguments.Add(new Pair(keyString, argValue));
+                }
             }
-            return new ConditionConfig(conditionTypeStr, conditionFeild, new List<Pair>());
+            return new ConditionConfig(conditionTypeStr, conditionFeild, arguments);
         }
     }
 }
