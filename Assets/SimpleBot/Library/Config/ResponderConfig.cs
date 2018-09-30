@@ -14,7 +14,6 @@ public class ResponderConfig
     }
 
     private List<string> responds;
-    private JsonNode condition;
 
     public List<string> Responds
     {
@@ -24,10 +23,9 @@ public class ResponderConfig
         }
     }
 
-    public ResponderConfig(string target, List<string> responds, JsonNode condition)
+    public ResponderConfig(string target, List<string> responds)
     {
         this.target = target;
         this.responds = responds;
-        this.condition = condition;
     }
 }

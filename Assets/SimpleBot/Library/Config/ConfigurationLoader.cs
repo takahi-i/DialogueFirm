@@ -73,7 +73,7 @@ namespace SimpleBot
                     }
 
                     if (responder.Contains<string>("condition")) {
-                        builder.AddResponds(targetName, values, responder["condition"]);
+                        builder.AddResponds(targetName, values); //FIXME load condition block
                     } else 
                     {
                         builder.AddResponds(targetName, values);

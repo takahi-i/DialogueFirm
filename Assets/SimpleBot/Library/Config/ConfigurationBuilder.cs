@@ -31,7 +31,7 @@ namespace SimpleBot {
 
         public ConfigurationBuilder AddResponds(string target, List<string> responds, JsonNode condition=null)
         {
-            this.responderConfigs.Add(new ResponderConfig(target, responds, condition));
+            this.responderConfigs.Add(new ResponderConfig(target, responds));
             return this;
         }
 
