@@ -85,8 +85,6 @@ namespace SimpleBot
                     {
                         builder.AddResponds(targetName, values);
                     }
-
-
                 }
             }
             return builder.Build();
@@ -131,8 +129,7 @@ namespace SimpleBot
                 conditionFeild = field.Get<string>();
                 foreach (var argumentKey in terminalConditonNode[conditionFeild]) {
                     string keyString = argumentKey.Get<string>();
-                    System.Object argValue = terminalConditonNode[keyString].Get<System.Object>();
-                    Debug.Log("creating arguments");
+                    System.Object argValue = terminalConditonNode[conditionFeild][keyString].Get<System.Object>();
                     arguments.Add(new Pair(keyString, argValue));
                 }
             }

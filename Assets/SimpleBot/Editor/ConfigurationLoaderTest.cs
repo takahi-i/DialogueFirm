@@ -87,8 +87,7 @@ public class ConfigurationLoaderTest
         Assert.AreEqual("anger-level", configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].TargetField);
         Assert.AreEqual(1, configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments.Count);
         Assert.AreEqual("gte", configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments[0].First);
-        //Assert.AreEqual(3, configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments[0].Second);
-
+        Assert.AreEqual(3, configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments[0].Second);
 
         Assert.AreEqual("default", configuration.ResponderConfigs[1].Target);
         Assert.AreEqual("Sorry I do not understand what you mean.", configuration.ResponderConfigs[1].Responds[0]);
