@@ -3,10 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ConditionConfig {
-    private string condtionType;
-    private List<ConditionConfig> childConfigs;
-    private string targetField;
-    private List<SimpleBot.Pair> arguments;
+    private readonly string condtionType;
+
+    public string CondtionType
+    {
+        get
+        {
+            return condtionType;
+        }
+    }
+
+    private readonly List<ConditionConfig> childConfigs;
+
+    public List<ConditionConfig> ChildConfigs
+    {
+        get
+        {
+            return childConfigs;
+        }
+    }
+
+    private readonly string targetField;
+
+    public string TargetField
+    {
+        get
+        {
+            return targetField;
+        }
+    }
+
+    private readonly List<SimpleBot.Pair> arguments;
+
+    public List<SimpleBot.Pair> Arguments
+    {
+        get
+        {
+            return arguments;
+        }
+    }
 
     public ConditionConfig(string conditionType, List<ConditionConfig> childConfigs)
     {

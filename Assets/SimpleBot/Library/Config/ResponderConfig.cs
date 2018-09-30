@@ -7,6 +7,15 @@ public class ResponderConfig
 {
     private string target;
     private List<ConditionConfig> conditions;
+
+    public List<ConditionConfig> Conditions
+    {
+        get
+        {
+            return conditions;
+        }
+    }
+
     private List<string> responds;
 
     public string Target

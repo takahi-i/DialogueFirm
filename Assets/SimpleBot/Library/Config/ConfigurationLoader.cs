@@ -78,13 +78,11 @@ namespace SimpleBot
 
                     if (responder.Contains<string>("condition"))
                     {
-                        Debug.Log("Found Condition for " + targetName);
                         ConditionConfig condition = this.extractCondtion(responder["condition"]);
-                        builder.AddResponds(targetName, values); //FIXME load condition block
+                        builder.AddResponds(targetName, values, new List<ConditionConfig>() { condition });
                     }
                     else
                     {
-                        Debug.Log("Not Found Condition for " + targetName);
                         builder.AddResponds(targetName, values);
                     }
 
@@ -134,6 +132,7 @@ namespace SimpleBot
                 foreach (var argumentKey in terminalConditonNode[conditionFeild]) {
                     string keyString = argumentKey.Get<string>();
                     System.Object argValue = terminalConditonNode[keyString].Get<System.Object>();
+                    Debug.Log("creating arguments");
                     arguments.Add(new Pair(keyString, argValue));
                 }
             }
