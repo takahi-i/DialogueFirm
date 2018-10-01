@@ -128,14 +128,18 @@ namespace SimpleBot
             foreach (var field in terminalConditonNode) // NOTE: only one element exist 
             {
                 conditionFeild = field.Get<string>();
-                var argumentMap = (IDictionary) terminalConditonNode[conditionFeild].Get<System.Object>();
-                if (argumentMap is IDictionary) {
+                var fieldArguments = terminalConditonNode[conditionFeild].Get<System.Object>();
+                if (fieldArguments is IDictionary) // "range": {"status": {"lte": 1}
+                { 
+                    IDictionary argumentMap = (IDictionary) fieldArguments;
                     foreach (var argumentKey in argumentMap.Keys)
                     {
                         string keyString = (string) argumentKey;
                         System.Object argValue = argumentMap[keyString];
                         arguments.Add(new Pair(keyString, argValue));
                     }
+                } else if (fieldArguments is string) { // {"term": {"status": "happy"}}
+                    arguments.Add(new Pair((string) fieldArguments, null));
                 }
             }
             return new ConditionConfig(conditionTypeStr, conditionFeild, arguments);
