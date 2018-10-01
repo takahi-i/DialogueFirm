@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -127,10 +128,14 @@ namespace SimpleBot
             foreach (var field in terminalConditonNode) // NOTE: only one element exist 
             {
                 conditionFeild = field.Get<string>();
-                foreach (var argumentKey in terminalConditonNode[conditionFeild]) {
-                    string keyString = argumentKey.Get<string>();
-                    System.Object argValue = terminalConditonNode[conditionFeild][keyString].Get<System.Object>();
-                    arguments.Add(new Pair(keyString, argValue));
+                var argumentMap = (IDictionary) terminalConditonNode[conditionFeild].Get<System.Object>();
+                if (argumentMap is IDictionary) {
+                    foreach (var argumentKey in argumentMap.Keys)
+                    {
+                        string keyString = (string) argumentKey;
+                        System.Object argValue = argumentMap[keyString];
+                        arguments.Add(new Pair(keyString, argValue));
+                    }
                 }
             }
             return new ConditionConfig(conditionTypeStr, conditionFeild, arguments);
