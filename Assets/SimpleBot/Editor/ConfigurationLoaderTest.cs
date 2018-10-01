@@ -35,16 +35,24 @@ public class ConfigurationLoaderTest
          ""values"": [""tomato"", ""potate""]
       }
     ],
-    ""responders"": [
+    ""responders"": {
+      ""question"": [
       {
-         ""target"": ""question"",
-         ""responds"": [""Turn the corner and go straight for five minitues.""]
-      }
+         ""responds"": [""Turn the corner and go straight for five minitues.""],
+         ""condition"": {
+           ""must"": [
+            {
+              ""range"": { ""anger-level"": { ""gte"": 3} }
+            }
+           ]
+         }
+      }],
+      ""default"": [
       {
-         ""target"": ""default"",
          ""responds"": [""Sorry I do not understand what you mean.""]
       }
-    ]
+      ]
+    }
 }
 ";
 
@@ -72,6 +80,15 @@ public class ConfigurationLoaderTest
         Assert.AreEqual(2, configuration.ResponderConfigs.Count);
         Assert.AreEqual("question", configuration.ResponderConfigs[0].Target);
         Assert.AreEqual("Turn the corner and go straight for five minitues.", configuration.ResponderConfigs[0].Responds[0]);
+        Assert.AreEqual(1, configuration.ResponderConfigs[0].Conditions.Count);
+        Assert.AreEqual("must", configuration.ResponderConfigs[0].Conditions[0].CondtionType);
+        Assert.AreEqual(1, configuration.ResponderConfigs[0].Conditions[0].ChildConfigs.Count);
+        Assert.AreEqual("range", configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].CondtionType);
+        Assert.AreEqual("anger-level", configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].TargetField);
+        Assert.AreEqual(1, configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments.Count);
+        Assert.AreEqual("gte", configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments[0].First);
+        Assert.AreEqual(3, configuration.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments[0].Second);
+
         Assert.AreEqual("default", configuration.ResponderConfigs[1].Target);
         Assert.AreEqual("Sorry I do not understand what you mean.", configuration.ResponderConfigs[1].Responds[0]);
     }

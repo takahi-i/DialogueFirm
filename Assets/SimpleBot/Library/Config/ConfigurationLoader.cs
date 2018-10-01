@@ -43,14 +43,17 @@ namespace SimpleBot
                     {
                         slots.Add(slot["name"].Get<string>(), slot["type"].Get<string>());
                     }
-                } catch (System.NullReferenceException) {
+                }
+                catch (System.NullReferenceException)
+                {
                     // do nothing
                 }
                 builder.AddIntent(name, type, expressions, slots);
             }
 
             // extract types
-            foreach (var type in json["types"]) {
+            foreach (var type in json["types"])
+            {
                 var name = type["name"].Get<string>();
                 var values = new List<string>();
                 foreach (var value in type["values"])
@@ -61,17 +64,76 @@ namespace SimpleBot
             }
 
             // extract responders
-            foreach (var responder in json["responders"])
+            foreach (var responderName in json["responders"])
             {
-                var targetName = responder["target"].Get<string>();
-                var values = new List<string>();
-                foreach (var respond in responder["responds"])
+                var targetName = responderName.Get<string>();
+                var targetResponders = json["responders"][targetName];
+                foreach (var responder in targetResponders)
                 {
-                    values.Add(respond.Get<string>());
+                    var values = new List<string>();
+                    foreach (var respond in responder["responds"])
+                    {
+                        values.Add(respond.Get<string>());
+                    }
+
+                    if (responder.Contains<string>("condition"))
+                    {
+                        ConditionConfig condition = this.extractCondtion(responder["condition"]);
+                        builder.AddResponds(targetName, values, new List<ConditionConfig>() { condition });
+                    }
+                    else
+                    {
+                        builder.AddResponds(targetName, values);
+                    }
                 }
-                builder.AddResponds(targetName, values);
             }
             return builder.Build();
+        }
+
+        private ConditionConfig extractCondtion(JsonNode conditionNode)
+        {
+            foreach (var conditionType in conditionNode)
+            {
+                string conditonTypeStr = conditionType.Get<string>();
+                Debug.Log("conditonTypeStr; " + conditonTypeStr);
+                return new  ConditionConfig(conditonTypeStr, this.extractChildCondtions(conditionNode[conditionType.Get<string>()]));
+            }
+            throw new InvalidOperationException("No conditon is specified...");
+        }
+
+        private List<ConditionConfig> extractChildCondtions(JsonNode childConditionListNodes) {
+            List<ConditionConfig> childConditions = new List<ConditionConfig>();
+            foreach (var conditionNode in childConditionListNodes)
+            {
+                foreach (var conditionType in conditionNode) {
+                    string conditionTypeStr = conditionType.Get<string>();
+                    if (conditionTypeStr == "must" || conditionTypeStr == "should") // intermidiate node
+                    {
+                        childConditions.Add(new ConditionConfig(conditionTypeStr, this.extractChildCondtions(conditionNode[conditionTypeStr])));
+                    }
+                    else // terminal node
+                    {
+                        childConditions.Add(this.extractTerminalConditions(conditionTypeStr, conditionNode[conditionTypeStr]));
+                    }
+                }
+            }
+            return childConditions;
+        }
+
+        private ConditionConfig extractTerminalConditions(string conditionTypeStr, JsonNode terminalConditonNode)
+        {
+            string conditionFeild = "";
+            List<Pair> arguments = new List<Pair>();
+            foreach (var field in terminalConditonNode) // NOTE: only one element exist 
+            {
+                conditionFeild = field.Get<string>();
+                foreach (var argumentKey in terminalConditonNode[conditionFeild]) {
+                    string keyString = argumentKey.Get<string>();
+                    System.Object argValue = terminalConditonNode[conditionFeild][keyString].Get<System.Object>();
+                    arguments.Add(new Pair(keyString, argValue));
+                }
+            }
+            return new ConditionConfig(conditionTypeStr, conditionFeild, arguments);
         }
     }
 }
