@@ -30,4 +30,20 @@ public class ConfigurationBuilderTest {
         Assert.AreEqual("gte", config.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments[0].First);
         Assert.AreEqual(20, config.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments[0].Second);
     }
+
+    [Test]
+    public void TestBuildConditionWithStringArgument()
+    {
+        var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
+                                               AddResponds("foobar", new List<string>() { "baz" },
+                                                           new List<ConditionConfig>() { new ConditionConfig("must", new List<ConditionConfig>() { new ConditionConfig("term", "status", new List<Pair>() { new Pair("happy", "dummy") }) }) }).Build();
+        Assert.AreEqual(1, config.ResponderConfigs[0].Conditions.Count);
+        Assert.AreEqual("must", config.ResponderConfigs[0].Conditions[0].CondtionType);
+        Assert.AreEqual(1, config.ResponderConfigs[0].Conditions[0].ChildConfigs.Count);
+        Assert.AreEqual("term", config.ResponderConfigs[0].Conditions[0].ChildConfigs[0].CondtionType);
+        Assert.AreEqual("status", config.ResponderConfigs[0].Conditions[0].ChildConfigs[0].TargetField);
+        Assert.AreEqual(1, config.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments.Count);
+        Assert.AreEqual("happy", config.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments[0].First);
+        Assert.AreEqual("dummy", config.ResponderConfigs[0].Conditions[0].ChildConfigs[0].Arguments[0].Second);
+    }
 }
