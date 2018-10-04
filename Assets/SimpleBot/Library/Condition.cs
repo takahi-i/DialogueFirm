@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace SimpleBot
 {
-    class Condition
+    public static class Condition
     {
-        static public Func<State, bool> Load(ConditionConfig config)
+        public static Func<State, bool> Load(ConditionConfig config)
         {
-            foreach (var child_condition in config.ChildConfigs) {
-                return term(child_condition.CondtionType, child_condition);
-            }
-            throw new ArgumentException("No conditon is defined ...");
+            return term(config.CondtionType, config);
         }
 
         private static Func<State, bool> term(string condtion_type, ConditionConfig factor_config)
@@ -88,8 +84,8 @@ namespace SimpleBot
 
         private static Func<State, bool> term_method(ConditionConfig config)
         {
-            var targetField = (string)config.Arguments[0].First;
-            var targetValue = (string)config.Arguments[0].Second;
+            var targetField = config.TargetField;
+            var targetValue = (string)config.Arguments[0].First;
             return (State state) => {
                 if (state.GetString(targetField) == targetValue)
                 {
