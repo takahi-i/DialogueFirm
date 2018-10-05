@@ -23,8 +23,11 @@ public class ConditionTest
     [Test]
     public void TestUnmatchedTermConditon()
     {
-        var config = new ConfigurationBuilder().AddResponds("foobar", new List<string>() { "baz" },
-                                                            new List<ConditionConfig>() { new ConditionConfig("must", new List<ConditionConfig>() { new ConditionConfig("term", "feel", new List<Pair>() { new Pair("happy", "dummy") }) }) }).Build();
+        var config = new ConfigurationBuilder().AddResponds("foobar", new List<string>() { "baz" })
+                                               .AddCondition( new ConditionConfig("must", 
+                                                                                  new List<ConditionConfig>() { 
+                                                                                  new ConditionConfig("term", "feel", new List<Pair>() { new Pair("happy", "dummy") })
+                                                                                  })).Build();
         Assert.AreEqual(1, config.ResponderConfigs[0].Conditions.Count);
 
         Func<State, bool> condition = Condition.Load(config.ResponderConfigs[0].Conditions[0]);
