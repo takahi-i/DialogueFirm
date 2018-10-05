@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using SimpleBot;
 using UnityEngine;
 
 public class ResponderConfig

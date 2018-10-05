@@ -2,60 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConditionConfig {
-    private readonly string condtionType;
-
-    public string CondtionType
+namespace SimpleBot
+{
+    public class ConditionConfig
     {
-        get
+        private readonly string condtionType;
+
+        public string CondtionType
         {
-            return condtionType;
+            get
+            {
+                return condtionType;
+            }
         }
-    }
 
-    private readonly List<ConditionConfig> childConfigs;
+        private readonly List<ConditionConfig> childConfigs;
 
-    public List<ConditionConfig> ChildConfigs
-    {
-        get
+        public List<ConditionConfig> ChildConfigs
         {
-            return childConfigs;
+            get
+            {
+                return childConfigs;
+            }
         }
-    }
 
-    private readonly string targetField;
+        private readonly string targetField;
 
-    public string TargetField
-    {
-        get
+        public string TargetField
         {
-            return targetField;
+            get
+            {
+                return targetField;
+            }
         }
-    }
 
-    private readonly List<SimpleBot.Pair> arguments;
+        private readonly List<SimpleBot.Pair> arguments;
 
-    public List<SimpleBot.Pair> Arguments
-    {
-        get
+        public List<SimpleBot.Pair> Arguments
         {
-            return arguments;
+            get
+            {
+                return arguments;
+            }
         }
-    }
 
-    public ConditionConfig(string conditionType, List<ConditionConfig> childConfigs)
-    {
-        this.condtionType = conditionType;
-        this.childConfigs = childConfigs;
-        this.targetField = null;
-        this.arguments = new List<SimpleBot.Pair>();
-    }
+        public ConditionConfig(string conditionType, List<ConditionConfig> childConfigs)
+        {
+            this.condtionType = conditionType;
+            this.childConfigs = childConfigs;
+            this.targetField = null;
+            this.arguments = new List<SimpleBot.Pair>();
+        }
 
-    public ConditionConfig(string conditionType, string targetField, List<SimpleBot.Pair> arguments)
-    {
-        this.condtionType = conditionType;
-        this.childConfigs = new List<ConditionConfig>();
-        this.targetField = targetField;
-        this.arguments = arguments;
+        public ConditionConfig(string conditionType, string targetField, List<SimpleBot.Pair> arguments)
+        {
+            this.condtionType = conditionType;
+            this.childConfigs = new List<ConditionConfig>();
+            this.targetField = targetField;
+            this.arguments = arguments;
+        }
     }
 }
