@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.TestTools;
-using NUnit.Framework;
-using System.Collections;
+﻿using NUnit.Framework;
 using SimpleBot;
 
 public class ConditionConfigTest
