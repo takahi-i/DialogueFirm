@@ -18,9 +18,15 @@ public class ConfigurationBuilderTest {
     [Test]
     public void TestBuildCondition()
     {
-        var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
+        Configuration config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
                                                AddResponds("foobar", new List<string>() { "baz" },
-                                                           new List<ConditionConfig>() { new ConditionConfig("must", new List<ConditionConfig>(){ new ConditionConfig("scope", "age", new List<Pair>(){ new Pair("gte", 20) })})}).Build();
+                                                           new List<ConditionConfig>() {
+                                                               new ConditionConfigBuilder().AddType("must").AddChild(
+                                                                    new ConditionConfigBuilder().AddType("scope").AddTargetField("age").AddArgument(new Pair("gte", 20)).Build()
+                                                              ).Build()
+                                                            }
+                                                          ).Build();
+
         Assert.AreEqual(1, config.ResponderConfigs[0].Conditions.Count);
         Assert.AreEqual("must", config.ResponderConfigs[0].Conditions[0].CondtionType);
         Assert.AreEqual(1, config.ResponderConfigs[0].Conditions[0].ChildConfigs.Count);
@@ -36,7 +42,13 @@ public class ConfigurationBuilderTest {
     {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
                                                AddResponds("foobar", new List<string>() { "baz" },
-                                                           new List<ConditionConfig>() { new ConditionConfig("must", new List<ConditionConfig>() { new ConditionConfig("term", "status", new List<Pair>() { new Pair("happy", "dummy") }) }) }).Build();
+                                                           new List<ConditionConfig>() {
+                                                               new ConditionConfigBuilder().AddType("must").AddChild(
+                                                                    new ConditionConfigBuilder().AddType("term").AddTargetField("status").AddArgument(new Pair("happy", "dummy")).Build()
+                                                              ).Build()
+                                                            }
+                                                          ).Build();
+
         Assert.AreEqual(1, config.ResponderConfigs[0].Conditions.Count);
         Assert.AreEqual("must", config.ResponderConfigs[0].Conditions[0].CondtionType);
         Assert.AreEqual(1, config.ResponderConfigs[0].Conditions[0].ChildConfigs.Count);
