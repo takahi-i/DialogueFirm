@@ -23,6 +23,13 @@ namespace SimpleBot {
             return this;
         }
 
+        public ConfigurationBuilder AddEffect(string targetField, string effectType, object defaultValue, object setvalue)
+        {
+            var lastIntentConfig = this.intentConfigs[this.intentConfigs.Count - 1];
+            lastIntentConfig.AddEffect(new EffectConfig(targetField, effectType, defaultValue, setvalue));
+            return this;
+        }
+
         public ConfigurationBuilder AddType(string name, List<string> examples)
         {
             this.typeConfigs.Add(name, examples);

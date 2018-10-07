@@ -9,6 +9,15 @@ namespace SimpleBot
         private string name;
         private List<string> patterns;
         private MatchConfig match;
+        private List<EffectConfig> effects;
+
+        public List<EffectConfig> Effects
+        {
+            get
+            {
+                return effects;
+            }
+        }
 
         public string Name
         {
@@ -22,6 +31,7 @@ namespace SimpleBot
         {
             this.name = name;
             this.match = new MatchConfig(type, patterns, slots);
+            this.effects = new List<EffectConfig>();
         }
 
         public string MatcherType()
@@ -37,6 +47,10 @@ namespace SimpleBot
         public IDictionary<string, string> Slots()
         {
             return this.match.Slots;
+        }
+
+        public void AddEffect(EffectConfig effectConfig) {
+            this.effects.Add(effectConfig);
         }
     }
 
@@ -110,6 +124,14 @@ namespace SimpleBot
         }
 
         private object setValue;
+
+        public object SetValue
+        {
+            get
+            {
+                return setValue;
+            }
+        }
 
         public EffectConfig(string targetFIeld, string effectType, object defaultValue, object setvalue)
         {
