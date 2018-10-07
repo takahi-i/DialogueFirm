@@ -7,7 +7,7 @@ public class EffectTest {
     private State state = new State();
 
     [Test]
-    public void TestSimpleLoad()
+    public void TestSimpleApply()
     {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>())
                                                .AddEffect("angry-level", "incr", 0, null).Build();

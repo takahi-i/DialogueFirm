@@ -6,10 +6,12 @@ namespace SimpleBot
     {
         private Func<State, bool> apply;
         private string targetField;
+        private object setValue;
 
         public Effect(EffectConfig config)
         {
             targetField = config.TargetFIeld;
+            setValue = config.SetValue;
             apply = this.load(config);
         }
 
@@ -29,7 +31,17 @@ namespace SimpleBot
                     }
                     return true;
                 };
-            } else {
+            } else if (config.EffectType == "decr") {
+                return (State state) => {
+                    if (state.HasKey(targetField))
+                    {
+                        int result = state.GetInt(targetField);
+                        state.SetInt(targetField, --result);
+                    }
+                    return true;
+                };
+            }
+            else {
                 throw new ArgumentException(config.EffectType + " is not supported");
             }
         }
