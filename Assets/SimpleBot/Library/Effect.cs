@@ -13,6 +13,10 @@ namespace SimpleBot
             apply = this.load(config);
         }
 
+        public bool Apply(State state) {
+            return this.apply(state);
+        }
+
         private Func<State, bool> load(EffectConfig config)
         {
             if (config.EffectType == "incr")
