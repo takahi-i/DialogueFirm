@@ -50,6 +50,24 @@ namespace SimpleBot
                     // do nothing
                 }
                 builder.AddIntent(name, type, expressions, slots);
+
+                // handle optional effects
+                if (intent.Contains<string>("effects")) {
+                    foreach (var effect in intent["effects"]) {
+                        var targetField = effect["field"].Get<string>();
+                        var effectType = effect["type"].Get<string>();
+                        object defaultValue = null;
+                        if (effect.Contains<string>("default")) {
+                            defaultValue = effect["default"];
+                        }
+                        object setValue = null;
+                        if (effect.Contains<string>("value"))
+                        {
+                            setValue = effect["value"];
+                        }
+                        builder.AddEffect(targetField, effectType, defaultValue, setValue);
+                    }
+                }
             }
 
             // extract types
