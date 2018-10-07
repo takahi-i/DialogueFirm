@@ -77,4 +77,46 @@ namespace SimpleBot
             this.slots = slots;
         }
     }
+
+    public class EffectConfig {
+        private string targetFIeld;
+
+        public string TargetFIeld
+        {
+            get
+            {
+                return targetFIeld;
+            }
+        }
+
+        private string effectType;
+
+        public string EffectType
+        {
+            get
+            {
+                return effectType;
+            }
+        }
+
+        private object defaultValue;
+
+        public object DefaultValue
+        {
+            get
+            {
+                return defaultValue;
+            }
+        }
+
+        private object setValue;
+
+        public EffectConfig(string targetFIeld, string effectType, object defaultValue, object setvalue)
+        {
+            this.targetFIeld = targetFIeld;
+            this.effectType = effectType;
+            this.defaultValue = defaultValue;
+            this.setValue = setvalue;
+        }
+    }
 }
