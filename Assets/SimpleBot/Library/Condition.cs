@@ -98,7 +98,56 @@ namespace SimpleBot
 
         private static Func<State, bool> ranges_method(ConditionConfig config)
         {
-            throw new NotImplementedException();
+            var targetField = config.TargetField;
+            var ranges = config.Arguments;
+            List<Func<State, bool>> methods = new List<Func<State, bool>>();
+            foreach (var range in ranges) {
+                methods.Add(range_method(targetField, range));
+            }
+            return (State state) => {
+                foreach (var method in methods) {
+                    if (!method(state)) {
+                        return false;
+                    }
+                }
+                return true;
+            };
+        }
+
+        private static Func<State, bool> range_method(string targetField, Pair range)
+        {
+            string identifier = range.First;
+            int target_value = (int) range.Second;
+            if (identifier == "eq")
+            {
+                return (State state) =>
+                {
+                    if (state.HasKey(targetField) && state.GetInt(targetField) != target_value)
+                    {
+                        return false;
+                    }
+                    return true;
+                };
+            } else if (identifier == "lte") {
+                return (State state) =>
+                {
+                    if (state.HasKey(targetField) && state.GetInt(targetField) <= target_value)
+                    {
+                        return true;
+                    }
+                    return false;
+                };
+            } else if (identifier == "gte") {
+                return (State state) =>
+                {
+                    if (state.HasKey(targetField) && state.GetInt(targetField) >= target_value)
+                    {
+                        return true;
+                    }
+                    return false;
+                };
+            }
+            throw new ArgumentException(identifier + " is not supported in factor method.");
         }
     }
 }

@@ -6,6 +6,11 @@ namespace SimpleBot
 {
     public class State
     {
+
+        public bool HasKey(string key) {
+            return PlayerPrefs.HasKey(key);
+        }
+
         public void SetInt(string key, int value)
         {
             PlayerPrefs.SetInt(key, value);
