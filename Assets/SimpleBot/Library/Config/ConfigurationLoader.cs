@@ -26,21 +26,21 @@ namespace SimpleBot
             JsonNode json = JsonNode.Parse(jsonText);
 
             // extract intents
-            foreach (var intention in json["intentions"])
+            foreach (var intent in json["intentions"])
             {
-                var name = intention["name"].Get<string>();
-                var type = intention["match"]["type"].Get<string>();
+                var name = intent["name"].Get<string>();
+                var type = intent["match"]["type"].Get<string>();
                 var expressions = new List<string>();
                 IDictionary<string, string> slots = new Dictionary<string, string>();
 
-                foreach (var expression in intention["match"]["expressions"])
+                foreach (var expression in intent["match"]["expressions"])
                 {
                     expressions.Add(expression.Get<string>());
                 }
 
                 try
                 {
-                    foreach (var slot in intention["match"]["slots"])
+                    foreach (var slot in intent["match"]["slots"])
                     {
                         slots.Add(slot["name"].Get<string>(), slot["type"].Get<string>());
                     }
