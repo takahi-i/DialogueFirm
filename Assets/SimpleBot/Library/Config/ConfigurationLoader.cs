@@ -63,7 +63,7 @@ namespace SimpleBot
                         object setValue = null;
                         if (effect.Contains<string>("value"))
                         {
-                            setValue = effect["value"];
+                            setValue = effect["value"].Get<object>();
                         }
                         builder.AddEffect(targetField, effectType, defaultValue, setValue);
                     }
@@ -114,7 +114,6 @@ namespace SimpleBot
             foreach (var conditionType in conditionNode)
             {
                 string conditonTypeStr = conditionType.Get<string>();
-                Debug.Log("conditonTypeStr; " + conditonTypeStr);
                 return new  ConditionConfig(conditonTypeStr, this.extractChildCondtions(conditionNode[conditionType.Get<string>()]));
             }
             throw new InvalidOperationException("No conditon is specified...");

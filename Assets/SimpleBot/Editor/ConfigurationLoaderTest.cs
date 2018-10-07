@@ -26,7 +26,12 @@ public class ConfigurationLoaderTest
                 ""type"" : ""template"",
                 ""slots"" : [ {""name"": ""ingredient1"", ""type"": ""ingredients"" }],
                 ""expressions"" : [ ""tell me ${ingredient1}"", ""show me ${ingredient1}"" ]
-            }
+            },
+            ""effects"" : [{
+                ""field"": ""anger - level"",
+                ""type"": ""set"",
+                ""value"": 0}
+            ]
        }
     ],
     ""types"": [
@@ -83,6 +88,10 @@ public class ConfigurationLoaderTest
         Assert.AreEqual("show me ${ingredient1}", configuration.GetIntentConfigs()[1].Patterns()[1]);
         Assert.AreEqual(1, configuration.GetIntentConfigs()[1].Slots().Count);
         Assert.AreEqual("ingredients", configuration.GetIntentConfigs()[1].Slots()["ingredient1"]);
+        Assert.AreEqual(1, configuration.GetIntentConfigs()[1].Effects.Count);
+        Assert.AreEqual("set", configuration.GetIntentConfigs()[1].Effects[0].EffectType);
+        Assert.AreEqual(null, configuration.GetIntentConfigs()[1].Effects[0].DefaultValue);
+        Assert.AreEqual(0, configuration.GetIntentConfigs()[1].Effects[0].SetValue);
 
         Assert.AreEqual(2, configuration.GetTypeConfig("ingredients").Count);
         Assert.AreEqual("tomato", configuration.GetTypeConfig("ingredients")[0]);
