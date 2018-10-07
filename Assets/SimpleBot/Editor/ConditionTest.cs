@@ -91,6 +91,24 @@ public class ConditionTest
 
 
     [Test]
+    public void TestNotSetFieldNameCondition()
+    {
+        var config = new ConfigurationBuilder().AddResponds("foobar", new List<string>() { "baz" }, new List<ConditionConfig>() {
+                                                                    new ConditionConfigBuilder().AddType("must").
+                                                                          AddChild(new ConditionConfigBuilder().
+                                                                                   AddType("range").AddTargetField("angry-level").
+                                                                                   AddArgument(new Pair("gte", 3)).
+                                                                                   Build())
+                                                                    .Build()
+                                                                }
+                                                           ).Build();
+        Assert.AreEqual(1, config.ResponderConfigs[0].Conditions.Count);
+        Func<State, bool> condition = Condition.Load(config.ResponderConfigs[0].Conditions[0]);
+        Assert.AreEqual(false, condition(this.state));
+    }
+
+
+    [Test]
     public void TestSimpleUnmatchRangeCondition()
     {
         var config = new ConfigurationBuilder().AddResponds("foobar", new List<string>() { "baz" }, new List<ConditionConfig>() {

@@ -122,7 +122,7 @@ namespace SimpleBot
             {
                 return (State state) =>
                 {
-                    if (state.GetInt(targetField) != target_value)
+                    if (state.HasKey(targetField) && state.GetInt(targetField) != target_value)
                     {
                         return false;
                     }
@@ -131,7 +131,7 @@ namespace SimpleBot
             } else if (identifier == "lte") {
                 return (State state) =>
                 {
-                    if (state.GetInt(targetField) <= target_value)
+                    if (state.HasKey(targetField) && state.GetInt(targetField) <= target_value)
                     {
                         return true;
                     }
@@ -140,7 +140,7 @@ namespace SimpleBot
             } else if (identifier == "gte") {
                 return (State state) =>
                 {
-                    if (state.GetInt(targetField) >= target_value)
+                    if (state.HasKey(targetField) && state.GetInt(targetField) >= target_value)
                     {
                         return true;
                     }
