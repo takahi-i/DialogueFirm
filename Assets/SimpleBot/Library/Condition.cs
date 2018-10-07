@@ -128,6 +128,24 @@ namespace SimpleBot
                     }
                     return true;
                 };
+            } else if (identifier == "lte") {
+                return (State state) =>
+                {
+                    if (state.GetInt(targetField) <= target_value)
+                    {
+                        return true;
+                    }
+                    return false;
+                };
+            } else if (identifier == "gte") {
+                return (State state) =>
+                {
+                    if (state.GetInt(targetField) >= target_value)
+                    {
+                        return true;
+                    }
+                    return false;
+                };
             }
             throw new ArgumentException(identifier + " is not supported in factor method.");
         }
