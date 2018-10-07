@@ -9,6 +9,15 @@ namespace SimpleBot
         private string name;
         private List<string> patterns;
         private MatchConfig match;
+        private List<EffectConfig> effects;
+
+        public List<EffectConfig> Effects
+        {
+            get
+            {
+                return effects;
+            }
+        }
 
         public string Name
         {
@@ -22,6 +31,7 @@ namespace SimpleBot
         {
             this.name = name;
             this.match = new MatchConfig(type, patterns, slots);
+            this.effects = new List<EffectConfig>();
         }
 
         public string MatcherType()
@@ -37,6 +47,10 @@ namespace SimpleBot
         public IDictionary<string, string> Slots()
         {
             return this.match.Slots;
+        }
+
+        public void AddEffect(EffectConfig effectConfig) {
+            this.effects.Add(effectConfig);
         }
     }
 
@@ -75,6 +89,56 @@ namespace SimpleBot
             this.matchType = type;
             this.patterns = patterns;
             this.slots = slots;
+        }
+    }
+
+    public class EffectConfig {
+        private string targetFIeld;
+
+        public string TargetFIeld
+        {
+            get
+            {
+                return targetFIeld;
+            }
+        }
+
+        private string effectType;
+
+        public string EffectType
+        {
+            get
+            {
+                return effectType;
+            }
+        }
+
+        private object defaultValue;
+
+        public object DefaultValue
+        {
+            get
+            {
+                return defaultValue;
+            }
+        }
+
+        private object setValue;
+
+        public object SetValue
+        {
+            get
+            {
+                return setValue;
+            }
+        }
+
+        public EffectConfig(string targetFIeld, string effectType, object defaultValue, object setvalue)
+        {
+            this.targetFIeld = targetFIeld;
+            this.effectType = effectType;
+            this.defaultValue = defaultValue;
+            this.setValue = setvalue;
         }
     }
 }

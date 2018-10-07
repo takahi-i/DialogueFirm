@@ -26,21 +26,21 @@ namespace SimpleBot
             JsonNode json = JsonNode.Parse(jsonText);
 
             // extract intents
-            foreach (var intention in json["intentions"])
+            foreach (var intent in json["intentions"])
             {
-                var name = intention["name"].Get<string>();
-                var type = intention["match"]["type"].Get<string>();
+                var name = intent["name"].Get<string>();
+                var type = intent["match"]["type"].Get<string>();
                 var expressions = new List<string>();
                 IDictionary<string, string> slots = new Dictionary<string, string>();
 
-                foreach (var expression in intention["match"]["expressions"])
+                foreach (var expression in intent["match"]["expressions"])
                 {
                     expressions.Add(expression.Get<string>());
                 }
 
                 try
                 {
-                    foreach (var slot in intention["match"]["slots"])
+                    foreach (var slot in intent["match"]["slots"])
                     {
                         slots.Add(slot["name"].Get<string>(), slot["type"].Get<string>());
                     }
@@ -50,6 +50,24 @@ namespace SimpleBot
                     // do nothing
                 }
                 builder.AddIntent(name, type, expressions, slots);
+
+                // handle optional effects
+                if (intent.Contains<string>("effects")) {
+                    foreach (var effect in intent["effects"]) {
+                        var targetField = effect["field"].Get<string>();
+                        var effectType = effect["type"].Get<string>();
+                        object defaultValue = null;
+                        if (effect.Contains<string>("default")) {
+                            defaultValue = effect["default"];
+                        }
+                        object setValue = null;
+                        if (effect.Contains<string>("value"))
+                        {
+                            setValue = effect["value"].Get<object>();
+                        }
+                        builder.AddEffect(targetField, effectType, defaultValue, setValue);
+                    }
+                }
             }
 
             // extract types
@@ -96,7 +114,6 @@ namespace SimpleBot
             foreach (var conditionType in conditionNode)
             {
                 string conditonTypeStr = conditionType.Get<string>();
-                Debug.Log("conditonTypeStr; " + conditonTypeStr);
                 return new  ConditionConfig(conditonTypeStr, this.extractChildCondtions(conditionNode[conditionType.Get<string>()]));
             }
             throw new InvalidOperationException("No conditon is specified...");
