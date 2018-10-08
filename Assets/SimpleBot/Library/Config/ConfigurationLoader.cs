@@ -58,7 +58,7 @@ namespace SimpleBot
                         var effectType = effect["type"].Get<string>();
                         object defaultValue = null;
                         if (effect.Contains<string>("default")) {
-                            defaultValue = effect["default"];
+                            defaultValue = effect["default"].Get<object>();
                         }
                         object setValue = null;
                         if (effect.Contains<string>("value"))

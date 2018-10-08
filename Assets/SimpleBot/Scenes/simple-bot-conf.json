@@ -1,11 +1,16 @@
 ﻿{
   "intentions": [
     {
-    "name": "repeat",
+      "name": "repeat",
       "match": {
         "type": "verbatim",
         "expressions": [ "repeat", "pardon me?" ]
-      }
+      },
+      "effects" : [{
+			"field": "anger-level",
+			"type": "incr",
+			"default": 0
+		    }]
     },
     {
       "name": "question",
@@ -35,10 +40,28 @@
     "question": [{
       "responds": [ "Turn the corner and go straight for five minitues." ]
     }],
-    "repeat": [{
-      "target": "repeat",
-      "responds": [ "Oh." ]
-    }],
+    "repeat": [
+      {
+	"responds": [ "Oh." ],
+	"condition": {
+	  "must": [
+	    {
+	      "range": { "anger-level" : { "lte": 1 }}
+	    }
+	  ]
+        }
+      },
+      {
+	"responds": [ "FUXXX." ],
+	"condition": {
+	  "must": [
+	    {
+	      "range": { "anger-level" : { "gte": 2 }}
+	    }
+	  ]
+	}
+      }
+    ],
     "default": [{
       "target": "default",
       "responds": [ "Sorry I do not understand what you mean." ]

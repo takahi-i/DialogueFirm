@@ -8,6 +8,13 @@ namespace SimpleBot
     {
         public static Func<State, bool> Load(ConditionConfig config)
         {
+            if (config == null) {
+                return (State state) =>
+                {
+                    return true;
+                };
+            }
+
             return term(config.CondtionType, config);
         }
 
@@ -88,7 +95,7 @@ namespace SimpleBot
             var targetField = config.TargetField;
             var targetValue = (string)config.Arguments[0].First;
             return (State state) => {
-                if (state.GetString(targetField) == targetValue)
+                if (state.HasKey(targetField) && state.GetString(targetField) == targetValue)
                 {
                     return true;
                 }
@@ -117,7 +124,7 @@ namespace SimpleBot
         private static Func<State, bool> range_method(string targetField, Pair range)
         {
             string identifier = range.First;
-            int target_value = (int) range.Second;
+            int target_value = Int32.Parse(range.Second.ToString());
             if (identifier == "eq")
             {
                 return (State state) =>
