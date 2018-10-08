@@ -28,10 +28,14 @@ namespace SimpleBot
             {
                 state.SetString(targetField, (string)config.DefaultValue);
             }
-            else 
+            else if (config.DefaultValue == null)
+            { 
+                // dummy
+            }
+            else
             {
                 Debug.Log("faile to add the default value for " + targetField + "....");
-                //Debug.Log("type of the targett value is " + config.DefaultValue.GetType().FullName);
+                Debug.Log("type of the targett value is " + config.DefaultValue.GetType().FullName);
             }
         }
 
