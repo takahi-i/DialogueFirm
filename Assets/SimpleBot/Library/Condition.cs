@@ -95,7 +95,7 @@ namespace SimpleBot
             var targetField = config.TargetField;
             var targetValue = (string)config.Arguments[0].First;
             return (State state) => {
-                if (state.GetString(targetField) == targetValue)
+                if (state.HasKey(targetField) && state.GetString(targetField) == targetValue)
                 {
                     return true;
                 }

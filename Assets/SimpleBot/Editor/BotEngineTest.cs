@@ -19,4 +19,19 @@ public class BotEngineTest {
         var engine = new BotEngine(config);
         Assert.AreEqual("baz", engine.replySentence("aho is not a researcher."));
     }
+
+    [Test]
+    public void NotMatchCondition()
+    {
+        var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
+                                               AddResponds("foobar", new List<string>() { "baz" }).
+                                               AddCondition(new ConditionConfig("must",
+                                                                                  new List<ConditionConfig>() {
+                                                                                  new ConditionConfig("term", "feel", new List<Pair>() { new Pair("happy", "dummy") })
+                                                                                })).
+                                               AddResponds("default", new List<string>() { "foo" }).
+                                               Build();
+        var engine = new BotEngine(config);
+        Assert.AreEqual("foo", engine.replySentence("aho is not a researcher."));
+    }
 }
