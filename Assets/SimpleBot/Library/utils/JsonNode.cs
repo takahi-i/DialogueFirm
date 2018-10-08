@@ -90,7 +90,7 @@ public class JsonNode : IEnumerable<JsonNode>, IDisposable
                 return 0;
             }
         }
-      
+
     }
 
     public bool Contains<T>(T key)
