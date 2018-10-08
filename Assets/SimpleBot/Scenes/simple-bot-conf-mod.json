@@ -46,7 +46,7 @@
 	"condition": {
 	  "must": [
 	    {
-	      "range": { "anger-level" : { "lte": 1 }}
+	      "range": { "anger-level" : { "lte": 1} }
 	    }
 	  ]
         }
