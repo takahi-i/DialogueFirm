@@ -22,6 +22,10 @@ namespace SimpleBot
                 this.condition = Condition.Load(conditionConfig);
             }
 
+            public bool satisfyState(State state) {
+                return this.condition(state);
+            }
+
             public override string Respond(Intent intent)
             {
                 if (this.responds.Count == 0)

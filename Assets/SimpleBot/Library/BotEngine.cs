@@ -8,7 +8,7 @@ namespace SimpleBot
     public class BotEngine
     {
         private IntentIdentifier identifier;
-        private IDictionary<string, ReplyResponder> responders;
+        private IDictionary<string, List<ReplyResponder>> responders;
         private State state;
 
         public BotEngine(Configuration config)
@@ -18,18 +18,22 @@ namespace SimpleBot
             this.state = new State();
         }
 
-        private IDictionary<string, ReplyResponder> generateResponderMap(Configuration config)
+        private IDictionary<string, List<ReplyResponder>> generateResponderMap(Configuration config)
         {
             List<ResponderConfig> responderConfigs = config.ResponderConfigs;
-            IDictionary<string, ReplyResponder> responderMap = new Dictionary<string, ReplyResponder>();
+            IDictionary<string, List<ReplyResponder>> responderMap = new Dictionary<string, List<ReplyResponder>>();
             foreach (var responderConfig in responderConfigs)
             {
+                string target = responderConfig.Target;
+                if (!responderMap.ContainsKey(target)) {
+                    responderMap[target] = new List<ReplyResponder>();
+                }
+
+
                 if (responderConfig.Conditions.Count > 0) {
-                    responderMap.Add(responderConfig.Target,
-                                     new SimpleResponder(responderConfig.Target, responderConfig.Responds, responderConfig.Conditions[0])); //TODO: support various responders
+                    responderMap[target].Add(new SimpleResponder(responderConfig.Target, responderConfig.Responds, responderConfig.Conditions[0])); //TODO: support various responders
                 } else {
-                    responderMap.Add(responderConfig.Target,
-                                     new SimpleResponder(responderConfig.Target, responderConfig.Responds, null)); //TODO: support various responders
+                    responderMap[target].Add(new SimpleResponder(responderConfig.Target, responderConfig.Responds, null)); //TODO: support various responders
                 }
             }
             return responderMap;
@@ -44,12 +48,14 @@ namespace SimpleBot
             Intent intent = this.identifier.Identify(input);
             if (this.responders.ContainsKey(intent.Name))
             {
-                return this.responders[intent.name].Respond(intent);
+                foreach (var responder in this.responders[intent.name]) {
+                    return responder.Respond(intent);
+                }
             }
 
             if (this.responders.ContainsKey("default"))
             {
-                return this.responders["default"].Respond(intent);
+                return this.responders["default"][0].Respond(intent);
             }
             throw new InvalidOperationException("No default responder is specified...");
         }
