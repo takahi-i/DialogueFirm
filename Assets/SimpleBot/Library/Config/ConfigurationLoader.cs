@@ -102,7 +102,7 @@ namespace SimpleBot
                     }
                     else
                     {
-                        builder.AddResponds(targetName, values);
+                        builder.AddResponds(targetName, values, new List<ConditionConfig>());
                     }
                 }
             }
