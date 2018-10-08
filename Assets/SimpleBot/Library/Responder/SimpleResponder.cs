@@ -12,12 +12,14 @@ namespace SimpleBot
             private List<string> responds;
             private Random cRandom;
             private string targetIntent;
+            Func<State, bool> condition;
 
-            public SimpleResponder(string targetIntent, List<string> responds)
+            public SimpleResponder(string targetIntent, List<string> responds, ConditionConfig conditionConfig)
             {
                 this.targetIntent = targetIntent;
                 this.responds = responds;
                 this.cRandom = new System.Random();
+                this.condition = Condition.Load(conditionConfig);
             }
 
             public override string Respond(Intent intent)

@@ -8,6 +8,13 @@ namespace SimpleBot
     {
         public static Func<State, bool> Load(ConditionConfig config)
         {
+            if (config == null) {
+                return (State state) =>
+                {
+                    return true;
+                };
+            }
+
             return term(config.CondtionType, config);
         }
 
