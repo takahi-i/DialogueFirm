@@ -23,20 +23,37 @@ namespace SimpleBot
         {
             if (config.EffectType == "incr")
             {
-                return (State state) => {
+                return (State state) =>
+                {
                     if (state.HasKey(targetField))
                     {
                         int result = state.GetInt(targetField);
-                        state.SetInt(targetField, ++result); 
+                        state.SetInt(targetField, ++result);
                     }
                     return true;
                 };
-            } else if (config.EffectType == "decr") {
-                return (State state) => {
+            }
+            else if (config.EffectType == "decr")
+            {
+                return (State state) =>
+                {
                     if (state.HasKey(targetField))
                     {
                         int result = state.GetInt(targetField);
                         state.SetInt(targetField, --result);
+                    }
+                    return true;
+                };
+            }
+            else if (config.EffectType == "set")
+            {
+                return (State state) =>
+                {
+                    if (this.setValue is int)
+                    {
+                        state.SetInt(targetField, (int)this.setValue);
+                    } else if (this.setValue is string) {
+                        state.SetString(targetField, (string)this.setValue);
                     }
                     return true;
                 };
