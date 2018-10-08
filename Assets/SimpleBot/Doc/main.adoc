@@ -14,10 +14,9 @@ SimpleBot is a simple chat bot engine for the Unity platform. Given input senten
 
 * Amazon Echo style simple configuration (JSON)
 * Provide functions useful for builing practical application
-  * define slot types
-  * state transitions
-  * effect of getting an intent
-
+  * slot and types
+  * state transitions with effect of getting an intent
+  * can make chage the reoponds with the user's status
 
 == Basic Example
 
@@ -69,5 +68,6 @@ We register `intents` to extract intent from input sentences. `responders` speci
 
 ## Classes
 
+## Samples
 
-## Samples 
+### Guide
