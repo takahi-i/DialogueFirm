@@ -8,8 +8,8 @@
       },
       "effects" : [{
 			"field": "anger-level",
-			"type": "set",
-			"value": 0
+			"type": "incr",
+			"default": 0
 		    }]
     },
     {
@@ -50,6 +50,16 @@
 	    }
 	  ]
         }
+      },
+      {
+	"responds": [ "FUXXX." ],
+	"condition": {
+	  "must": [
+	    {
+	      "range": { "anger-level" : { "gte": 2 }}
+	    }
+	  ]
+	}
       }
     ],
     "default": [{
