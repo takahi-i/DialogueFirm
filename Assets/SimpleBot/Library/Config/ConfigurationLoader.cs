@@ -26,7 +26,7 @@ namespace SimpleBot
             JsonNode json = JsonNode.Parse(jsonText);
 
             // extract intents
-            foreach (var intent in json["intentions"])
+            foreach (var intent in json["intents"])
             {
                 var name = intent["name"].Get<string>();
                 var type = intent["match"]["type"].Get<string>();
