@@ -1,5 +1,5 @@
 ﻿{
-  "intentions": [
+  "intents": [
     {
       "name": "repeat",
       "match": {
