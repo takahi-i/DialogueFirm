@@ -40,11 +40,11 @@ namespace SimpleBot
 
         public Intent IdenfityIntent(string input)
         {
-            return this.identifier.Identify(input);
+            return this.identifier.Identify(input, this.state);
         }
 
         public string replySentence(string input) {
-            Intent intent = this.identifier.Identify(input);
+            Intent intent = this.identifier.Identify(input, this.state);
             if (this.responders.ContainsKey(intent.Name))
             {
                 foreach (var responder in this.responders[intent.name]) {
