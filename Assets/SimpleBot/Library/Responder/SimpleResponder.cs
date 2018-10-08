@@ -22,7 +22,7 @@ namespace SimpleBot
                 this.condition = Condition.Load(conditionConfig);
             }
 
-            public bool satisfyState(State state) {
+            public override bool SatisfyState(State state) {
                 return this.condition(state);
             }
 

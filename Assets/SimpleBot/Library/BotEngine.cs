@@ -29,7 +29,6 @@ namespace SimpleBot
                     responderMap[target] = new List<ReplyResponder>();
                 }
 
-
                 if (responderConfig.Conditions.Count > 0) {
                     responderMap[target].Add(new SimpleResponder(responderConfig.Target, responderConfig.Responds, responderConfig.Conditions[0])); //TODO: support various responders
                 } else {
@@ -49,7 +48,9 @@ namespace SimpleBot
             if (this.responders.ContainsKey(intent.Name))
             {
                 foreach (var responder in this.responders[intent.name]) {
-                    return responder.Respond(intent);
+                    if (responder.SatisfyState(this.state)) {
+                        return responder.Respond(intent);
+                    }
                 }
             }
 

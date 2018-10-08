@@ -8,6 +8,7 @@ namespace SimpleBot
         public abstract class ReplyResponder
         {
             public abstract string Respond(Intent intent);
+            public abstract bool SatisfyState(State state);
         }
     }
 }
