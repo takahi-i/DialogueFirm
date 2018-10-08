@@ -124,12 +124,7 @@ namespace SimpleBot
         private static Func<State, bool> range_method(string targetField, Pair range)
         {
             string identifier = range.First;
-            Debug.Log("range.First");
-            Debug.Log(range.First);
-            Debug.Log("range.Second");
-            Debug.Log(range.Second.GetType().FullName);
-            
-            long target_value = Int32.Parse(range.Second.ToString());
+            int target_value = Int32.Parse(range.Second.ToString());
             if (identifier == "eq")
             {
                 return (State state) =>
