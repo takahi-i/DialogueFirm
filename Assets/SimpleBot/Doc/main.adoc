@@ -11,17 +11,36 @@
 == Overview
 
 SimpleBot is a simple chat bot engine for the Unity platform. Given input sentences, SimpleBot detects the intent and then reply the reply sentence.
+Simple bot provide Amazon Echo style JSON configuration. In addition, functions for practical applications such as state transitions or slot type matching are provided.
 
-* Amazon Echo style simple configuration (JSON)
-* Provide functions useful for builing practical application
-  * slot and types
-  * state transitions with effect of getting an intent
-  * can make chage the reoponds with the user's status
+== Basic Usage
 
-== Basic Example
+SimpleBot has `Simple.BotEngine` which manages the dialogue with the user following specified configuration.file. We can create a `BotEngine` specifing the configuration file.
 
-SimpleBot has `Simple.BotEngine` which manages the dialogue with the user following specified configuration.file.
+```
+private void createBot()
+{
+    string settingFilePath = Application.dataPath + "/SimpleBot/Scenes/simple-bot-conf.json";
+    string setting = File.ReadAllText(settingFilePath);
+    ConfigurationLoader configurationLoader = new ConfigurationLoader();
+    Configuration config = configurationLoader.loadFromString(setting);
+    this.bot = new BotEngine(config);
+}
+```
 
+After we create a `BotEngine` instance, the instance is ready to get input sentence.
+
+```
+public void RespondtoInput()
+{
+    var input = inputField.text;
+    var reply = this.bot.replySentence(input);
+    text.text = reply;
+    inputField.text = "";
+}
+```
+
+In the following sections, we learn the configurations and practical usage.
 
 == Configurations
 
