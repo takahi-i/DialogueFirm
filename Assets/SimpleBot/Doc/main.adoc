@@ -76,12 +76,14 @@ formatted confiuration file. The following is a tiny example.
 ```
 
 In the above example, we see that the configuration files have two blocks (`intents` and `responders`).
-We register `intents` to extract intent from input sentences. `responders` specify the handlers to output the reply sentences for target intents.
+We register `intents` to extract intent from input sentences. `responders` specify the handlers to output
+the reply sentences for target intents.
 
 ### Intent settings
 
-`Intents` blocks consist of a list of intent settings. We add a set of intents which we want make the `BotEngine` to identify the intent of input sentences.
-Intents has three blocks, `name`, `match` and `effects`. The following table shows the description of each block.
+`Intents` blocks consist of a list of intent settings. We add a set of intents which we want make the `BotEngine`
+to identify the intent of input sentences. Intents has three blocks, `name`, `match` and `effects`. The following
+table shows the description of each block.
 
 [cols="1,2", options="header"]
 .elements of match block
@@ -122,8 +124,9 @@ types of intent matching.
 
 ### Verbatim matching
 
-`verbatim` provides the plain matching, with which intent is match when the registered expression is contained in the input sentence.
-In the `verbatim` match we specify intent by maching with registered expressions. The following is the example shown in the previous section.
+`verbatim` provides the plain matching, with which intent is match when the registered expression is contained in
+the input sentence. In the `verbatim` match we specify intent by matching with registered expressions.
+The following is the example shown in the previous section.
 
 ```
 "intents": [
@@ -139,9 +142,34 @@ In the `verbatim` match we specify intent by maching with registered expressions
 
 With the `expressions` settings, SimpleBot identify the input is about weather when input contains registered expressions `forcast` or `weather`.
 
-### Template macthing
+### Template matching
 
-Compared with `verbatim`, `template` type maching provides more powerful matching with `slots` and `types`.
+Compared with `verbatim`, `template` type matching provides more powerful matching with `slots` and `types`.
+The following settings contains one intent setting whose type is `template` and contains a `slots` block.
+
+```
+intents: [
+        {
+            "name": "weather-forcast",
+            "match" : {
+                "type" : "template",
+                 "slots" : [{
+                     "name" : "location1",
+                      "type" :  "location"
+                  } ]
+                "patterns" : [ "Tell me the weather forecast for #{location1}?" ]
+            }
+        },
+],
+"types" :
+[
+   {
+       "name" : "locations",
+       "examples", ["paris", "new york", "tokyo"]
+    }
+]
+```
+
 
 ### Slots and Types
 
