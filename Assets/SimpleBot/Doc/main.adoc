@@ -10,12 +10,14 @@
 
 == Overview
 
-SimpleBot is a simple chat bot engine for the Unity platform. Given input sentences, SimpleBot detects the intent and then reply the reply sentence.
-Simple bot provide Amazon Echo style JSON configuration. In addition, functions for practical applications such as state transitions or slot type matching are provided.
+SimpleBot is a simple chat bot engine for the Unity platform. Given input sentences, SimpleBot detects
+the intent and then reply the reply sentence. Simple bot provide Amazon Echo style JSON configuration.
+In addition, functions for practical applications such as state transitions or slot type matching are provided.
 
 == Basic Usage
 
-SimpleBot has `Simple.BotEngine` which manages the dialogue with the user following specified configuration.file. We can create a `BotEngine` specifing the configuration file.
+SimpleBot has `Simple.BotEngine` which manages the dialogue with the user following specified configuration.file.
+We can create a `BotEngine` specifing the configuration file.
 
 ```
 private void createBot()
@@ -44,7 +46,8 @@ In the following sections, we learn the configurations and practical usage.
 
 == Configurations
 
-SimpleBot has a JSON formatted confiuration file. The following is a tiny example.
+This section starts from the simple SimpleBot configuration. SimpleBot has a JSON
+formatted confiuration file. The following is a tiny example.
 
 ```
 {
@@ -72,21 +75,104 @@ SimpleBot has a JSON formatted confiuration file. The following is a tiny exampl
 }
 ```
 
-In the above example, Configuration files have two blocks (`intents` and `responders`).
+In the above example, we see that the configuration files have two blocks (`intents` and `responders`).
 We register `intents` to extract intent from input sentences. `responders` specify the handlers to output the reply sentences for target intents.
 
 ### Intent settings
 
-#### Slot
+`Intents` blocks consist of a list of intent settings. We add a set of intents which we want make the `BotEngine` to identify the intent of input sentences.
+Intents has three blocks, `name`, `match` and `effects`. The following table shows the description of each block.
+
+[cols="1,2", options="header"]
+.elements of match block
+|===
+|Name
+|Description
+
+|name
+|Name of the intent
+
+|match
+|Describe matching patterns. If the type is `verbatim`, we specify substring、If `template`, we add list of template patterns
+
+|effects (optional)
+|Describe effects of matching the intent from the users. This block contains the list of effects when the indent is detected.
+|===
+
+### Intent example
+
+The following is a plain setting to identify if the user input is about weather.
+
+```
+"intents": [
+    {
+      "name": "weather",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "forcast", "weather" ]
+      }
+    }
+]
+```
+
+As we see intents block is a list and contains one intent block. The intent block has three elements `name`, `match`.
+In the `match` block, we specify the matching expressions. `match` has two types of matching type. We specify matching
+type in `type` element. SimpleBot provides two types of matching. `verbatim` and `template`. Next section shows the
+types of intent matching.
+
+### Verbatim matching
+
+`verbatim` provides the plain matching, with which intent is match when the registered expression is contained in the input sentence.
+In the `verbatim` match we specify intent by maching with registered expressions. The following is the example shown in the previous section.
+
+```
+"intents": [
+    {
+      "name": "weather",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "forcast", "weather" ]
+      }
+    }
+]
+```
+
+With the `expressions` settings, SimpleBot identify the input is about weather when input contains registered expressions `forcast` or `weather`.
+
+### Template macthing
+
+Compared with `verbatim`, `template` type maching provides more powerful matching with `slots` and `types`.
+
+### Slots and Types
+
+### Effect
+
+
+```
+"intents": [
+    {
+      "name": "repeat",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "repeat", "pardon me?" ]
+      },
+      "effects" : [{
+			"field": "anger-level",
+			"type": "incr",
+			"default": 0
+		    }]
+    }
+]
+```
 
 #### Condition
 
 ### Responder settings
-
-#### Effect
 
 ## Classes
 
 ## Samples
 
 ### Guide
+
+## Summary
