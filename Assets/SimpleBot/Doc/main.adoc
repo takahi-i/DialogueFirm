@@ -17,7 +17,7 @@ In addition, functions for practical applications such as state transitions or s
 == Basic Usage
 
 SimpleBot has `Simple.BotEngine` which manages the dialogue with the user following specified configuration.file.
-We can create a `BotEngine` specifing the configuration file.
+We can create a `BotEngine` specifying the configuration file.
 
 ```
 private void createBot()
@@ -47,7 +47,7 @@ In the following sections, we learn the configurations and practical usage.
 == Configurations
 
 This section starts from the simple SimpleBot configuration. SimpleBot has a JSON
-formatted confiuration file. The following is a tiny example.
+formatted configuration file. The following is a tiny example.
 
 ```
 {
@@ -138,9 +138,11 @@ The following is the example shown in the previous section.
       }
     }
 ]
+
 ```
 
-With the `expressions` settings, SimpleBot identify the input is about weather when input contains registered expressions `forcast` or `weather`.
+With the `expressions` settings, SimpleBot identify the input is about weather when input
+contains registered expressions `forcast` or `weather`.
 
 ### Template matching
 
@@ -154,10 +156,10 @@ intents: [
             "match" : {
                 "type" : "template",
                  "slots" : [{
-                     "name" : "location1",
-                      "type" :  "location"
+                     "name" : "target-location",
+                      "type" :  "locations"
                   } ]
-                "patterns" : [ "Tell me the weather forecast for #{location1}?" ]
+                "patterns" : [ "weather forecast for #{target-location}?" ]
             }
         },
 ],
@@ -165,13 +167,27 @@ intents: [
 [
    {
        "name" : "locations",
-       "examples", ["paris", "new york", "tokyo"]
+       "examples", ["Paris", "New York", "Tokyo"]
     }
 ]
 ```
 
+The next section describe how we can make template intent using `types` and `slots`.
 
 ### Slots and Types
+
+In the slots block, we specify a `type` in `types` block. `types`
+block contains a list of types which contains a list of `examples`.
+`example` contains a list of expressions, which are used in the
+`slot` block in `template` type of intents to detect intent.
+
+In the above configuration example, the type `location` is used in `slot`
+named `target-location`.
+
+The patterns of template type of intents can embed the slots. the pattern
+matches the inputs which are expanded patterns such as `weather forecast for Paris`
+or `weather forecast for New York`.
+
 
 ### Effect
 
