@@ -44,7 +44,7 @@ public void RespondtoInput()
 
 In the following sections, we learn the configurations and practical usage.
 
-== Configurations
+== Basic Configurations
 
 This section starts from the simple SimpleBot configuration. SimpleBot has a JSON
 formatted configuration file. The following is a tiny example.
@@ -188,6 +188,43 @@ The patterns of template type of intents can embed the slots. the pattern
 matches the inputs which are expanded patterns such as `weather forecast for Paris`
 or `weather forecast for New York`.
 
+### Responder settings
+
+`responders` is a list section in the configuration file, we add the responder
+settings for the each target intent defined in `intents` block.
+
+The following configuration, one intent `repeat` is defined in `intents` block.
+The `responders` section has two block, for `repeat` and `default` targets. `repeat` target is applied when
+the `BotEngine` detect the intent of inputs as `repeat`. `default` target is called when no intent is detected.
+
+```
+{
+  "intents": [
+    {
+      "name": "repeat",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "repeat", "pardon me?" ]
+      }
+    }
+  ],
+  "responders":
+  {
+    "repeat": [
+      {
+        "responds": [ "Go straight." ],
+      }
+    ],
+    "default": [{
+      "responds": [ "Sorry I do not understand what you mean." ]
+    }]
+  }
+}
+```
+
+Each respond block contains `responds` element which has a list of respond sentences.
+`BotEngine` select randomly the respond sentence from the list.
+
 ## Handling State
 
 SimpleBot support state of dialogue. We can add the settings of state,
@@ -251,44 +288,7 @@ SimpleBot support the following types of effect.
 The states such as are used when the BotEngine select the responder using `condition`. In the next section,
 we will learn the `responder` settings including usage of `condition`.
 
-### Responder settings
-
-`responders` is a list section in the configuration file, we add the responder
-settings for the each target intent defined in `intents` block.
-
-The following configuration, one intent `repeat` is defined in `intents` block.
-The `responders` section has two block, for `repeat` and `default` targets. `repeat` target is applied when
-the `BotEngine` detect the intent of inputs as `repeat`. `default` target is called when no intent is detected.
-
-```
-{
-  "intents": [
-    {
-      "name": "repeat",
-      "match": {
-        "type": "verbatim",
-        "expressions": [ "repeat", "pardon me?" ]
-      }
-    }
-  ],
-  "responders":
-  {
-    "repeat": [
-      {
-        "responds": [ "Go straight." ],
-      }
-    ],
-    "default": [{
-      "responds": [ "Sorry I do not understand what you mean." ]
-    }]
-  }
-}
-```
-
-Each respond block contains `responds` element which has a list of respond sentences.
-`BotEngine` select randomly the respond sentence from the list.
-
-#### Condition
+### Condition
 
 The state defined in `state` block, can be used in matching `responder`.
 The following example make use of state with `effect` and `condition`.
