@@ -64,7 +64,7 @@ formatted configuration file. The following is a tiny example.
   {
     "repeat": [
       {
-	"responds": [ "Go stragiht." ],
+        "responds": [ "Go straight." ],
       }
     ],
     "default": [{
@@ -217,16 +217,114 @@ the effect of state, when the BotEngine identify the intent.
 
 In the above example, every time identifying the whether intent, the `angry-level` increased.
 The states such as are used when the BotEngine select the responder using `condition`. In the next section,
-we will understand the usage of `condition`.
-
-#### Condition
+we will learn the `responder` settings including usage of `condition`.
 
 ### Responder settings
 
-## Classes
+`responders` is a list section in the configuration file, we add the responder
+settings for the each target intent defined in `intents` block.
+
+The following configuration, one intent `repeat` is defined in `intents` block.
+The `responders` section has two block, for `repeat` and `default` targets. `repeat` target is applied when
+the `BotEngine` detect the intent of inputs as `repeat`. `default` target is called when no intent is detected.
+
+```
+{
+  "intents": [
+    {
+      "name": "repeat",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "repeat", "pardon me?" ]
+      }
+    }
+  ],
+  "responders":
+  {
+    "repeat": [
+      {
+        "responds": [ "Go straight." ],
+      }
+    ],
+    "default": [{
+      "responds": [ "Sorry I do not understand what you mean." ]
+    }]
+  }
+}
+```
+
+Each respond block contains `responds` element which has a list of respond sentences.
+`BotEngine` select randomly the respond sentence from the list.
+
+#### Condition
+
+The state defined in `state` block, can be used in matching `responder`.
+The following example make use of state with `effect` and `condition`.
+
+The effects of `location` block defined `failed-num` is incremented from 0 when the
+`location` intent is identified. Then a respond block in the `location` block in
+`reponders` defines `condition` block which defines the condition to apply the responder.
+For responders with `condition` block does not applied even when the intent is the target
+one, if the state does not meet the condition.
+
+
+```
+{
+  "intents": [
+      {
+        "name": "location",
+        "match": {
+          "type": "verbatim",
+          "expressions": [ "location", "office", "where" ]
+        },
+        "effects" : [{
+  			    "field": "failed-num",
+      			"type": "incr",
+            "default": 0
+  		    }]
+      }
+  ],
+  "responders":
+  {
+    "location": [
+      {
+        "responds": [ "The conference is held in 321 room of O-nine building." ],
+        "condition": {
+          "must": [
+            {
+              "range": { "failed-num" : { "lte": 1 }}
+            }
+          ]
+        }
+      },
+      {
+        "responds": [ "Please call to the a responsible person, the number is +81-90-0004-49009." ],
+        "condition": {
+          "must": [
+            {
+              "range": { "failed-num" : { "gte": 2 }}
+            }
+          ]
+        }
+      }
+    ],
+    "default": [{
+      "target": "default",
+      "responds": [ "Sorry I do not understand what you mean." ]
+    }]
+  }
+}
+```
+
+For `location` intent, the configuration file contains two responders both of them have `condition` block.
+If the `failed-num` is less then or equals `1` first respond is applied otherwise the second one is applied.
 
 ## Samples
 
 ### Guide
+
+### Continuous Integration
+
+## FAQ
 
 ## Summary
