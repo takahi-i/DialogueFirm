@@ -351,6 +351,72 @@ one, if the state does not meet the condition.
 For `location` intent, the configuration file contains two responders both of them have `condition` block.
 If the `failed-num` is less then or equals `1` first respond is applied otherwise the second one is applied.
 
+SimpleBot supports the following conditions.
+
+[cols="1,2", options="header"]
+.types of range condition
+|===
+|Name
+|Description
+|gte
+|Greater-than or equal to
+|lte
+|Less-than or equal to
+|eq
+|Equal to
+|===
+
+### Boolean conditions
+
+SimpleBot supports the combinations of other conditions with boolean conditions (`should` and `must`).
+The following table shows the descriptions of supported boolean conditions.
+
+[cols="1,2", options="header"]
+.types of boolean condition
+|===
+|Name
+|Description
+|should
+|One of the sub-conditions must be satisfied
+|must
+|All sub-conditions must be satisfied
+|===
+
+Using boolean conditions, we can make more complicated conditions. In the following setting,
+"Oh my god... Project looks chaos ..." is responded when one of the conditions in the `should` block.
+
+```
+"responders" : {
+  "fail": [
+    {
+      "list": [
+        "Oh my god... Project looks chaos ..."
+      ],
+      "condition" : {
+        "should" : [
+          {
+            "range": { "failed-num": { "gte": 3}},
+            "term": { "contain-critical-error": "true"}},
+          }
+        ]
+      }
+    },
+    {
+      "list": [
+        "Please fix the build failure"
+      ]
+    }
+  ],
+  "default": [{
+    "type": "random",
+    "name": "default",
+    "list": [
+      "Build looks nice :-)"
+    ]
+  }]
+}
+```
+
 ## Samples
 
 ### Guide
