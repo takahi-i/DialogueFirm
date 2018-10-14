@@ -332,11 +332,7 @@ one, if the state does not meet the condition.
       {
         "responds": [ "Please call to the a responsible person, the number is +81-90-0004-49009." ],
         "condition": {
-          "must": [
-            {
-              "range": { "failed-num" : { "gte": 2 }}
-            }
-          ]
+            "range": { "failed-num" : { "gte": 2 }}
         }
       }
     ],
@@ -366,6 +362,9 @@ SimpleBot supports the following conditions.
 |Equal to
 |===
 
+`condition` is useful, but it is inadequate to express complex condition. SimpleBot
+supports `boolean condition` to express complex conditions.
+
 ### Boolean conditions
 
 SimpleBot supports the combinations of other conditions with boolean conditions (`should` and `must`).
@@ -383,7 +382,8 @@ The following table shows the descriptions of supported boolean conditions.
 |===
 
 Using boolean conditions, we can make more complicated conditions. In the following setting,
-"Oh my god... Project looks chaos ..." is responded when one of the conditions in the `should` block.
+a respond sentence with condition ``"Oh my god... Project looks chaos ..."`` is responded
+when one of the conditions in the `should` block.
 
 ```
 "responders" : {
