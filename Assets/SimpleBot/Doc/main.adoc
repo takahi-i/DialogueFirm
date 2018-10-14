@@ -196,7 +196,22 @@ combining `effects` and `condition` blocks.
 ### Effect
 
 Each intent of `intents` block supports `effects` block, where we can define
-the effect of state, when the BotEngine identify the intent.
+the effect of state, when the BotEngine identify the intent. `effects` has the following elements.
+
+[cols="1,2", options="header"]
+.types of effect
+|===
+|Name
+|Description
+
+|field
+|property name
+|type
+|Specify type of the effect (`incr`, `decr`, or `set`)
+|defaul
+|Set the default value of the property
+|===
+
 
 ```
 "intents": [
@@ -216,6 +231,23 @@ the effect of state, when the BotEngine identify the intent.
 ```
 
 In the above example, every time identifying the whether intent, the `angry-level` increased.
+SimpleBot support the following types of effect.
+
+[cols="1,2", options="header"]
+.types of effect
+|===
+|Name
+|Description
+
+|incr
+|Increments the value of specified property (NOTE: the type of the property must be integer)
+
+|decr
+|Decrements the value of specified property (NOTE: the type of the property must be integer)
+|set
+|Set the value of specified property (NOTE: the type of the property must be string)
+|===
+
 The states such as are used when the BotEngine select the responder using `condition`. In the next section,
 we will learn the `responder` settings including usage of `condition`.
 
