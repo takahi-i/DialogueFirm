@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class BotController : MonoBehaviour {
+/// <summary>
+/// Bot controller.
+/// </summary>
+public class BotController {
 
 
     string str;

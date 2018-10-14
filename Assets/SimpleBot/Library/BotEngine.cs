@@ -5,12 +5,20 @@ using UnityEngine;
 
 namespace SimpleBot
 {
+    /// <summary>
+    /// BotEngine is main class in SimpleBot. This instance load a configuration
+    ///  file and manage dialogue between a user and bot.
+    /// </summary>
     public class BotEngine
     {
         private IntentIdentifier identifier;
         private IDictionary<string, List<ReplyResponder>> responders;
         private State state;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:SimpleBot.BotEngine"/> class.
+        /// </summary>
+        /// <param name="config">Configuration object loaded from the configuration file</param>
         public BotEngine(Configuration config)
         {
             this.identifier = new IntentIdentifier(config);
@@ -38,6 +46,11 @@ namespace SimpleBot
             return responderMap;
         }
 
+        /// <summary>
+        /// Idenfities the intent of input sentence.
+        /// </summary>
+        /// <returns>Intent object containing the intent name and extracted properties.</returns>
+        /// <param name="input">input sentence</param>
         public Intent IdenfityIntent(string input)
         {
             return this.identifier.Identify(input, this.state);
