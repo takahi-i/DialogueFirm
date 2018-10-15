@@ -30,7 +30,7 @@ namespace SimpleBot
             }
             else
             {
-                throw new ArgumentException("Condtion type, " + condtion_type + " is not supported in the top level");
+                return generate_factor_method(factor_config);
             }
         }
 
