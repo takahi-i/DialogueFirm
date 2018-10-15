@@ -177,6 +177,24 @@ public class ConditionTest
     }
 
 
+    [Test]
+    public void TestDirectRangeCondition()
+    {
+        var config = new ConfigurationBuilder().AddResponds("foobar", new List<string>() { "baz" }, new List<ConditionConfig>() {
+                                                                    new ConditionConfigBuilder().AddType("range").
+                                                                          AddChild(new ConditionConfigBuilder().
+                                                                                   AddTargetField("angry-level").
+                                                                                   AddArgument(new Pair("eq", 1)).
+                                                                                   Build())
+                                                                    .Build()
+                                                                }
+                                                           ).Build();
+        Assert.AreEqual(1, config.ResponderConfigs[0].Conditions.Count);
+        Func<State, bool> condition = Condition.Load(config.ResponderConfigs[0].Conditions[0]);
+        this.state.SetInt("angry-level", 1);
+        Assert.AreEqual(true, condition(this.state));
+    }
+
 
     [TearDown]
     public void Dispose()
