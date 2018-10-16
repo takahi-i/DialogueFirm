@@ -176,7 +176,6 @@ public class ConditionTest
         Assert.AreEqual(true, condition(this.state));
     }
 
-
     [Test]
     public void TestDirectRangeCondition()
     {

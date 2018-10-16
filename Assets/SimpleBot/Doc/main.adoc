@@ -295,7 +295,7 @@ The following example make use of state with `effect` and `condition`.
 
 The effects of `location` block defined `failed-num` is incremented from 0 when the
 `location` intent is identified. Then a respond block in the `location` block in
-`reponders` defines `condition` block which defines the condition to apply the responder.
+`reponders` defines `condition` blocks which defines the condition to apply the responder.
 For responders with `condition` block does not applied even when the intent is the target
 one, if the state does not meet the condition.
 
@@ -344,10 +344,23 @@ one, if the state does not meet the condition.
 }
 ```
 
-For `location` intent, the configuration file contains two responders both of them have `condition` block.
-If the `failed-num` is less then or equals `1` first respond is applied otherwise the second one is applied.
+For `location` intent in the above setting, the configuration file contains two responders both of them have `condition` block which
+defines `range` condition. If the `failed-num` is less then or equals `1` first respond is applied otherwise the second one is applied.
 
-SimpleBot supports the following conditions.
+SimpleBot supports two types of conditions (`range` and `term`).
+
+[cols="1,2", options="header"]
+.types of conditions
+|===
+|Name
+|Description
+|range
+|Condition on range of values (`integer`).
+|term
+|Condition on value of specified property name.
+|===
+
+The following shows the supported types of range conditions.
 
 [cols="1,2", options="header"]
 .types of range condition
@@ -418,6 +431,8 @@ when one of the conditions in the `should` block.
 ```
 
 ## Samples
+
+In this section we go though chat-bot sample configurations with SimpleBot.
 
 ### Guide
 

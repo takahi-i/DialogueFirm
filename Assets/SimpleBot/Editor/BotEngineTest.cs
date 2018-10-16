@@ -20,6 +20,7 @@ public class BotEngineTest {
         Assert.AreEqual("baz", engine.replySentence("aho is not a researcher."));
     }
 
+
     [Test]
     public void NotMatchCondition()
     {
