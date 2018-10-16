@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Bot controller.
 /// </summary>
-public class BotController {
+public class BotController : MonoBehaviour {
 
 
     string str;
