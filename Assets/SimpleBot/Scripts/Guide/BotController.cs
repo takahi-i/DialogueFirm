@@ -33,7 +33,7 @@ public class BotController : MonoBehaviour {
 
     private void loadConfig()
     {
-        string settingFilePath = Application.dataPath + "/SimpleBot/Scenes/simple-bot-conf.json";
+        string settingFilePath = Application.dataPath + "/SimpleBot/Settings/Guide/guide-conf.json";
         string setting = File.ReadAllText(settingFilePath);
         Debug.Log(setting);
         ConfigurationLoader configurationLoader = new ConfigurationLoader();
