@@ -52,12 +52,15 @@ namespace SimpleBot
                 builder.AddIntent(name, type, expressions, slots);
 
                 // handle optional effects
-                if (intent.Contains<string>("effects")) {
-                    foreach (var effect in intent["effects"]) {
+                if (intent.Contains<string>("effects"))
+                {
+                    foreach (var effect in intent["effects"])
+                    {
                         var targetField = effect["field"].Get<string>();
                         var effectType = effect["type"].Get<string>();
                         object defaultValue = null;
-                        if (effect.Contains<string>("default")) {
+                        if (effect.Contains<string>("default"))
+                        {
                             defaultValue = effect["default"].Get<object>();
                         }
                         object setValue = null;
@@ -70,16 +73,8 @@ namespace SimpleBot
                 }
             }
 
-            // extract types
-            foreach (var type in json["types"])
-            {
-                var name = type["name"].Get<string>();
-                var values = new List<string>();
-                foreach (var value in type["values"])
-                {
-                    values.Add(value.Get<string>());
-                }
-                builder.AddType(name, values);
+            if (json.Contains<string>("types"))  {
+                extractTypes(builder, json);
             }
 
             // extract responders
@@ -107,6 +102,22 @@ namespace SimpleBot
                 }
             }
             return builder.Build();
+        }
+
+        private static void extractTypes(ConfigurationBuilder builder, JsonNode json)
+        {
+            // extract types
+            foreach (var type in json["types"])
+            {
+                Debug.Log("come to types block");
+                var name = type["name"].Get<string>();
+                var values = new List<string>();
+                foreach (var value in type["values"])
+                {
+                    values.Add(value.Get<string>());
+                }
+                builder.AddType(name, values);
+            }
         }
 
         private ConditionConfig extractCondtion(JsonNode conditionNode)
