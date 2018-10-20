@@ -1,0 +1,61 @@
+{
+  "intents": [
+    {
+      "name": "fail",
+      "match": {
+        "type": "verbatim",
+        "expressions": [
+          "fail",
+          "exception",
+          "error"
+        ]
+      },
+      "effects": [{
+        "field": "anger-level",
+        "type": "incr",
+        "default": 0
+      }]
+    },
+    {
+      "name": "succeeded",
+      "match": {
+        "type": "verbatim",
+        "expressions": [
+          "fixed",
+          "succeeded"
+        ]
+      },
+      "effects": [{
+        "field": "anger-level",
+        "type": "set",
+        "value": 0
+      }]
+    }
+  ],
+  "responders" : {
+    "fail": [
+      {
+        "responds": [
+          "Oh my god... Project looks chaos ..."
+        ],
+        "condition" : {
+          "must" : [
+            {
+              "range": {"anger-level": { "gte": 3}}
+            }
+          ]
+        }
+      },
+      {
+        "responds": [
+          "Please fix the build failure"
+        ]
+      }
+    ],
+    "default": [{
+      "responds": [
+        "Build looks nice :-)"
+      ]
+    }]
+  }
+}
