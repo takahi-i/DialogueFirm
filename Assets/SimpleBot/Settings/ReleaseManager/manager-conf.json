@@ -1,70 +1,61 @@
-﻿{
+{
   "intents": [
     {
-      "name": "repeat",
+      "name": "fail",
       "match": {
         "type": "verbatim",
-        "expressions": [ "repeat", "pardon me?" ]
+        "expressions": [
+          "fail",
+          "exception",
+          "error"
+        ]
       },
-      "effects" : [{
-			"field": "anger-level",
-			"type": "incr",
-			"default": 0
-		    }]
+      "effects": [{
+        "field": "anger-level",
+        "type": "incr",
+        "default": 0
+      }]
     },
     {
-      "name": "question",
+      "name": "succeeded",
       "match": {
-        "type": "template",
-        "slots": [
-          {
-            "name": "ingredient1",
-            "type": "ingredients"
-          }
-        ],
+        "type": "verbatim",
         "expressions": [
-          "tell me$ ${ingredient1}",
-          "show me ${ingredient1}"
+          "fixed",
+          "succeeded"
         ]
-      }
+      },
+      "effects": [{
+        "field": "anger-level",
+        "type": "set",
+        "value": 0
+      }]
     }
   ],
-  "types": [
-    {
-      "name": "ingredients",
-      "values": [ "tomato", "potate" ]
-    }
-  ],
-  "responders":
-  {
-    "question": [{
-      "responds": [ "Turn the corner and go straight for five minitues." ]
-    }],
-    "repeat": [
+  "responders" : {
+    "fail": [
       {
-	"responds": [ "Oh." ],
-	"condition": {
-	  "must": [
-	    {
-	      "range": { "anger-level" : { "lte": 1 }}
-	    }
-	  ]
+        "responds": [
+          "Oh my god... Project looks chaos ..."
+        ],
+        "condition" : {
+          "must" : [
+            {
+              "range": {"anger-level": { "gte": 3}}
+            }
+          ]
         }
       },
       {
-	"responds": [ "FUXXX." ],
-	"condition": {
-	  "must": [
-	    {
-	      "range": { "anger-level" : { "gte": 2 }}
-	    }
-	  ]
-	}
+        "responds": [
+          "Please fix the build failure"
+        ]
       }
     ],
     "default": [{
-      "target": "default",
-      "responds": [ "Sorry I do not understand what you mean." ]
+      "responds": [
+        "Build looks nice :-)"
+      ]
     }]
   }
 }
