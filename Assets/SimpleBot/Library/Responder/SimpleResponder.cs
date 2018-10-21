@@ -32,7 +32,7 @@ namespace SimpleBot
                 {
                     throw new InvalidOperationException("No responds are deployed in the responder for intent " + targetIntent);
                 }
-                return this.responds[this.cRandom.Next(this.responds.Count - 1)];
+                return this.responds[this.cRandom.Next(this.responds.Count)];
             }
         }
     }
