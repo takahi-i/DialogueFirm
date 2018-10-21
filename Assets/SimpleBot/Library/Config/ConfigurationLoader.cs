@@ -25,10 +25,7 @@ namespace SimpleBot
             var builder = new ConfigurationBuilder();
             JsonNode json = JsonNode.Parse(jsonText);
             extractIntents(builder, json);
-            if (json.Contains<string>("types"))
-            {
-                extractTypes(builder, json);
-            }
+            extractTypes(builder, json);
             extractResponders(builder, json);
             return builder.Build();
         }
@@ -112,6 +109,10 @@ namespace SimpleBot
 
         private static void extractTypes(ConfigurationBuilder builder, JsonNode json)
         {
+            if (!json.Contains<string>("types"))
+            {
+                return;
+            }
             // extract types
             foreach (var type in json["types"])
             {
