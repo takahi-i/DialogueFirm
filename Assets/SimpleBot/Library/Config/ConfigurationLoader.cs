@@ -71,7 +71,7 @@ namespace SimpleBot
                         {
                             setValue = effect["value"].Get<object>();
                         }
-                        builder.AddEffect(targetField, effectType, defaultValue, setValue);
+                        builder.AddEffect(targetField, effectType, defaultValue, setValue, null);
                     }
                 }
             }

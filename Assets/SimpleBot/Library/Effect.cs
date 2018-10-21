@@ -34,7 +34,7 @@ namespace SimpleBot
             }
             else
             {
-                Debug.Log("faile to add the default value for " + targetField + "....");
+                Debug.Log("failed to add the default value for " + targetField + "....");
                 Debug.Log("type of the targett value is " + config.DefaultValue.GetType().FullName);
             }
         }

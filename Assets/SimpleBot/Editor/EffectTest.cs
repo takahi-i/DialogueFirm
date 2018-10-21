@@ -10,7 +10,7 @@ public class EffectTest {
     public void TestSimpleApply()
     {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>())
-                                               .AddEffect("angry-level", "incr", 0, null).Build();
+                                               .AddEffect("angry-level", "incr", 0, null, null).Build();
         Effect effect = new Effect(config.GetIntentConfigs()[0].Effects[0]);
         state.SetInt("angry-level", 0);
         effect.Apply(state);
@@ -21,7 +21,7 @@ public class EffectTest {
     public void TestSimpleSetIntApply()
     {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>())
-                                               .AddEffect("angry-level", "set", null, 80).Build();
+                                               .AddEffect("angry-level", "set", null, 80, null).Build();
         Effect effect = new Effect(config.GetIntentConfigs()[0].Effects[0]);
         state.SetInt("angry-level", 0);
         effect.Apply(state);
@@ -32,7 +32,7 @@ public class EffectTest {
     public void TestSimpleSetStringApply()
     {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>())
-                                               .AddEffect("status", "set", null, "happy").Build();
+                                               .AddEffect("status", "set", null, "happy", null).Build();
         Effect effect = new Effect(config.GetIntentConfigs()[0].Effects[0]);
         state.SetString("status", "sad");
         effect.Apply(state);
