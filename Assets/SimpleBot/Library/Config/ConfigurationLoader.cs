@@ -24,8 +24,17 @@ namespace SimpleBot
         {
             var builder = new ConfigurationBuilder();
             JsonNode json = JsonNode.Parse(jsonText);
+            extractIntents(builder, json);
+            if (json.Contains<string>("types"))
+            {
+                extractTypes(builder, json);
+            }
+            extractResponders(builder, json);
+            return builder.Build();
+        }
 
-            // extract intents
+        private static void extractIntents(ConfigurationBuilder builder, JsonNode json)
+        {
             foreach (var intent in json["intents"])
             {
                 var name = intent["name"].Get<string>();
@@ -72,12 +81,10 @@ namespace SimpleBot
                     }
                 }
             }
+        }
 
-            if (json.Contains<string>("types"))  {
-                extractTypes(builder, json);
-            }
-
-            // extract responders
+        private void extractResponders(ConfigurationBuilder builder, JsonNode json)
+        {
             foreach (var responderName in json["responders"])
             {
                 var targetName = responderName.Get<string>();
@@ -101,7 +108,6 @@ namespace SimpleBot
                     }
                 }
             }
-            return builder.Build();
         }
 
         private static void extractTypes(ConfigurationBuilder builder, JsonNode json)
