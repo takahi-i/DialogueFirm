@@ -39,3 +39,4 @@ sysinfo.txt
 # output
 *.pdf
 main.pdf.meta
+*.dll
