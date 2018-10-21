@@ -44,17 +44,14 @@ namespace SimpleBot
                     expressions.Add(expression.Get<string>());
                 }
 
-                try
+                if (intent["match"].Contains<string>("slots"))
                 {
                     foreach (var slot in intent["match"]["slots"])
                     {
                         slots.Add(slot["name"].Get<string>(), slot["type"].Get<string>());
                     }
                 }
-                catch (System.NullReferenceException)
-                {
-                    // do nothing
-                }
+
                 builder.AddIntent(name, type, expressions, slots);
 
                 // handle optional effects
