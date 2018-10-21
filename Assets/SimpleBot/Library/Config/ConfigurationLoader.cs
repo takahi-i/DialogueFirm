@@ -24,8 +24,14 @@ namespace SimpleBot
         {
             var builder = new ConfigurationBuilder();
             JsonNode json = JsonNode.Parse(jsonText);
+            extractIntents(builder, json);
+            extractTypes(builder, json);
+            extractResponders(builder, json);
+            return builder.Build();
+        }
 
-            // extract intents
+        private static void extractIntents(ConfigurationBuilder builder, JsonNode json)
+        {
             foreach (var intent in json["intents"])
             {
                 var name = intent["name"].Get<string>();
@@ -38,17 +44,14 @@ namespace SimpleBot
                     expressions.Add(expression.Get<string>());
                 }
 
-                try
+                if (intent["match"].Contains<string>("slots"))
                 {
                     foreach (var slot in intent["match"]["slots"])
                     {
                         slots.Add(slot["name"].Get<string>(), slot["type"].Get<string>());
                     }
                 }
-                catch (System.NullReferenceException)
-                {
-                    // do nothing
-                }
+
                 builder.AddIntent(name, type, expressions, slots);
 
                 // handle optional effects
@@ -72,12 +75,10 @@ namespace SimpleBot
                     }
                 }
             }
+        }
 
-            if (json.Contains<string>("types"))  {
-                extractTypes(builder, json);
-            }
-
-            // extract responders
+        private void extractResponders(ConfigurationBuilder builder, JsonNode json)
+        {
             foreach (var responderName in json["responders"])
             {
                 var targetName = responderName.Get<string>();
@@ -101,11 +102,14 @@ namespace SimpleBot
                     }
                 }
             }
-            return builder.Build();
         }
 
         private static void extractTypes(ConfigurationBuilder builder, JsonNode json)
         {
+            if (!json.Contains<string>("types"))
+            {
+                return;
+            }
             // extract types
             foreach (var type in json["types"])
             {

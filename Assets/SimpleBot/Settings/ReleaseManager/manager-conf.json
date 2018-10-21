@@ -36,7 +36,8 @@
     "fail": [
       {
         "responds": [
-          "Oh my god... Project looks chaos ..."
+          "Oh my god... My project looks chaos...",
+          "You need to fix the problem as soon as possible!"
         ],
         "condition" : {
           "must" : [
@@ -48,13 +49,18 @@
       },
       {
         "responds": [
-          "Please fix the build failure"
+          "Can anyone fix the build failure?"
         ]
+      }
+    ],
+    "succeeded": [
+      {
+        "responds": ["Facinating!", "You did a great work!"]
       }
     ],
     "default": [{
       "responds": [
-        "Build looks nice :-)"
+        "I do not know the details but looks nice :-)", "Looks nice?"
       ]
     }]
   }
