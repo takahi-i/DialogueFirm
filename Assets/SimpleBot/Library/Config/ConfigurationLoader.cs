@@ -71,7 +71,11 @@ namespace SimpleBot
                         {
                             setValue = effect["value"].Get<object>();
                         }
-                        builder.AddEffect(targetField, effectType, defaultValue, setValue);
+                        string referField = null;
+                        {
+                            referField = effect["refer"].Get<string>();
+                        }
+                        builder.AddEffect(targetField, effectType, defaultValue, setValue, referField);
                     }
                 }
             }

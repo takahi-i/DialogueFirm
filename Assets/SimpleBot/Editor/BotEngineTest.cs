@@ -40,7 +40,7 @@ public class BotEngineTest {
     public void NotMatchConditionByEffect()
     {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
-                                               AddEffect("angry-level", "incr", 0, null).
+                                               AddEffect("angry-level", "incr", 0, null, null).
                                                AddResponds("foobar", new List<string>() { "baz" }).
                                                AddCondition(new ConditionConfig("must",
                                                                                   new List<ConditionConfig>() {
