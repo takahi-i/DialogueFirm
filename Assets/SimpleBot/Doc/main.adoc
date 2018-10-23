@@ -281,8 +281,15 @@ SimpleBot support the following types of effect.
 
 |decr
 |Decrements the value of specified property (NOTE: the type of the property must be integer)
+
 |set
 |Set the value of specified property (NOTE: the type of the property must be string)
+
+|copy-ifield
+|Copy the int value of specified property field (NOTE: the type of the target property field value must be int)
+
+|copy-sfield
+|Copy the string value of specified property field (NOTE: the type of the target property field value must be string)
 |===
 
 The states such as are used when the BotEngine select the responder using `condition`. In the next section,
@@ -432,11 +439,14 @@ when one of the conditions in the `should` block.
 
 ## Samples
 
-In this section we go though chat-bot sample configurations with SimpleBot.
+In this section we go through chat-bot sample configurations with SimpleBot though two chat bot examples.
+Both examples are bundled in this SimpleBot package.
 
 ### Guide
 
-### Continuous Integration
+In this section, we see a tiny chat bot example, `Guide` which shows the direction to the conference room in a building.
+
+### Release Manager
 
 ## FAQ
 
