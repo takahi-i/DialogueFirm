@@ -5,5 +5,5 @@
     -r:UnityEngine \
     -r:UnityEditor \
     -target:library \
-    -out:build/SimpleBot.dll
+    -out:Assets/SimpleBot/Lib/SimpleBot.dll
     

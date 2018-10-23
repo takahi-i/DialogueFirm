@@ -133,12 +133,23 @@ namespace SimpleBot
             }
         }
 
-        public EffectConfig(string targetFIeld, string effectType, object defaultValue, object setvalue)
+        private string referField;
+
+        public string ReferField
+        {
+            get
+            {
+                return referField;
+            }
+        }
+
+        public EffectConfig(string targetFIeld, string effectType, object defaultValue, object setvalue, string referField)
         {
             this.targetFIeld = targetFIeld;
             this.effectType = effectType;
             this.defaultValue = defaultValue;
             this.setValue = setvalue;
+            this.referField = referField;
         }
     }
 }

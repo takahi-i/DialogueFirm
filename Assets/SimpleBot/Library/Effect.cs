@@ -9,12 +9,14 @@ namespace SimpleBot
         private string targetField;
         private object setValue;
         private object defaultValue;
+        private string referField;
         private State state;
 
         public Effect(EffectConfig config)
         {
             targetField = config.TargetFIeld;
             setValue = config.SetValue;
+            referField = config.ReferField;
             apply = this.load(config);
             state = new State();
 
@@ -34,7 +36,7 @@ namespace SimpleBot
             }
             else
             {
-                Debug.Log("faile to add the default value for " + targetField + "....");
+                Debug.Log("failed to add the default value for " + targetField + "....");
                 Debug.Log("type of the targett value is " + config.DefaultValue.GetType().FullName);
             }
         }
@@ -78,6 +80,38 @@ namespace SimpleBot
                         state.SetInt(targetField, (int)this.setValue);
                     } else if (this.setValue is string) {
                         state.SetString(targetField, (string)this.setValue);
+                    }
+                    return true;
+                };
+            }
+            else if (config.EffectType == "copy-sfield")
+            {
+                return (State state) =>
+                {
+                    if (state.HasKey(referField))
+                    {
+                        string value = state.GetString(referField);
+                        state.SetString(targetField, value);
+                    }
+                    else
+                    {
+                        Debug.Log("no such key as " + referField);
+                    }
+                    return true;
+                };
+            }
+            else if (config.EffectType == "copy-ifield")
+            {
+                return (State state) =>
+                {
+                    if (state.HasKey(referField))
+                    {
+                        int value = state.GetInt(referField);
+                        state.SetInt(targetField, value);
+                    }
+                    else
+                    {
+                        Debug.Log("no such key as " + referField);
                     }
                     return true;
                 };

@@ -40,7 +40,7 @@ public class BotEngineTest {
     public void NotMatchConditionByEffect()
     {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
-                                               AddEffect("angry-level", "incr", 0, null).
+                                               AddEffect("angry-level", "incr", 0, null, null).
                                                AddResponds("foobar", new List<string>() { "baz" }).
                                                AddCondition(new ConditionConfig("must",
                                                                                   new List<ConditionConfig>() {
@@ -51,5 +51,31 @@ public class BotEngineTest {
         var engine = new BotEngine(config);
         Assert.AreEqual("baz", engine.replySentence("aho is not a researcher."));
     }
+
+    [Test]
+    public void MatchConditionWithPrevStateByEffect()
+    {
+        var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>())
+                                                .AddEffect("angry-level", "incr", 0, null, null)
+                                                .AddEffect("prev-angry-level", "copy-ifield", null, null, "angry-level")
+                                                   .AddResponds("foobar", new List<string>() { "baz" })
+                                                   .AddCondition(new ConditionConfigBuilder().AddType("must")
+                                                   .AddChild(new ConditionConfigBuilder()
+                                                        .AddType("range")
+                                                        .AddTargetField("angry-level")
+                                                        .AddArgument(new Pair("gte", 3)).Build())
+                                                    .AddChild(new ConditionConfigBuilder()
+                                                        .AddType("range")
+                                                        .AddTargetField("prev-angry-level")
+                                                        .AddArgument(new Pair("gte", 2)).Build())
+                                               .Build())
+                                               .AddResponds("default", new List<string>() { "foo" })
+                                               .Build();
+        var engine = new BotEngine(config);
+        Assert.AreEqual("foo", engine.replySentence("aho is not a researcher."));
+        Assert.AreEqual("foo", engine.replySentence("aho is not a researcher."));
+        Assert.AreEqual("baz", engine.replySentence("aho is not a researcher."));
+    }
+
 
 }
