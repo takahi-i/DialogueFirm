@@ -88,10 +88,14 @@ namespace SimpleBot
             {
                 return (State state) =>
                 {
-                    if (state.HasKey(targetField))
+                    if (state.HasKey(referField))
                     {
-                        string value = state.GetString(targetField);
-                        state.SetString(referField, value);
+                        string value = state.GetString(referField);
+                        state.SetString(targetField, value);
+                    }
+                    else
+                    {
+                        Debug.Log("no such key as " + referField);
                     }
                     return true;
                 };
@@ -100,10 +104,14 @@ namespace SimpleBot
             {
                 return (State state) =>
                 {
-                    if (state.HasKey(targetField))
+                    if (state.HasKey(referField))
                     {
-                        int value = state.GetInt(targetField);
-                        state.SetInt(referField, value);
+                        int value = state.GetInt(referField);
+                        state.SetInt(targetField, value);
+                    }
+                    else
+                    {
+                        Debug.Log("no such key as " + referField);
                     }
                     return true;
                 };

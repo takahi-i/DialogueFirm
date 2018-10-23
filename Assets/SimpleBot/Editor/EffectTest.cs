@@ -36,6 +36,20 @@ public class EffectTest {
         Effect effect = new Effect(config.GetIntentConfigs()[0].Effects[0]);
         state.SetString("status", "sad");
         effect.Apply(state);
-        Assert.AreEqual(80, state.GetInt("angry-level"));
+        Assert.AreEqual("happy", state.GetString("status"));
     }
+
+
+    [Test]
+    public void TestSimpleCopyIntFieldApply()
+    {
+        var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>())
+                                               .AddEffect("prev-status", "copy-sfield", null, null, "status").Build();
+
+        Effect effect = new Effect(config.GetIntentConfigs()[0].Effects[0]);
+        state.SetString("status", "sad");
+        effect.Apply(state);
+        Assert.AreEqual("sad", state.GetString("prev-status"));
+    }
+
 }
