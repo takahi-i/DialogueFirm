@@ -13,46 +13,47 @@
 		    }]
     },
     {
-      "name": "question",
+      "name": "room-with-presentation-topic",
       "match": {
         "type": "template",
         "slots": [
           {
-            "name": "ingredient1",
-            "type": "ingredients"
+            "name": "topic",
+            "type": "topics"
           }
         ],
         "expressions": [
-          "tell me$ ${ingredient1}",
-          "show me ${ingredient1}"
+          "session on ${topic}",
+          "${topic}"
         ]
       }
     }
   ],
   "types": [
     {
-      "name": "ingredients",
-      "values": [ "tomato", "potate" ]
+      "name": "topics",
+      "values": [ "docker", "machine learning", "jupyter" ]
     }
   ],
   "responders":
   {
-    "question": [{
-      "responds": [ "Turn the corner and go straight for five minitues." ]
-    }],
-    "repeat": [
+    "room-with-presentation-topic": [
       {
-	"responds": [ "Oh." ],
+	"responds": [ "Session on Docker is held in room 445 from 15:00" ],
 	"condition": {
-	  "must": [
-	    {
-	      "range": { "anger-level" : { "lte": 1 }}
-	    }
-	  ]
-        }
+	  "term": { "topic" : "docker"}
+	}		      
       },
       {
-	"responds": [ "FUXXX." ],
+	"responds": [ "Session on Jupyter Notebook is held in room 134 from 12:00" ],
+	"condition": {
+	  "term": { "topic" : "jupyter"}
+	}	      
+      }	
+    ],
+    "repeat": [
+      {
+	"responds": [ "Please call support center. The number is +81-908483-122344" ],
 	"condition": {
 	  "must": [
 	    {
