@@ -188,6 +188,8 @@ The patterns of template type of intents can embed the slots. the pattern
 matches the inputs which are expanded patterns such as `weather forecast for Paris`
 or `weather forecast for New York`.
 
+The matched slot key and value are used in the condition block of the responder.
+
 ### Responder settings
 
 `responders` is a list section in the configuration file, we add the responder
@@ -444,7 +446,76 @@ Both examples are bundled in this SimpleBot package.
 
 ### Guide
 
-In this section, we see a tiny chat bot example, `Guide` which shows the direction to the conference room in a building.
+In this section, we see a tiny chat bot example, `Guide` which supports the audiences of a small conference.
+As the first function of this bot application. We add the configuration to tell the users the misc information of the conference.
+
+This conference uses two rooms (134 and 445) in a building. The following is the first setting of this application.
+
+```
+﻿{
+  "intents": [
+    {
+      "name": "room-schedule",
+      "match": {
+        "type": "template",
+        "slots": [
+          {
+            "name": "roomId",
+            "type": "roomIds"
+          }
+        ],
+        "expressions": [
+          "schedule of the room ${roomId}",
+          "schedule of room ${roomId}",
+          "schedule of ${roomId}"
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "roomIds",
+      "values": [ "134", "445" ]
+    }
+  ],
+  "responders":
+  {
+    "room-schedule": [
+      {
+	       "responds": [ "Room 134 has two sessions. One is on Jupyter Notebook from 12:00 and the other is on machine learning from 14:00" ],
+	        "condition": {
+	           "term": { "roomId" : "134"}
+	        }
+      },
+      {
+	        "responds": [ "Room 445 has one session. Session on Docker is held from 15:00" ],
+	        "condition": {
+	           "term": { "roomId" : "445"}
+         	}
+      },
+      {
+	       "responds": [ "There is no session at the room." ],
+      }
+    ],
+    "default": [{
+      "target": "default",
+      "responds": [ "Sorry I do not understand what you mean." ]
+    }]
+  }
+}
+```
+
+In the above settings, SimpleBot returns the schedule of the room which is specified by the users.
+There is one intent (`room-schedule`) which is a `template` matching using slot named `roomIds`. This template matches `tell me the schedule of room`.
+In responders section, two responders (`room-schedule` and `default`) are registered. `room-schedule` is applied when the inputs from users
+match `room-schedule` intent, otherwise `default` responder is applied.
+
+`room-schedule` responder have three blocks. Which of them are used as the respond is depends on the `condition`.
+When the a user asks for the schedule of room `134`, the first block is applied. When any conditions are not matched,
+the last block (`There is no session at the room.`) is applied.
+
+For example, when a user submit a sentence **Tell me the schedule of the room 134**, the bot
+replies a sentence **Room 134 has two sessions. One is on Jupyter Notebook from 12:00 and the other is on machine learning from 14:00**.
 
 ### Release Manager
 
