@@ -33,6 +33,16 @@ public class IntentIdentifierTest {
     }
 
     [Test]
+    public void SaveSlotValueToStateWithMatchWithTemplateMatcher()
+    {
+        var config = new ConfigurationBuilder().AddIntent("ingredient", "template", new List<string>() { "this is a ${ingredient1}" }, new Dictionary<string, string>() { { "ingredient1", "ingredient" } })
+                                               .AddType("ingredient", new List<string>() { "potato", "cherry" }).Build();
+        var identifier = new IntentIdentifier(config);
+        Assert.AreEqual("ingredient", identifier.Identify("this is a potato", state).Name);
+        Assert.AreEqual("potato", state.GetString("ingredient1"));
+    }
+
+    [Test]
     public void IdentityNotMatchWithTemplateMatcher()
     {
         var config = new ConfigurationBuilder().AddIntent("ingredient", "template", new List<string>() { "this is a ${ingredient1}" }, new Dictionary<string, string>() { { "ingredient1", "ingredient" } })

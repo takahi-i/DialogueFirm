@@ -57,6 +57,11 @@ namespace SimpleBot
                         effect.Apply(state);
                     }
                 }
+                if (matchedIntent.Slots.Count > 0) {
+                    foreach (var keyvalue in matchedIntent.Slots) {
+                        state.SetString(keyvalue.Key, keyvalue.Value);
+                    }
+                }
                 return matchResults.First();
             }
             return new Intent(NO_MATCH_EXIST, false, new Dictionary<string, string>());
