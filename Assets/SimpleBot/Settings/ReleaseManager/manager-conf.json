@@ -10,11 +10,12 @@
           "error"
         ]
       },
-      "effects": [{
-        "field": "anger-level",
-        "type": "incr",
-        "default": 0
-      }]
+      "effects": [
+        {
+          "field": "anger-level",
+          "type": "incr",
+          "default": 0
+        }]
     },
     {
       "name": "succeeded",
@@ -25,11 +26,18 @@
           "succeeded"
         ]
       },
-      "effects": [{
-        "field": "anger-level",
-        "type": "set",
-        "value": 0
-      }]
+      "effects": [
+          {
+            "field": "prev-anger-level",
+            "type": "copy-ifield",
+            "refer": "anger-level"
+          },
+          {
+            "field": "anger-level",
+            "type": "set",
+            "value": 0
+          },
+      ]
     }
   ],
   "responders" : {
@@ -54,6 +62,19 @@
       }
     ],
     "succeeded": [
+      {
+        "responds": ["You are my hero!!"],
+        "condition" : {
+          "must": [
+              {
+                "range": {"anger-level": { "eq": 0}},
+              },
+              {
+                "range": {"prev-anger-level": { "gte": 1}},
+              }
+            ]
+          }
+      },
       {
         "responds": ["Facinating!", "You did a great work!"]
       }
