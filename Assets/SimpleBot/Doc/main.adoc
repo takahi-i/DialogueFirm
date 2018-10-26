@@ -188,7 +188,7 @@ The patterns of template type of intents can embed the slots. the pattern
 matches the inputs which are expanded patterns such as `weather forecast for Paris`
 or `weather forecast for New York`.
 
-The matched slot key and value are used in the condition block of the responder.
+TIP: The matched slot key and value are used in the condition block of the responder.
 
 ### Responder settings
 
@@ -299,7 +299,7 @@ we will learn the `responder` settings including usage of `condition`.
 
 ### Condition
 
-The state defined in `state` block, can be used in matching `responder`.
+The state defined in `effects` can be used in matching `responder`.
 The following example make use of state with `effect` and `condition`.
 
 The effects of `location` block defined `failed-num` is incremented from 0 when the
@@ -353,8 +353,10 @@ one, if the state does not meet the condition.
 }
 ```
 
-For `location` intent in the above setting, the configuration file contains two responders both of them have `condition` block which
-defines `range` condition. If the `failed-num` is less then or equals `1` first respond is applied otherwise the second one is applied.
+For `location` intent in the above setting, the configuration file contains
+two responders both of them have `condition` block which
+defines `range` condition. If the `failed-num` is less then or equals `1` first
+respond is applied otherwise the second one is applied.
 
 SimpleBot supports two types of conditions (`range` and `term`).
 
@@ -506,8 +508,9 @@ This conference uses two rooms (134 and 445) in a building. The following is the
 ```
 
 In the above settings, SimpleBot returns the schedule of the room which is specified by the users.
-There is one intent (`room-schedule`) which is a `template` matching using slot named `roomIds`. This template matches `tell me the schedule of room`.
-In responders section, two responders (`room-schedule` and `default`) are registered. `room-schedule` is applied when the inputs from users
+There is one intent (`room-schedule`) which is a `template` matching using slot named `roomIds`.
+This template matches `tell me the schedule of room`. In responders section, two responders
+(`room-schedule` and `default`) are registered. `room-schedule` is applied when the inputs from users
 match `room-schedule` intent, otherwise `default` responder is applied.
 
 `room-schedule` responder have three blocks. Which of them are used as the respond is depends on the `condition`.
@@ -516,6 +519,9 @@ the last block (`There is no session at the room.`) is applied.
 
 For example, when a user submit a sentence **Tell me the schedule of the room 134**, the bot
 replies a sentence **Room 134 has two sessions. One is on Jupyter Notebook from 12:00 and the other is on machine learning from 14:00**.
+
+In the bundled Sence `Guide`, the setting file handles the question on the location and topics of the sessions,
+please see the details of the configuration file.
 
 ### Release Manager
 
