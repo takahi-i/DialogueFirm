@@ -6,11 +6,13 @@
         "type": "verbatim",
         "expressions": [ "repeat", "pardon me?" ]
       },
-      "effects" : [{
-			"field": "anger-level",
-			"type": "incr",
-			"default": 0
-		    }]
+      "effects" : [
+	{
+	  "field": "anger-level",
+	  "type": "incr",
+	  "default": 0
+	}
+      ]
     },
     {
       "name": "room-with-presentation-topic",
@@ -42,24 +44,26 @@
 	"responds": [ "Session on Docker is held in room 445 from 15:00" ],
 	"condition": {
 	  "term": { "topic" : "docker"}
-	}		      
+	}
       },
       {
 	"responds": [ "Session on Jupyter Notebook is held in room 134 from 12:00" ],
 	"condition": {
 	  "term": { "topic" : "jupyter"}
-	}	      
-      }	
+	}
+      },
+      {
+	"responds": [ "Session on machine learning application is held in room 134 from 12:00" ],
+	"condition": {
+	  "term": { "topic" : "machine learning"}
+	}
+      }
     ],
     "repeat": [
       {
 	"responds": [ "Please call support center. The number is +81-908483-122344" ],
 	"condition": {
-	  "must": [
-	    {
-	      "range": { "anger-level" : { "gte": 2 }}
-	    }
-	  ]
+	  "range": { "anger-level" : { "gte": 3 }}
 	}
       }
     ],
