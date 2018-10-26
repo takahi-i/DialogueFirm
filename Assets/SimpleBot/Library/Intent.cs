@@ -32,5 +32,13 @@ namespace SimpleBot
         }
 
         private IDictionary<string, string> slots;
+
+        public IDictionary<string, string> Slots
+        {
+            get
+            {
+                return slots;
+            }
+        }
     }
 }
