@@ -1,20 +1,6 @@
 ﻿{
   "intents": [
     {
-      "name": "repeat",
-      "match": {
-        "type": "verbatim",
-        "expressions": [ "repeat", "pardon me?" ]
-      },
-      "effects" : [
-	{
-	  "field": "anger-level",
-	  "type": "incr",
-	  "default": 0
-	}
-      ]
-    },
-    {
       "name": "room-with-presentation-topic",
       "match": {
         "type": "template",
@@ -29,12 +15,62 @@
           "${topic}"
         ]
       }
+    },
+    {
+      "name": "room-schedule",
+      "match": {
+        "type": "template",
+        "slots": [
+          {
+            "name": "roomId",
+            "type": "roomIds"
+          }
+        ],
+        "expressions": [
+          "schedule on room ${roomId}",
+          "schedule on ${roomId}"
+        ]
+      }
+    },
+    {
+      "name": "room-location",
+      "match": {
+        "type": "template",
+        "slots": [
+          {
+            "name": "roomId",
+            "type": "roomIds"
+          }
+        ],
+        "expressions": [
+          "where is room ${roomId}",
+          "location of ${roomId}"
+        ]
+      }
+    },
+    {
+      "name": "fail",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "repeat", "pardon me?", "not understand" ]
+      },
+      "effects" : [
+	{
+	  "field": "fail-count",
+	  "type": "incr",
+	  "default": 0
+	}
+      ]
     }
   ],
   "types": [
     {
       "name": "topics",
       "values": [ "docker", "machine learning", "jupyter" ]
+    },
+    {
+      "name": "roomIds",
+      "values": [ "134", "445" ]
     }
   ],
   "responders":
@@ -53,17 +89,57 @@
 	}
       },
       {
-	"responds": [ "Session on machine learning application is held in room 134 from 12:00" ],
+	"responds": [ "Session on machine learning application is held in room 134 from 14:00" ],
 	"condition": {
 	  "term": { "topic" : "machine learning"}
 	}
       }
     ],
-    "repeat": [
+    "room-schedule": [
       {
-	"responds": [ "Please call support center. The number is +81-908483-122344" ],
+	"responds": [ "Room 134 has two sessions. One is on Jupyter Notebook from 12:00 and the other is on machine learning from 14:00" ],
 	"condition": {
-	  "range": { "anger-level" : { "gte": 3 }}
+	  "term": { "roomId" : "134"}
+	}
+      },
+      {
+	"responds": [ "Room 445 has one session. Session on Docker is held from 15:00" ],
+	"condition": {
+	  "term": { "roomId" : "445"}
+	}
+      },
+      {
+	"responds": [ "There is no session at the room." ],
+      }
+    ],
+    "room-location": [
+      {
+	"responds": [ "Room 134 is in the first floor of Hello World Builing." ],
+	"condition": {
+	  "term": { "roomId" : "134"}
+	}
+      },
+      {
+	"responds": [ "Room 445 is in the first floor of Hello World Builing." ],
+	"condition": {
+	  "term": { "roomId" : "445"}
+	}
+      },
+      {
+	"responds": [ "There is no session at the room." ],
+      }
+    ],
+    "fail": [
+      {
+	"responds": [ "Can you please tell me again more slowly." ],
+	"condition": {
+	  "range": {"fail-count" : { "lte": 2 }}
+	}
+      },
+      {
+	"responds": [ "Can you please call support center. The number is +81-908483-122344" ],
+	"condition": {
+	  "range": {"fail-count" : { "gte": 3 }}
 	}
       }
     ],
