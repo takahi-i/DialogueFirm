@@ -466,11 +466,7 @@ This conference uses two rooms (134 and 445) in a building. The following is the
             "type": "roomIds"
           }
         ],
-        "expressions": [
-          "schedule of the room ${roomId}",
-          "schedule of room ${roomId}",
-          "schedule of ${roomId}"
-        ]
+        "expressions": [ "schedule of the room ${roomId}", "schedule of room ${roomId}", "schedule of ${roomId}" ]
       }
     }
   ],
@@ -524,6 +520,77 @@ In the bundled Sence `Guide`, the setting file handles the question on the locat
 please see the details of the configuration file.
 
 ### Release Manager
+
+Next example is `Release Manager` who checks the release messages. When the release messages does not contains errors,
+he or she is satisfied, but when there are errors, he get nervous.
+
+The following setting contains two intents `failed` and `succeeded`. They match keywords `fail` and `fixed` respectively.
+
+```
+{
+  "intents": [
+    {
+      "name": "fail",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "fail", "exception", "error" ]
+      },
+      "effects": [
+        {
+          "field": "anger-level",
+          "type": "incr",
+          "default": 0
+        }]
+    },
+    {
+      "name": "succeeded",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "fixed", "succeeded" ]
+      },
+      "effects": [
+          {
+            "field": "anger-level",
+            "type": "set",
+            "value": 0
+          }
+      ]
+    }
+  ],
+  "responders" : {
+    "fail": [
+      {
+        "responds": [ "You need to fix the problem as soon as possible!" ],
+        "condition" : {
+          "must" : [
+            {
+              "range": {"anger-level": { "gte": 3}}
+            }
+          ]
+        }
+      },
+      {
+        "responds": [ "Can anyone fix the build failure?" ]
+      }
+    ],
+    "succeeded": [
+      {
+        "responds": ["You did a great work as always."]
+      }
+    ],
+    "default": [{
+      "responds": [ "I do not know the details but looks nice :-)", "Looks nice?" ]
+    }]
+  }
+}
+```
+
+A feature of the above setting is `effects` in the `intents` block. When the bot get
+inputs which match `failed` intent, state `anger-level` incremented.
+
+The state `anger-level` is used in responder section. When anger level is greater than equals to `3`,
+the bot responds with first block of responds, otherwise the bot reply "Can anyone fix the build failure?".
+When the bot get the input matches the `succeeded` intent, the `anger-level` is set to `0`.
 
 ## FAQ
 
