@@ -79,7 +79,7 @@ In the above example, we see that the configuration files have two blocks (`inte
 We register `intents` to extract intent from input sentences. `responders` specify the handlers to output
 the reply sentences for target intents.
 
-### Intent settings
+=== Intent settings
 
 `Intents` blocks consist of a list of intent settings. We add a set of intents which we want make the `BotEngine`
 to identify the intent of input sentences. Intents has three blocks, `name`, `match` and `effects`. The following
@@ -101,7 +101,7 @@ table shows the description of each block.
 |Describe effects of matching the intent from the users. This block contains the list of effects when the indent is detected.
 |===
 
-### Intent example
+==== Intent example
 
 The following is a plain setting to identify if the user input is about weather.
 
@@ -122,7 +122,7 @@ In the `match` block, we specify the matching expressions. `match` has two types
 type in `type` element. SimpleBot provides two types of matching. `verbatim` and `template`. Next section shows the
 types of intent matching.
 
-### Verbatim matching
+==== Verbatim matching
 
 `verbatim` provides the plain matching, with which intent is match when the registered expression is contained in
 the input sentence. In the `verbatim` match we specify intent by matching with registered expressions.
@@ -144,7 +144,7 @@ The following is the example shown in the previous section.
 With the `expressions` settings, SimpleBot identify the input is about weather when input
 contains registered expressions `forcast` or `weather`.
 
-### Template matching
+==== Template matching
 
 Compared with `verbatim`, `template` type matching provides more powerful matching with `slots` and `types`.
 The following settings contains one intent setting whose type is `template` and contains a `slots` block.
@@ -174,7 +174,7 @@ intents: [
 
 The next section describe how we can make template intent using `types` and `slots`.
 
-### Slots and Types
+=== Slots and Types
 
 In the slots block, we specify a `type` in `types` block. `types`
 block contains a list of types which contains a list of `examples`.
@@ -190,7 +190,7 @@ or `weather forecast for New York`.
 
 TIP: The matched slot key and value are used in the condition block of the responder.
 
-### Responder settings
+=== Responder settings
 
 `responders` is a list section in the configuration file, we add the responder
 settings for the each target intent defined in `intents` block.
@@ -227,15 +227,18 @@ the `BotEngine` detect the intent of inputs as `repeat`. `default` target is cal
 Each respond block contains `responds` element which has a list of respond sentences.
 `BotEngine` select randomly the respond sentence from the list.
 
-## Handling State
+== Handling State
 
 SimpleBot support state of dialogue. We can add the settings of state,
 combining `effects` and `condition` blocks.
 
-### Effect
+=== Effect
 
-Each intent of `intents` block supports `effects` block, where we can define
-the effect of state, when the BotEngine identify the intent. `effects` has the following elements.
+BotEngine provide two ways to setting `state`. One is effect described in this section, the other is `template matching`.
+The slot value in template matching is automatically set to state.
+
+Each intent of `intents` block supports `effects` block, where we can define the effect of state, when the BotEngine identifies
+the intent. `effects` has the following elements.
 
 [cols="1,2", options="header"]
 .types of effect
@@ -297,14 +300,14 @@ SimpleBot support the following types of effect.
 The states such as are used when the BotEngine select the responder using `condition`. In the next section,
 we will learn the `responder` settings including usage of `condition`.
 
-### Condition
+=== Condition
 
 The state defined in `effects` can be used in matching `responder`.
 The following example make use of state with `effect` and `condition`.
 
 The effects of `location` block defined `failed-num` is incremented from 0 when the
 `location` intent is identified. Then a respond block in the `location` block in
-`reponders` defines `condition` blocks which defines the condition to apply the responder.
+`responders` defines `condition` blocks which defines the condition to apply the responder.
 For responders with `condition` block does not applied even when the intent is the target
 one, if the state does not meet the condition.
 
@@ -389,7 +392,7 @@ The following shows the supported types of range conditions.
 `condition` is useful, but it is inadequate to express complex condition. SimpleBot
 supports `boolean condition` to express complex conditions.
 
-### Boolean conditions
+=== Boolean conditions
 
 SimpleBot supports the combinations of other conditions with boolean conditions (`should` and `must`).
 The following table shows the descriptions of supported boolean conditions.
@@ -441,12 +444,12 @@ when one of the conditions in the `should` block.
 }
 ```
 
-## Samples
+== Samples
 
 In this section we go through chat-bot sample configurations with SimpleBot though two chat bot examples.
 Both examples are bundled in this SimpleBot package.
 
-### Guide
+=== Guide
 
 In this section, we see a tiny chat bot example, `Guide` which supports the audiences of a small conference.
 As the first function of this bot application. We add the configuration to tell the users the misc information of the conference.
@@ -519,7 +522,7 @@ replies a sentence **Room 134 has two sessions. One is on Jupyter Notebook from 
 In the bundled Sence `Guide`, the setting file handles the question on the location and topics of the sessions,
 please see the details of the configuration file.
 
-### Release Manager
+=== Release Manager
 
 Next example is `Release Manager` who checks the release messages. When the release messages does not contains errors,
 he or she is satisfied, but when there are errors, he get nervous.
@@ -592,6 +595,9 @@ The state `anger-level` is used in responder section. When anger level is greate
 the bot responds with first block of responds, otherwise the bot reply "Can anyone fix the build failure?".
 When the bot get the input matches the `succeeded` intent, the `anger-level` is set to `0`.
 
-## FAQ
-
 ## Summary
+
+This article describes how to make settings of SimpleBot. As we see, we can make complicated application
+using `condition` and `effect` features.
+
+If you have any questions or feature request, please let us know through forum of Unity Assets markets.
