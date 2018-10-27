@@ -132,8 +132,14 @@ namespace SimpleBot
         {
             foreach (var conditionType in conditionNode)
             {
-                string conditonTypeStr = conditionType.Get<string>();
-                return new  ConditionConfig(conditonTypeStr, this.extractChildCondtions(conditionNode[conditionType.Get<string>()]));
+                string conditionTypeStr = conditionType.Get<string>();
+                if (conditionTypeStr == "must" || conditionTypeStr == "should") // intermidiate node
+                {
+                  return new ConditionConfig(conditionTypeStr, this.extractChildCondtions(conditionNode[conditionType.Get<string>()]));
+                } else // terminal node
+                {
+                   return this.extractTerminalConditions(conditionTypeStr, conditionNode[conditionTypeStr]);
+                }
             }
             throw new InvalidOperationException("No conditon is specified...");
         }

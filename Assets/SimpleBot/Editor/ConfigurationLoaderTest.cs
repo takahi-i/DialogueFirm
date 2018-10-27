@@ -28,7 +28,7 @@ public class ConfigurationLoaderTest
                 ""expressions"" : [ ""tell me ${ingredient1}"", ""show me ${ingredient1}"" ]
             },
             ""effects"" : [{
-                ""field"": ""anger - level"",
+                ""field"": ""anger-level"",
                 ""type"": ""set"",
                 ""value"": 0}
             ]

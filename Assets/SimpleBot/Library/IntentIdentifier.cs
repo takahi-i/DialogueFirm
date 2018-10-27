@@ -2,6 +2,7 @@
 using System.Linq;
 using System;
 using SimpleBot.Matcher;
+using UnityEngine;
 
 namespace SimpleBot
 {
@@ -59,10 +60,15 @@ namespace SimpleBot
                 }
                 if (matchedIntent.Slots.Count > 0) {
                     foreach (var keyvalue in matchedIntent.Slots) {
+                        Debug.Log("setting:" + keyvalue.Key);
                         state.SetString(keyvalue.Key, keyvalue.Value);
                     }
+                } else {
+                    Debug.Log("No slots values...");
                 }
                 return matchResults.First();
+            } else {
+                Debug.Log("No matching intent");
             }
             return new Intent(NO_MATCH_EXIST, false, new Dictionary<string, string>());
         }

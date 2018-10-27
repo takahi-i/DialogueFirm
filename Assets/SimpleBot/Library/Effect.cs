@@ -49,10 +49,12 @@ namespace SimpleBot
         {
             if (config.EffectType == "incr")
             {
+                Debug.Log("generate incr effect...");
                 return (State state) =>
                 {
                     if (state.HasKey(targetField))
                     {
+                        Debug.Log("incrementing " + targetField);
                         int result = state.GetInt(targetField);
                         state.SetInt(targetField, ++result);
                     }
@@ -73,13 +75,23 @@ namespace SimpleBot
             }
             else if (config.EffectType == "set")
             {
+                Debug.Log("generate set effect...");
                 return (State state) =>
                 {
-                    if (this.setValue is int)
+                    Type type = this.setValue.GetType();
+                    if (type.Equals(typeof(int)) || type.Equals(typeof(Int64)))
                     {
-                        state.SetInt(targetField, (int)this.setValue);
-                    } else if (this.setValue is string) {
+                        Debug.Log("setting " + targetField);
+                        Debug.Log(this.setValue);
+                        int targetValue = Int32.Parse(this.setValue.ToString());
+                        state.SetInt(targetField, targetValue);
+                    } 
+                    else if (type.Equals(typeof(string)))
+                    {
+                        Debug.Log("setting " + targetField);
                         state.SetString(targetField, (string)this.setValue);
+                    } else {
+                        Debug.Log("Not supported type..." + type.FullName);
                     }
                     return true;
                 };
