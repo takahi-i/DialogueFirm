@@ -33,12 +33,30 @@ public class BotController : MonoBehaviour {
 
     void loadConfig()
     {
-        string settingFilePath = Application.dataPath + "/SimpleBot/Settings/Guide/guide-conf.json";
+        
+        string settingFilePath = this.GetStreamingAssetsPath("SimpleBot/Guide/guide-conf.json");
         string setting = File.ReadAllText(settingFilePath);
         Debug.Log(setting);
         ConfigurationLoader configurationLoader = new ConfigurationLoader();
         Configuration config = configurationLoader.loadFromString(setting);
         this.bot = new BotEngine(config);
         Debug.Log("Finished loading bot");
+    }
+
+    string GetStreamingAssetsPath(string suffix)
+    {
+        string path;
+#if UNITY_EDITOR
+        path = Application.dataPath + "/StreamingAssets/";
+#elif UNITY_ANDROID
+     path = "jar:file://"+ Application.dataPath + "!/assets/";
+#elif UNITY_IOS
+     path = Application.dataPath + "/Raw";
+#else
+     //Desktop (Mac OS or Windows)
+     path = Application.dataPath + "/StreamingAssets/";
+#endif
+        path = path + suffix;
+        return path;
     }
 }
