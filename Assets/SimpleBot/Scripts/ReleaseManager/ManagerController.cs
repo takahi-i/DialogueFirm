@@ -38,7 +38,7 @@ public class ManagerController : MonoBehaviour
         inputField.text = "";
     }
 
-    private void loadConfig()
+    void loadConfig()
     {
         string settingFilePath = Application.dataPath + "/SimpleBot/Settings/ReleaseManager/manager-conf.json";
         string setting = File.ReadAllText(settingFilePath);

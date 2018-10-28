@@ -20,7 +20,7 @@ SimpleBot has `Simple.BotEngine` which manages the dialogue with the user follow
 We can create a `BotEngine` specifying the configuration file.
 
 ```
-private void createBot()
+void createBot()
 {
     string settingFilePath = Application.dataPath + "/SimpleBot/Scenes/simple-bot-conf.json";
     string setting = File.ReadAllText(settingFilePath);
