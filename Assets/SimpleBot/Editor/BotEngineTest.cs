@@ -17,7 +17,7 @@ public class BotEngineTest {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
                                                AddResponds("foobar", new List<string>(){"baz"} ).Build();
         var engine = new BotEngine(config);
-        Assert.AreEqual("baz", engine.replySentence("aho is not a researcher."));
+        Assert.AreEqual("baz", engine.ReplySentence("aho is not a researcher."));
     }
 
 
@@ -33,7 +33,7 @@ public class BotEngineTest {
                                                AddResponds("default", new List<string>() { "foo" }).
                                                Build();
         var engine = new BotEngine(config);
-        Assert.AreEqual("foo", engine.replySentence("aho is not a researcher."));
+        Assert.AreEqual("foo", engine.ReplySentence("aho is not a researcher."));
     }
 
     [Test]
@@ -49,7 +49,7 @@ public class BotEngineTest {
                                                AddResponds("default", new List<string>() { "foo" }).
                                                Build();
         var engine = new BotEngine(config);
-        Assert.AreEqual("baz", engine.replySentence("aho is not a researcher."));
+        Assert.AreEqual("baz", engine.ReplySentence("aho is not a researcher."));
     }
 
     [Test]
@@ -72,9 +72,9 @@ public class BotEngineTest {
                                                .AddResponds("default", new List<string>() { "foo" })
                                                .Build();
         var engine = new BotEngine(config);
-        Assert.AreEqual("foo", engine.replySentence("aho is not a researcher."));
-        Assert.AreEqual("foo", engine.replySentence("aho is not a researcher."));
-        Assert.AreEqual("baz", engine.replySentence("aho is not a researcher."));
+        Assert.AreEqual("foo", engine.ReplySentence("aho is not a researcher."));
+        Assert.AreEqual("foo", engine.ReplySentence("aho is not a researcher."));
+        Assert.AreEqual("baz", engine.ReplySentence("aho is not a researcher."));
     }
 
 

@@ -56,7 +56,7 @@ namespace SimpleBot
             return this.identifier.Identify(input, this.state);
         }
 
-        public string replySentence(string input) {
+        public string ReplySentence(string input) {
             Intent intent = this.identifier.Identify(input, this.state);
             if (this.responders.ContainsKey(intent.Name))
             {

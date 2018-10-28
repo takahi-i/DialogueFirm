@@ -33,7 +33,7 @@ public class ManagerController : MonoBehaviour
 
         str = inputField.text;
         Debug.Log("input: " + str);
-        var reply = this.bot.replySentence(str);
+        var reply = this.bot.ReplySentence(str);
         text.text = reply;
         inputField.text = "";
     }

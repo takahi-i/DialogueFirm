@@ -36,7 +36,7 @@ After we create a `BotEngine` instance, the instance is ready to get input sente
 public void RespondtoInput()
 {
     var input = inputField.text;
-    var reply = this.bot.replySentence(input);
+    var reply = this.bot.ReplySentence(input);
     text.text = reply;
     inputField.text = "";
 }
