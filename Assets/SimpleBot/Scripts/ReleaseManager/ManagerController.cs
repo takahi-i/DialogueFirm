@@ -24,7 +24,7 @@ public class ManagerController : MonoBehaviour
         if (this.bot == null)
         {
             Debug.Log("loading config");
-            this.loadConfig();
+            this.LoadConfig();
         }
         else
         {
@@ -38,7 +38,7 @@ public class ManagerController : MonoBehaviour
         inputField.text = "";
     }
 
-    void loadConfig()
+    void LoadConfig()
     {
         string settingFilePath = this.GetStreamingAssetsPath("SimpleBot/ReleaseManager/manager-conf.json");
         string setting = File.ReadAllText(settingFilePath);

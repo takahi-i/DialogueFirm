@@ -19,7 +19,7 @@ public class BotController : MonoBehaviour {
     {
         if (this.bot == null) {
             Debug.Log("loading config");
-            this.loadConfig();
+            this.LoadConfig();
         } else {
             Debug.Log("exist config");
         }
@@ -31,7 +31,7 @@ public class BotController : MonoBehaviour {
         inputField.text = "";
     }
 
-    void loadConfig()
+    void LoadConfig()
     {
         
         string settingFilePath = this.GetStreamingAssetsPath("SimpleBot/Guide/guide-conf.json");
