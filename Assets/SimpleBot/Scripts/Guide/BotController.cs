@@ -51,12 +51,13 @@ public class BotController : MonoBehaviour {
 #elif UNITY_ANDROID
      path = "jar:file://"+ Application.dataPath + "!/assets/";
 #elif UNITY_IOS
-     path = Application.dataPath + "/Raw";
+     path = Application.dataPath + "/Raw/";
 #else
      //Desktop (Mac OS or Windows)
      path = Application.dataPath + "/StreamingAssets/";
 #endif
         path = path + suffix;
+        Debug.Log("Path of setting file: " + path);
         return path;
     }
 }
