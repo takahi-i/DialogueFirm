@@ -19,7 +19,7 @@ public class BotController : MonoBehaviour {
     {
         if (this.bot == null) {
             Debug.Log("loading config");
-            this.loadConfig();
+            this.LoadConfig();
         } else {
             Debug.Log("exist config");
         }
@@ -31,14 +31,33 @@ public class BotController : MonoBehaviour {
         inputField.text = "";
     }
 
-    void loadConfig()
+    void LoadConfig()
     {
-        string settingFilePath = Application.dataPath + "/SimpleBot/Settings/Guide/guide-conf.json";
+        
+        string settingFilePath = this.GetStreamingAssetsPath("SimpleBot/Guide/guide-conf.json");
         string setting = File.ReadAllText(settingFilePath);
         Debug.Log(setting);
         ConfigurationLoader configurationLoader = new ConfigurationLoader();
         Configuration config = configurationLoader.loadFromString(setting);
         this.bot = new BotEngine(config);
         Debug.Log("Finished loading bot");
+    }
+
+    string GetStreamingAssetsPath(string suffix)
+    {
+        string path;
+#if UNITY_EDITOR
+        path = Application.dataPath + "/StreamingAssets/";
+#elif UNITY_ANDROID
+     path = "jar:file://"+ Application.dataPath + "!/assets/";
+#elif UNITY_IOS
+     path = Application.dataPath + "/Raw/";
+#else
+     //Desktop (Mac OS or Windows)
+     path = Application.dataPath + "/StreamingAssets/";
+#endif
+        path = path + suffix;
+        Debug.Log("Path of setting file: " + path);
+        return path;
     }
 }
