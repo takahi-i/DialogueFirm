@@ -188,7 +188,7 @@ The patterns of template type of intents can embed the slots. the pattern
 matches the inputs which are expanded patterns such as `weather forecast for Paris`
 or `weather forecast for New York`.
 
-TIP: The matched slot key and value are used in the condition block of the responder.
+TIP: The matched slot key and value are used in the condition block of the responder. For details please see Section <<Effect>>.
 
 === Responder settings
 
@@ -235,7 +235,8 @@ combining `effects` and `condition` blocks.
 === Effect
 
 BotEngine provide two ways to setting `state`. One is effect described in this section, the other is `template matching`.
-The slot value in template matching is automatically set to state.
+
+NOTE: The slot name and the value in template matching is automatically set to state.
 
 Each intent of `intents` block supports `effects` block, where we can define the effect of state, when the BotEngine identifies
 the intent. `effects` has the following elements.
@@ -527,7 +528,7 @@ please see the details of the configuration file.
 Next example is `Release Manager` who checks the release messages. When the release messages does not contains errors,
 he or she is satisfied, but when there are errors, he get nervous.
 
-The following setting contains two intents `failed` and `succeeded`. They match keywords `fail` and `fixed` respectively.
+The following setting contains two intents `failed` and `succeeded`. They match keywords `fail` and `fix` respectively.
 
 ```
 {
@@ -549,7 +550,7 @@ The following setting contains two intents `failed` and `succeeded`. They match 
       "name": "succeeded",
       "match": {
         "type": "verbatim",
-        "expressions": [ "fixed", "succeeded" ]
+        "expressions": [ "fix", "succeed" ]
       },
       "effects": [
           {
