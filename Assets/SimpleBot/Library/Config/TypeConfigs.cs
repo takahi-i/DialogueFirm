@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,7 @@ namespace SimpleBot
             {
                 return this.types[typeName];
             }
-            return new List<string>();
+            throw new InvalidOperationException("No type is regsitered as " + typeName + " ...");
         }
 
         public bool HasKey(string typeName)

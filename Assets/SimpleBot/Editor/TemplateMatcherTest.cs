@@ -19,6 +19,19 @@ public class NewTestScript {
         Assert.AreEqual("a (?<ingredient1>potato|tomato)", template.PatternStr);
     }
 
+
+    [Test]
+    public void TestCannotGenerateTemplateWithoutTemplate()
+    {
+        string pattern = "a ${ingredient1}";
+        Dictionary<string, string> slots = new Dictionary<string, string>(){
+            {"ingredient1", "ingredient"}
+        };
+        TypeConfig typeconfig = new TypeConfig();
+        Assert.That(() => TemplateMatcher.GenerateTemplate(pattern, slots, typeconfig),
+                    Throws.TypeOf<System.InvalidOperationException>());
+    }
+
     [Test]
     public void TestGenerateTemplateWithMatch()
     {
