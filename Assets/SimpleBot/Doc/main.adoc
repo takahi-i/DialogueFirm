@@ -16,8 +16,10 @@ In addition, functions for practical applications such as state transitions or s
 
 == Basic Usage
 
-SimpleBot has `Simple.BotEngine` which manages the dialogue with the user following specified configuration.file.
-We can create a `BotEngine` specifying the configuration file.
+SimpleBot has `Simple.BotEngine` which manages the dialogue with the user following
+specified configuration file. We can create a `BotEngine` specifying a `Configuration`
+object  which is loaded by `ConfigurationLoader`.
+The following is a sample of creating a `BotEngine` object.
 
 ```
 void createBot()
