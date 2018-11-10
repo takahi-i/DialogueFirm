@@ -158,10 +158,10 @@ intents: [
             "match" : {
                 "type" : "template",
                  "slots" : [{
-                     "name" : "target-location",
+                     "name" : "targetLocation",
                       "type" :  "locations"
                   } ]
-                "patterns" : [ "weather forecast for #{target-location}?" ]
+                "patterns" : [ "weather forecast for #{targetLocation}?" ]
             }
         },
 ],
@@ -173,6 +173,8 @@ intents: [
     }
 ]
 ```
+
+NOTE: symbols such as hyphen or underbar cannot be used in type and slot names
 
 The next section describe how we can make template intent using `types` and `slots`.
 

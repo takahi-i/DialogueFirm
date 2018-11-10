@@ -52,11 +52,7 @@ namespace SimpleBot
                     else // found slot
                     {
                         endPosition = pattern.IndexOf("}", startPosition, StringComparison.Ordinal);
-                        Debug.Log(startPosition);
-                        Debug.Log(endPosition);
-
                         var slotName = pattern.Substring(startPosition + 1, (endPosition - startPosition) - 1);
-                        Debug.Log("slotName:" + slotName);
                         string typeName = slots[slotName];
                         var typeElements = typeconfig.Get(typeName);
                         elements.Add(generateSlotElement(typeElements, slotName));
