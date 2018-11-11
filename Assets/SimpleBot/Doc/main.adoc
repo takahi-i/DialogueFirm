@@ -143,6 +143,8 @@ The following is the example shown in the previous section.
 
 ```
 
+NOTE: elements of expressions are automatically normalized into lowercase
+
 With the `expressions` settings, SimpleBot identify the input is about weather when input
 contains registered expressions `forcast` or `weather`.
 
@@ -175,6 +177,8 @@ intents: [
 ```
 
 NOTE: symbols such as hyphen or underbar cannot be used in type and slot names
+
+NOTE: elements of examples are automatically normalized into lowercase
 
 The next section describe how we can make template intent using `types` and `slots`.
 
