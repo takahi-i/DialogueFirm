@@ -48,7 +48,8 @@ namespace SimpleBot
 
         public Intent Identify(string input, State state)
         {
-            var results = this.matchers.Select(matcher => matcher.Match(input));
+            var loweredInput = input.ToLower();
+            var results = this.matchers.Select(matcher => matcher.Match(loweredInput));
             var matchResults = results.Where(result => result.Success == true);
             if (matchResults.Count() > 0)
             {
