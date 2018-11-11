@@ -73,5 +73,13 @@ namespace SimpleBot
             }
             throw new InvalidOperationException("No default responder is specified...");
         }
+
+        public State State
+        {
+            get
+            {
+                return state;
+            }
+        }
     }
 }
