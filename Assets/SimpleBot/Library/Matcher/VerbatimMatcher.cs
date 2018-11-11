@@ -14,7 +14,7 @@ namespace SimpleBot
             public VerbatimMatcher(string name, List<string> patterns)
             {
                 this.name = name;
-                IEnumerable<Regex> regexPatterns = patterns.Select(x => new Regex(x));
+                IEnumerable<Regex> regexPatterns = patterns.Select(x => new Regex(x.ToLower()));
                 this.patterns = new HashSet<Regex>(regexPatterns.ToList());
             }
 

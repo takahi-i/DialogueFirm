@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SimpleBot
@@ -71,7 +72,7 @@ namespace SimpleBot
             private static string generateSlotElement(List<string> typeElements, string slotName)
             {
                 string element = "(?<" + slotName + ">";
-                element += string.Join("|", typeElements.ToArray());
+                element += string.Join("|", typeElements.Select<string, string>(typeElement => typeElement.ToLower()).ToArray());
                 element += ")";
                 return element;
             }

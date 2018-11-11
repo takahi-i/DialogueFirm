@@ -17,6 +17,14 @@ public class IntentIdentifierTest {
     }
 
     [Test]
+    public void IdentifyIntentWithVervatimOnCapitalCaseTest()
+    {
+        var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "Aho" }, new Dictionary<string, string>()).Build();
+        var identifier = new IntentIdentifier(config);
+        Assert.AreEqual("foobar", identifier.Identify("aho is a researcher.", state).Name);
+    }
+
+    [Test]
     public void IdentifyNotExist() {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>(){"aho"}, new Dictionary<string, string>()).Build();
         var identifier = new IntentIdentifier(config);
@@ -30,6 +38,24 @@ public class IntentIdentifierTest {
                                                .AddType("ingredient", new List<string>(){"potato", "cherry"} ).Build();
         var identifier = new IntentIdentifier(config);
         Assert.AreEqual("ingredient", identifier.Identify("this is a potato", state).Name);
+    }
+
+    [Test]
+    public void IdentityIntentWithTemplateMatcherOnCapitalCaseTest()
+    {
+        var config = new ConfigurationBuilder().AddIntent("ingredient", "template", new List<string>() { "this is a ${ingredient1}" }, new Dictionary<string, string>() { { "ingredient1", "ingredient" } })
+                                               .AddType("ingredient", new List<string>() { "Potato", "Cherry" }).Build();
+        var identifier = new IntentIdentifier(config);
+        Assert.AreEqual("ingredient", identifier.Identify("this is a potato", state).Name);
+    }
+
+    [Test]
+    public void IdentityIntentWithTemplateMatcherOnCapitalCaseTest2()
+    {
+        var config = new ConfigurationBuilder().AddIntent("ingredient", "template", new List<string>() { "this is a ${ingredient1}" }, new Dictionary<string, string>() { { "ingredient1", "ingredient" } })
+                                               .AddType("ingredient", new List<string>() { "potato", "cherry" }).Build();
+        var identifier = new IntentIdentifier(config);
+        Assert.AreEqual("ingredient", identifier.Identify("this is a Potato", state).Name);
     }
 
     [Test]
