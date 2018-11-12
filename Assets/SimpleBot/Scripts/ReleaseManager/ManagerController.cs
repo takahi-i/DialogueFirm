@@ -19,6 +19,7 @@ public class ManagerController : MonoBehaviour
     private BotEngine bot;
     public Sprite angrySprite;
     public Sprite happySprite;
+    public Sprite bitAngrySprite;
     private SpriteRenderer spriteRenderer;
     public Image managerImage;
 
@@ -27,6 +28,8 @@ public class ManagerController : MonoBehaviour
         Debug.Log("Called Star()");
         angrySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-angry") as Sprite;
         happySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-happy") as Sprite;
+        bitAngrySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-bit-angry") as Sprite;
+
         managerImage.sprite = happySprite;
     }
 
@@ -45,13 +48,15 @@ public class ManagerController : MonoBehaviour
         str = inputField.text;
         var reply = this.bot.ReplySentence(str);
         int angerLevel = bot.State.GetInt("anger-level");
-        if (angerLevel == 0) {
+        if (angerLevel == 0)
+        {
             managerImage.sprite = happySprite;
-        } else {
+        } else if (angerLevel == 1)
+        {
+            managerImage.sprite = bitAngrySprite;
+        } else  {
             managerImage.sprite = angrySprite;
         }
-
-
         text.text = reply;
         inputField.text = "";
 }
