@@ -27,7 +27,7 @@ public class ManagerController : MonoBehaviour
         Debug.Log("Called Star()");
         angrySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-angry") as Sprite;
         happySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-happy") as Sprite;
-        managerImage.sprite = angrySprite;
+        managerImage.sprite = happySprite;
     }
 
     public void SaveText()
@@ -43,8 +43,15 @@ public class ManagerController : MonoBehaviour
         }
 
         str = inputField.text;
-        Debug.Log("input: " + str);
         var reply = this.bot.ReplySentence(str);
+        int angerLevel = bot.State.GetInt("anger-level");
+        if (angerLevel == 0) {
+            managerImage.sprite = happySprite;
+        } else {
+            managerImage.sprite = angrySprite;
+        }
+
+
         text.text = reply;
         inputField.text = "";
 }
