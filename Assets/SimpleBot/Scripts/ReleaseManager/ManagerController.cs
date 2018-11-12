@@ -5,7 +5,6 @@ using UnityEngine;
 
 using System.IO;
 using SimpleBot;
-using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -18,6 +17,21 @@ public class ManagerController : MonoBehaviour
     public InputField inputField;
     public Text text;
     private BotEngine bot;
+    public Sprite angrySprite;
+    public Sprite happySprite;
+    public Sprite bitAngrySprite;
+    private SpriteRenderer spriteRenderer;
+    public Image managerImage;
+
+    public void Start()
+    {
+        Debug.Log("Called Star()");
+        angrySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-angry") as Sprite;
+        happySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-happy") as Sprite;
+        bitAngrySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-bit-angry") as Sprite;
+
+        managerImage.sprite = happySprite;
+    }
 
     public void SaveText()
     {
@@ -32,11 +46,20 @@ public class ManagerController : MonoBehaviour
         }
 
         str = inputField.text;
-        Debug.Log("input: " + str);
         var reply = this.bot.ReplySentence(str);
+        int angerLevel = bot.State.GetInt("anger-level");
+        if (angerLevel == 0)
+        {
+            managerImage.sprite = happySprite;
+        } else if (angerLevel == 1)
+        {
+            managerImage.sprite = bitAngrySprite;
+        } else  {
+            managerImage.sprite = angrySprite;
+        }
         text.text = reply;
         inputField.text = "";
-    }
+}
 
     void LoadConfig()
     {

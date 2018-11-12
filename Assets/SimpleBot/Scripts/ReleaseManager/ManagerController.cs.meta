@@ -3,7 +3,12 @@ guid: ccd610708a226469ebfb7b7cd05b6991
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - inputField: {instanceID: 0}
+  - text: {instanceID: 0}
+  - managerImg: {fileID: 21300000, guid: 250aa5dab3b1a48aa86af995cb1c21db, type: 3}
+  - angrySprite: {fileID: 21300000, guid: d9434ab8c0d5c48f58c984d0d94fa3b5, type: 3}
+  - happySprite: {fileID: 21300000, guid: 250aa5dab3b1a48aa86af995cb1c21db, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
