@@ -21,10 +21,21 @@ namespace SimpleBot
         /// <param name="config">Configuration object loaded from the configuration file</param>
         public BotEngine(Configuration config)
         {
+            setResources(config);
+        }
+
+        public BotEngine(string configurationString) {
+            ConfigurationLoader configurationLoader = new ConfigurationLoader();
+            Configuration config = configurationLoader.loadFromString(configurationString);
+            setResources(config);
+        }
+
+        private void setResources(Configuration config) {
             this.identifier = new IntentIdentifier(config);
             this.responders = this.generateResponderMap(config);
             this.state = new State();
         }
+
 
         private IDictionary<string, List<ReplyResponder>> generateResponderMap(Configuration config)
         {
