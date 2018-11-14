@@ -36,7 +36,6 @@ namespace SimpleBot
             this.state = new State();
         }
 
-
         private IDictionary<string, List<ReplyResponder>> generateResponderMap(Configuration config)
         {
             List<ResponderConfig> responderConfigs = config.ResponderConfigs;
