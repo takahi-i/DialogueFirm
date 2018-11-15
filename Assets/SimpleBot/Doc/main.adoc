@@ -26,18 +26,15 @@ void createBot()
 {
     string settingFilePath = Application.dataPath + "/SimpleBot/Scenes/simple-bot-conf.json";
     string setting = File.ReadAllText(settingFilePath);
-    ConfigurationLoader configurationLoader = new ConfigurationLoader();
-    Configuration config = configurationLoader.loadFromString(setting);
-    this.bot = new BotEngine(config);
+    this.bot = new BotEngine(setting);
 }
 ```
 
 After we create a `BotEngine` instance, the instance is ready to get input sentence.
 
 ```
-public void RespondtoInput()
+public void RespondToInput(string input)
 {
-    var input = inputField.text;
     var reply = this.bot.ReplySentence(input);
     text.text = reply;
     inputField.text = "";
@@ -46,7 +43,7 @@ public void RespondtoInput()
 
 In the following sections, we learn the configurations and practical usage.
 
-== Basic Configurations
+== Configurations
 
 This section starts from the simple SimpleBot configuration. SimpleBot has a JSON
 formatted configuration file. The following is a tiny example.
@@ -235,12 +232,12 @@ the `BotEngine` detect the intent of inputs as `repeat`. `default` target is cal
 Each respond block contains `responds` element which has a list of respond sentences.
 `BotEngine` select randomly the respond sentence from the list.
 
-== Handling State
+=== Handling State
 
 SimpleBot support state of dialogue. We can add the settings of state,
 combining `effects` and `condition` blocks.
 
-=== Effect
+==== Effect
 
 BotEngine provide two ways to setting `state`. One is effect described in this section, the other is `template matching`.
 
@@ -309,7 +306,7 @@ SimpleBot support the following types of effect.
 The states such as are used when the BotEngine select the responder using `condition`. In the next section,
 we will learn the `responder` settings including usage of `condition`.
 
-=== Condition
+==== Condition
 
 The state defined in `effects` can be used in matching `responder`.
 The following example make use of state with `effect` and `condition`.
@@ -401,7 +398,7 @@ The following shows the supported types of range conditions.
 `condition` is useful, but it is inadequate to express complex condition. SimpleBot
 supports `boolean condition` to express complex conditions.
 
-=== Boolean conditions
+==== Boolean conditions
 
 SimpleBot supports the combinations of other conditions with boolean conditions (`should` and `must`).
 The following table shows the descriptions of supported boolean conditions.
@@ -452,6 +449,22 @@ when one of the conditions in the `should` block.
   }]
 }
 ```
+
+== Class and APIs
+
+This section describes the public classes and the usage provided by SimpleBot package.
+
+=== BotEngine
+
+`BotEngine` have the main role in the SimpleBot package. This object accept input sentence and returns reply sentences.
+
+==== Constructor
+
+==== ReplySentence
+
+==== State
+
+=== State
 
 == Samples
 
