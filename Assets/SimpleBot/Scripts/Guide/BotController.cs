@@ -35,11 +35,8 @@ public class BotController : MonoBehaviour {
     {
         
         string settingFilePath = this.GetStreamingAssetsPath("SimpleBot/Guide/guide-conf.json");
-        string setting = File.ReadAllText(settingFilePath);
-        Debug.Log(setting);
-        ConfigurationLoader configurationLoader = new ConfigurationLoader();
-        Configuration config = configurationLoader.loadFromString(setting);
-        this.bot = new BotEngine(config);
+        string settingString = File.ReadAllText(settingFilePath);
+        this.bot = new BotEngine(settingString);
         Debug.Log("Finished loading bot");
     }
 
