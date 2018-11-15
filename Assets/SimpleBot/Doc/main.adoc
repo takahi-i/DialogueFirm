@@ -26,18 +26,15 @@ void createBot()
 {
     string settingFilePath = Application.dataPath + "/SimpleBot/Scenes/simple-bot-conf.json";
     string setting = File.ReadAllText(settingFilePath);
-    ConfigurationLoader configurationLoader = new ConfigurationLoader();
-    Configuration config = configurationLoader.loadFromString(setting);
-    this.bot = new BotEngine(config);
+    this.bot = new BotEngine(setting);
 }
 ```
 
 After we create a `BotEngine` instance, the instance is ready to get input sentence.
 
 ```
-public void RespondtoInput()
+public void RespondToInput(string input)
 {
-    var input = inputField.text;
     var reply = this.bot.ReplySentence(input);
     text.text = reply;
     inputField.text = "";
@@ -459,7 +456,13 @@ This section describes the public classes and the usage provided by SimpleBot pa
 
 === BotEngine
 
+`BotEngine` have the main role in the SimpleBot package. This object accept input sentence and returns reply sentences.
 
+==== Constructor
+
+==== ReplySentence
+
+==== State
 
 === State
 
