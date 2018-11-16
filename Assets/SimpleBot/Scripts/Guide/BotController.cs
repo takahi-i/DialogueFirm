@@ -14,6 +14,20 @@ public class BotController : MonoBehaviour {
     public InputField inputField;
     public Text text;
     private BotEngine bot;
+    public Sprite angrySprite;
+    public Sprite happySprite;
+    public Sprite bitAngrySprite;
+    public Image guideImage;
+
+
+    public void Start()
+    {
+        Debug.Log("Called Star()");
+        angrySprite = Resources.Load<Sprite>("SimpleBot/Guide/bulter-confused") as Sprite;
+        happySprite = Resources.Load<Sprite>("SimpleBot/Guide/bulter-smile") as Sprite;
+        bitAngrySprite = Resources.Load<Sprite>("SimpleBot/Guide/butler-default") as Sprite;
+        guideImage.sprite = happySprite;
+    }
 
     public void SaveText()
     {
