@@ -546,10 +546,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 1450565440}
   text: {fileID: 455247716}
-  angrySprite: {fileID: 0}
+  confusedSprite: {fileID: 0}
   happySprite: {fileID: 0}
-  bitAngrySprite: {fileID: 0}
-  guideImage: {fileID: 0}
+  defaultSprite: {fileID: 0}
+  guideImage: {fileID: 50459013}
 --- !u!1 &1396010785
 GameObject:
   m_ObjectHideFlags: 0
