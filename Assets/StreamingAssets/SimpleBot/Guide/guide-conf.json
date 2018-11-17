@@ -55,11 +55,11 @@
         "expressions": [ "repeat", "pardon me?", "not understand" ]
       },
       "effects" : [
-	       {
-	          "field": "fail-count",
-	           "type": "incr",
-	            "default": 0
-	           }
+        {
+          "field": "fail-count",
+	        "type": "incr",
+	        "default": 0
+        }
       ]
     }
   ],

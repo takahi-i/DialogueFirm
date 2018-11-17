@@ -66,7 +66,6 @@ public class ManagerController : MonoBehaviour
         string settingFilePath = this.GetStreamingAssetsPath("SimpleBot/ReleaseManager/manager-conf.json");
         string settingString = File.ReadAllText(settingFilePath);
         this.bot = new BotEngine(settingString);
-        Debug.Log("Finished loading bot");
     }
 
     string GetStreamingAssetsPath(string suffix)
