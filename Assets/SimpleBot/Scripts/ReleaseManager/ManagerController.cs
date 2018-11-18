@@ -13,7 +13,6 @@ using UnityEngine.UI;
 /// </summary>
 public class ManagerController : MonoBehaviour
 {
-    string str;
     public InputField inputField;
     public Text text;
     private BotEngine bot;
@@ -29,24 +28,13 @@ public class ManagerController : MonoBehaviour
         angrySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-angry") as Sprite;
         happySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-happy") as Sprite;
         bitAngrySprite = Resources.Load<Sprite>("SimpleBot/ReleaseManager/manager-bit-angry") as Sprite;
-
         managerImage.sprite = happySprite;
+        this.LoadConfig();
     }
 
     public void SaveText()
     {
-        if (this.bot == null)
-        {
-            Debug.Log("loading config");
-            this.LoadConfig();
-        }
-        else
-        {
-            Debug.Log("exist config");
-        }
-
-        str = inputField.text;
-        var reply = this.bot.ReplySentence(str);
+        var reply = this.bot.ReplySentence(inputField.text);
         int angerLevel = bot.State.GetInt("anger-level");
         if (angerLevel == 0)
         {
@@ -59,7 +47,7 @@ public class ManagerController : MonoBehaviour
         }
         text.text = reply;
         inputField.text = "";
-}
+    }
 
     void LoadConfig()
     {
