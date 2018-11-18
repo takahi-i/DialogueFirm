@@ -36,15 +36,7 @@ public class ManagerController : MonoBehaviour
     {
         var reply = this.bot.ReplySentence(inputField.text);
         int angerLevel = bot.State.GetInt("anger-level");
-        if (angerLevel == 0)
-        {
-            managerImage.sprite = happySprite;
-        } else if (angerLevel == 1)
-        {
-            managerImage.sprite = bitAngrySprite;
-        } else  {
-            managerImage.sprite = angrySprite;
-        }
+		this.ChangeImage(angerLevel);
         text.text = reply;
         inputField.text = "";
     }
@@ -55,6 +47,22 @@ public class ManagerController : MonoBehaviour
         string settingString = File.ReadAllText(settingFilePath);
         this.bot = new BotEngine(settingString);
     }
+
+	void ChangeImage(int angerLevel)
+	{
+		if (angerLevel == 0)
+        {
+            managerImage.sprite = happySprite;
+        } 
+        else if (angerLevel == 1)
+        {
+            managerImage.sprite = bitAngrySprite;
+        }
+        else
+		{
+            managerImage.sprite = angrySprite;
+        }
+	}
 
     string GetStreamingAssetsPath(string suffix)
     {
