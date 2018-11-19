@@ -453,12 +453,29 @@ when one of the conditions in the `should` block.
 == Class and APIs
 
 This section describes the public classes and the usage provided by SimpleBot package.
+Basically we only use few objects in `SimpleBot` package.
 
 === BotEngine
 
-`BotEngine` have the main role in the SimpleBot package. This object accept input sentence and returns reply sentences.
+`BotEngine` has the main role in the SimpleBot package. This object accepts input sentence and returns reply sentences.
 
 ==== Constructor
+
+The constructor of BotEngine takes a string parameter which contains the configuration of SimpleBot.
+
+The following is a sample to create a BotEngine instance.
+
+```
+BotEngine LoadConfig()
+{
+    string settingFilePath = this.GetStreamingAssetsPath("SimpleBot/Guide/guide-conf.json");
+    string settingString = File.ReadAllText(settingFilePath);
+    return new BotEngine(settingString);
+}
+```
+
+In the above example, the configuration is stored as a Streaming Assets file.
+The method loads the file and pass the string content to the constructor of BotEngine.
 
 ==== ReplySentence
 
