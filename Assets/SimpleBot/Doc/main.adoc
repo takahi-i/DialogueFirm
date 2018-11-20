@@ -492,13 +492,11 @@ public void Reply()
 
 ==== State
 
-
-
 === State
 
 == Samples
 
-In this section we go through chat-bot sample configurations with SimpleBot though two chat bot examples.
+In this section, we go through chat-bot sample configurations with SimpleBot though two chat bot examples.
 Both examples are bundled in this SimpleBot package.
 
 === Guide
