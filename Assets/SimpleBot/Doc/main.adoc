@@ -479,7 +479,20 @@ The method loads the file and pass the string content to the constructor of BotE
 
 ==== ReplySentence
 
+`ReplySentence` return the sentence for input sentences. The following function, `Reply` loads the input
+from inputField (InputField) and then gets the reply sentence by bot (`BotEngine` object) putting the input sentence.
+
+```
+public void Reply()
+{
+    var reply = this.bot.ReplySentence(inputField.text);
+    text.text = reply;
+}
+```
+
 ==== State
+
+
 
 === State
 
@@ -558,7 +571,7 @@ the last block (`There is no session at the room.`) is applied.
 For example, when a user submit a sentence **Tell me the schedule of the room 134**, the bot
 replies a sentence **Room 134 has two sessions. One is on Jupyter Notebook from 12:00 and the other is on machine learning from 14:00**.
 
-In the bundled Sence `Guide`, the setting file handles the question on the location and topics of the sessions,
+In the bundled Scence `Guide`, the setting file handles the question on the location and topics of the sessions,
 please see the details of the configuration file.
 
 === Release Manager
