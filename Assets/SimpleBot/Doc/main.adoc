@@ -492,6 +492,36 @@ public void Reply()
 
 ==== State
 
+`BotEngine` has a method to return `State` object which contains the status of `BotEngine`.
+The following sample uses the `State` method to switches the images of an application.
+
+```
+public void Reply()
+{
+    var reply = this.bot.ReplySentence(inputField.text);
+    this.ChangeImage(bot.State.GetInt("fail-count"));
+    text.text = reply;
+}
+
+void ChangeImage(int failCount)
+{
+  if (failCount == 0)
+  {
+    guideImage.sprite = happySprite;
+  }
+  else if (failCount == 1)
+  {
+    guideImage.sprite = defaultSprite;
+  }
+  else
+  {
+    guideImage.sprite = confusedSprite;
+  }
+}
+```
+
+In the next section, we go through the usage of `State` object.
+
 === State
 
 == Samples
