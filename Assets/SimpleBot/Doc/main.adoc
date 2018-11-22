@@ -524,6 +524,41 @@ In the next section, we go through the usage of `State` object.
 
 === State
 
+State objects returned from `BotEngine.State` method have several methods to access the status of `BotEngine`.
+
+[cols="1,2,3", options="header"]
+.methods of State object
+|===
+|Name
+|Parameters
+|Description
+
+|HasKey
+|key (string)
+|Return True when the state attribute (key) is defined. Otherwise returns False.
+
+| SetInt
+| key (string), value (int)
+| Set the value to specified attribute name
+
+| SetString
+| key (string), value (string)
+| Set the value to specified attribute name
+
+| GetInt
+| key (string)
+| Get the value of specified attribute
+
+| GetString
+| key (string)
+| Get the value to specified attribute
+
+| DeleteAll
+| None
+| Delete all the attributes
+|===
+
+
 == Samples
 
 In this section, we go through chat-bot sample configurations with SimpleBot though two chat bot examples.
