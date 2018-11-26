@@ -11,7 +11,7 @@
 == Overview
 
 SimpleBot is a simple chat bot engine for the Unity platform. Given input sentences, SimpleBot detects
-the intent and then reply the reply sentence. Simple bot provide Amazon Echo style JSON configuration.
+the intent and then reply the reply sentence. Simple bot provides an Amazon Alexa styled JSON configuration.
 In addition, functions for practical applications such as state transitions or slot type matching are provided.
 
 == Basic Usage
@@ -706,7 +706,7 @@ The following setting contains two intents `failed` and `succeeded`. They match 
 A feature of the above setting is `effects` in the `intents` block. When the bot get
 inputs which match `failed` intent, state `anger-level` incremented.
 
-The state `anger-level` is used in responder section. When anger level is greater than equals to `3`,
+The state `anger-level` is used in a responder section. When anger level is greater than equals to `3`,
 the bot responds with first block of responds, otherwise the bot reply "Can anyone fix the build failure?".
 When the bot get the input matches the `succeeded` intent, the `anger-level` is set to `0`.
 
