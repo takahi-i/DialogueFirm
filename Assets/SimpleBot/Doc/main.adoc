@@ -22,7 +22,7 @@ object  which is loaded by `ConfigurationLoader`.
 The following is a sample of creating a `BotEngine` object.
 
 ```
-void createBot()
+void CreateBot()
 {
     string settingFilePath = Application.dataPath + "/SimpleBot/Scenes/simple-bot-conf.json";
     string setting = File.ReadAllText(settingFilePath);
@@ -377,7 +377,7 @@ SimpleBot supports two types of conditions (`range` and `term`).
 |range
 |Condition on range of values (`integer`).
 |term
-|Condition on value of specified property name.
+|Condition on value existence of specified property name.
 |===
 
 The following shows the supported types of range conditions.
