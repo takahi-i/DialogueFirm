@@ -142,7 +142,7 @@ The following is the example shown in the previous section.
 
 NOTE: elements of expressions are automatically normalized into lowercase
 
-With the `expressions` settings, SimpleBot identify the input is about weather when input
+With the `expressions` settings, SimpleBot can tell if the input is about weather when input
 contains registered expressions `forcast` or `weather`.
 
 ==== Template matching
@@ -380,7 +380,7 @@ SimpleBot supports two types of conditions (`range` and `term`).
 |Condition on value existence of specified property name.
 |===
 
-The following shows the supported types of range conditions.
+The following table shows the supported types of range conditions.
 
 [cols="1,2", options="header"]
 .types of range condition
@@ -479,7 +479,7 @@ The method loads the file and pass the string content to the constructor of BotE
 
 ==== ReplySentence
 
-`ReplySentence` return the sentence for input sentences. The following function, `Reply` loads the input
+`ReplySentence` returns the sentence for input sentences. The following function, `Reply` loads the input
 from inputField (InputField) and then gets the reply sentence by bot (`BotEngine` object) putting the input sentence.
 
 ```
@@ -492,8 +492,8 @@ public void Reply()
 
 ==== State
 
-`BotEngine` has a method to return `State` object which contains the status of `BotEngine`.
-The following sample uses the `State` method to switches the images of an application.
+`BotEngine` has a method to return the `State` object which contains the status of `BotEngine`.
+The following sample calls the `State` method to switches the images of an application.
 
 ```
 public void Reply()
