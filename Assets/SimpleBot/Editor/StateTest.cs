@@ -18,6 +18,23 @@ public class StateTest {
         Assert.AreEqual("uho", this.state.GetString("aho"));
     }
 
+
+    [Test]
+    public void TestGetIntToNotExsitProperty()
+    {
+
+        Assert.That(() => this.state.GetInt("no-such-property"),
+                    Throws.TypeOf<System.InvalidOperationException>());
+    }
+
+    [Test]
+    public void TestGetStringToNotExsitProperty()
+    {
+
+        Assert.That(() => this.state.GetString("no-such-property"),
+                    Throws.TypeOf<System.InvalidOperationException>());
+    }
+
     [TearDown]
     public void Dispose()
     {
