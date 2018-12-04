@@ -10,4 +10,15 @@ public class SimpleResponderTest {
         );
         Assert.AreEqual("yes that is very tasty.", responder.Respond(new SimpleBot.Intent("ingredient", true, new Dictionary<string, string>())));
     }
+
+    [Test]
+    public void RespondToNotToMatchIntent()
+    {
+        SimpleResponder responder = new SimpleResponder(
+            "ingredient", new List<string>(), null
+        );
+
+        Assert.That(() => responder.Respond(new SimpleBot.Intent("not-ingredient", true, new Dictionary<string, string>())),
+            Throws.TypeOf<System.InvalidOperationException>());
+    }
 }
