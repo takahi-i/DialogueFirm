@@ -52,7 +52,18 @@ public class GuideController : MonoBehaviour {
     void LoadConfig()
     {
         string settingFilePath = this.GetStreamingAssetsPath("SimpleBot/Guide/guide-conf.json");
-        string settingString = File.ReadAllText(settingFilePath);
+        string settingString;
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            WWW www = new WWW(settingFilePath);
+            while (!www.isDone);
+            settingString = www.text;
+        }
+        else
+        {
+            settingString = File.ReadAllText(settingFilePath);
+        }
         this.bot = new BotEngine(settingString);
     }
 
@@ -62,7 +73,7 @@ public class GuideController : MonoBehaviour {
 #if UNITY_EDITOR
      path = Application.dataPath + "/StreamingAssets/";
 #elif UNITY_ANDROID
-     path = "jar:file://"+ Application.dataPath + "!/assets/";
+     path = "jar:file://" + Application.dataPath + "!/assets/";
 #elif UNITY_IOS
      path = Application.dataPath + "/Raw/";
 #else
@@ -70,6 +81,7 @@ public class GuideController : MonoBehaviour {
      path = Application.dataPath + "/StreamingAssets/";
 #endif
         path = path + suffix;
+        Debug.Log("config path is set to  " + path);
         return path;
     }
 }

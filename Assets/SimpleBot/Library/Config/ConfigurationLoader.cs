@@ -23,7 +23,11 @@ namespace SimpleBot
         public Configuration loadFromString(string jsonText)
         {
             var builder = new ConfigurationBuilder();
+            Debug.Log("loading configuration string" + jsonText);
             JsonNode json = JsonNode.Parse(jsonText);
+            Debug.Log("Succeeded to parse given json");
+            Debug.Log(json);
+
             extractIntents(builder, json);
             extractTypes(builder, json);
             extractResponders(builder, json);
