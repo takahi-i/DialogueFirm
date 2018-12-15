@@ -17,8 +17,7 @@ In addition, functions for practical applications such as state transitions or s
 == Basic Usage
 
 SimpleBot has `Simple.BotEngine` which manages the dialogue with the user following
-specified configuration file. We can create a `BotEngine` specifying a `Configuration`
-object  which is loaded by `ConfigurationLoader`.
+specified configuration file. We can create a `BotEngine` specifying a configuration file.
 The following is a sample of creating a `BotEngine` object.
 
 ```
@@ -31,6 +30,7 @@ void CreateBot()
 ```
 
 After we create a `BotEngine` instance, the instance is ready to get input sentence.
+Adding input sentence (string type),  `BotEngine` returns the reply sentence following the given setting file.
 
 ```
 public void RespondToInput(string input)
@@ -41,7 +41,7 @@ public void RespondToInput(string input)
 }
 ```
 
-In the following sections, we learn the configurations and practical usage.
+In the following sections, we learn the configurations and practical usage of the SimpleBot framework.
 
 == Configurations
 
