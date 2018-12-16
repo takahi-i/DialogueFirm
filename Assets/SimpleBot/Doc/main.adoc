@@ -524,7 +524,7 @@ In the next section, we go through the usage of `State` object.
 
 === State
 
-State objects returned from `BotEngine.State` method have several methods to access the status of `BotEngine`.
+State object returned from `BotEngine.State` method have several methods to access the status of `BotEngine`.
 
 [cols="1,2,3", options="header"]
 .methods of State object
@@ -557,6 +557,15 @@ State objects returned from `BotEngine.State` method have several methods to acc
 | None
 | Delete all the attributes
 |===
+
+Using set methods of State, we can set the status of BotEngine or users in your application file as follows.
+
+```
+public void SetUserName(String name)
+{
+    this.engine.state.SetString("user-name", name);
+}
+```
 
 == Samples
 
