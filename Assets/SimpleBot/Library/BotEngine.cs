@@ -11,6 +11,7 @@ namespace SimpleBot
     /// </summary>
     public class BotEngine
     {
+        public float VERSION = 0.7f;
         private IntentIdentifier identifier;
         private IDictionary<string, List<ReplyResponder>> responders;
         private State state;
@@ -21,10 +22,12 @@ namespace SimpleBot
         /// <param name="config">Configuration object loaded from the configuration file</param>
         public BotEngine(Configuration config)
         {
+            Debug.Log(String.Format("Generating BotEngine version {0:F}", VERSION));
             setResources(config);
         }
 
         public BotEngine(string configurationString) {
+            Debug.Log(String.Format("Generating BotEngine version {0:F}", VERSION));
             ConfigurationLoader configurationLoader = new ConfigurationLoader();
             Configuration config = configurationLoader.loadFromString(configurationString);
             setResources(config);
