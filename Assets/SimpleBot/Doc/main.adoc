@@ -75,14 +75,14 @@ formatted configuration file. The following is a tiny example.
 ```
 
 In the above example, we see that the configuration files have two blocks (`intents` and `responders`).
-We register `intents` to extract intent from input sentences. `responders` specify the handlers to output
+We register `intents` to extract intents from input sentences. `responders` specify the handlers to output
 the reply sentences for target intents.
 
 === Intent settings
 
-`Intents` blocks consist of a list of intent settings. We add a set of intents which we want make the `BotEngine`
-to identify the intent of input sentences. Intents has three blocks, `name`, `match` and `effects`. The following
-table shows the description of each block.
+`Intents` blocks consist of a list of intent settings. A set of intents make the `BotEngine`
+to identify the intents of input sentences. Each element of intent has three properties,
+`name`, `match` and `effects`. The following table shows the description of each property.
 
 [cols="1,2", options="header"]
 .elements of match block
@@ -547,22 +547,21 @@ State objects returned from `BotEngine.State` method have several methods to acc
 
 | GetInt
 | key (string)
-| Get the value of specified attribute
+| Get the value of specified attribute. If the value does not exist, throws `InvalidOperationException`
 
 | GetString
 | key (string)
-| Get the value to specified attribute
+| Get the value to specified attribute. If the value does not exist, throws `InvalidOperationException`
 
 | DeleteAll
 | None
 | Delete all the attributes
 |===
 
-
 == Samples
 
-In this section, we go through chat-bot sample configurations with SimpleBot though two chat bot examples.
-Both examples are bundled in this SimpleBot package.
+In this section, we go through sample configurations of SimpleBot though two chat bot examples.
+Both examples are bundled in this SimpleBot package as scenes.
 
 === Guide
 
@@ -639,8 +638,8 @@ please see the details of the configuration file.
 
 === Release Manager
 
-Next example is `Release Manager` who checks the release messages. When the release messages does not contains errors,
-he or she is satisfied, but when there are errors, he get nervous.
+Next example is `Release Manager` who is manager of a software product and checks the release messages.
+When the release messages does not contains errors, he or she is satisfied, but when there are errors, he get nervous.
 
 The following setting contains two intents `failed` and `succeeded`. They match keywords `fail` and `fix` respectively.
 
