@@ -35,11 +35,11 @@ namespace SimpleBot
 {
     namespace Utils
     {
-        public class JsonNode : IEnumerable<JsonNode>, IDisposable
+        public class JsonAccessor : IEnumerable<JsonAccessor>, IDisposable
         {
             object obj;
 
-            public JsonNode(object obj)
+            public JsonAccessor(object obj)
             {
                 this.obj = obj;
             }
@@ -49,30 +49,30 @@ namespace SimpleBot
                 obj = null;
             }
 
-            public static JsonNode Parse(string json)
+            public static JsonAccessor Parse(string json)
             {
-                return new JsonNode(MiniJSON.Json.Deserialize(json));
+                return new JsonAccessor(MiniJSON.Json.Deserialize(json));
             }
 
-            public JsonNode this[int i]
+            public JsonAccessor this[int i]
             {
                 get
                 {
                     if (obj is IList)
                     {
-                        return new JsonNode(((IList)obj)[i]);
+                        return new JsonAccessor(((IList)obj)[i]);
                     }
                     throw new Exception("Object is not IList : " + obj.GetType().ToString());
                 }
             }
 
-            public JsonNode this[string key]
+            public JsonAccessor this[string key]
             {
                 get
                 {
                     if (obj is IDictionary)
                     {
-                        return new JsonNode(((IDictionary)obj)[key]);
+                        return new JsonAccessor(((IDictionary)obj)[key]);
                     }
                     throw new Exception("Object is not IDictionary : " + obj.GetType().ToString());
                 }
@@ -116,13 +116,13 @@ namespace SimpleBot
                 return (T)obj;
             }
 
-            public IEnumerator<JsonNode> GetEnumerator()
+            public IEnumerator<JsonAccessor> GetEnumerator()
             {
                 if (obj is IList)
                 {
                     foreach (var o in (IList)obj)
                     {
-                        yield return new JsonNode(o);
+                        yield return new JsonAccessor(o);
                     }
                 }
                 else if (obj is IDictionary)
@@ -130,7 +130,7 @@ namespace SimpleBot
                     var dic = (IDictionary)obj;
                     foreach (var o in dic.Keys) // return keys
                     {
-                        yield return new JsonNode(o);
+                        yield return new JsonAccessor(o);
                     }
                 }
                 else
