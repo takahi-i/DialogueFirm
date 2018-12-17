@@ -37,16 +37,16 @@ namespace SimpleBot
     {
         public class JsonAccessor : IEnumerable<JsonAccessor>, IDisposable
         {
-            object obj;
+            object currentNode;
 
             public JsonAccessor(object obj)
             {
-                this.obj = obj;
+                this.currentNode = obj;
             }
 
             public void Dispose()
             {
-                obj = null;
+                currentNode = null;
             }
 
             public static JsonAccessor Parse(string json)
@@ -58,11 +58,11 @@ namespace SimpleBot
             {
                 get
                 {
-                    if (obj is IList)
+                    if (currentNode is IList)
                     {
-                        return new JsonAccessor(((IList)obj)[i]);
+                        return new JsonAccessor(((IList)currentNode)[i]);
                     }
-                    throw new Exception("Object is not IList : " + obj.GetType().ToString());
+                    throw new Exception("Node is not List : " + currentNode.GetType().ToString());
                 }
             }
 
@@ -70,11 +70,11 @@ namespace SimpleBot
             {
                 get
                 {
-                    if (obj is IDictionary)
+                    if (currentNode is IDictionary)
                     {
-                        return new JsonAccessor(((IDictionary)obj)[key]);
+                        return new JsonAccessor(((IDictionary)currentNode)[key]);
                     }
-                    throw new Exception("Object is not IDictionary : " + obj.GetType().ToString());
+                    throw new Exception("Node is not Dictionary : " + currentNode.GetType().ToString());
                 }
             }
 
@@ -82,13 +82,13 @@ namespace SimpleBot
             {
                 get
                 {
-                    if (obj is IList)
+                    if (currentNode is IList)
                     {
-                        return ((IList)obj).Count;
+                        return ((IList)currentNode).Count;
                     }
-                    else if (obj is IDictionary)
+                    else if (currentNode is IDictionary)
                     {
-                        return ((IDictionary)obj).Count;
+                        return ((IDictionary)currentNode).Count;
                     }
                     else
                     {
@@ -100,9 +100,9 @@ namespace SimpleBot
 
             public bool Contains<T>(T key)
             {
-                if (obj is IDictionary)
+                if (currentNode is IDictionary)
                 {
-                    var dic = (IDictionary)obj;
+                    var dic = (IDictionary)currentNode;
                     return dic.Contains(key);
                 }
                 else
@@ -113,21 +113,21 @@ namespace SimpleBot
 
             public T Get<T>()
             {
-                return (T)obj;
+                return (T)currentNode;
             }
 
             public IEnumerator<JsonAccessor> GetEnumerator()
             {
-                if (obj is IList)
+                if (currentNode is IList)
                 {
-                    foreach (var o in (IList)obj)
+                    foreach (var o in (IList)currentNode)
                     {
                         yield return new JsonAccessor(o);
                     }
                 }
-                else if (obj is IDictionary)
+                else if (currentNode is IDictionary)
                 {
-                    var dic = (IDictionary)obj;
+                    var dic = (IDictionary)currentNode;
                     foreach (var o in dic.Keys) // return keys
                     {
                         yield return new JsonAccessor(o);
