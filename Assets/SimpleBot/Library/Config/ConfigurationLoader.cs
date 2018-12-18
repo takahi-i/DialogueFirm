@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SimpleBot.Utils;
 
 namespace SimpleBot
 {
@@ -24,7 +25,7 @@ namespace SimpleBot
         {
             var builder = new ConfigurationBuilder();
             Debug.Log("loading configuration string" + jsonText);
-            JsonNode json = JsonNode.Parse(jsonText);
+            JsonAccessor json = JsonAccessor.Parse(jsonText);
             Debug.Log("Succeeded to parse given json");
             Debug.Log(json);
 
@@ -34,7 +35,7 @@ namespace SimpleBot
             return builder.Build();
         }
 
-        private static void extractIntents(ConfigurationBuilder builder, JsonNode json)
+        private static void extractIntents(ConfigurationBuilder builder, JsonAccessor json)
         {
             foreach (var intent in json["intents"])
             {
@@ -85,7 +86,7 @@ namespace SimpleBot
             }
         }
 
-        private void extractResponders(ConfigurationBuilder builder, JsonNode json)
+        private void extractResponders(ConfigurationBuilder builder, JsonAccessor json)
         {
             foreach (var responderName in json["responders"])
             {
@@ -112,7 +113,7 @@ namespace SimpleBot
             }
         }
 
-        private static void extractTypes(ConfigurationBuilder builder, JsonNode json)
+        private static void extractTypes(ConfigurationBuilder builder, JsonAccessor json)
         {
             if (!json.Contains<string>("types"))
             {
@@ -132,7 +133,7 @@ namespace SimpleBot
             }
         }
 
-        private ConditionConfig extractCondtion(JsonNode conditionNode)
+        private ConditionConfig extractCondtion(JsonAccessor conditionNode)
         {
             foreach (var conditionType in conditionNode)
             {
@@ -148,7 +149,7 @@ namespace SimpleBot
             throw new InvalidOperationException("No conditon is specified...");
         }
 
-        private List<ConditionConfig> extractChildCondtions(JsonNode childConditionListNodes) {
+        private List<ConditionConfig> extractChildCondtions(JsonAccessor childConditionListNodes) {
             List<ConditionConfig> childConditions = new List<ConditionConfig>();
             foreach (var conditionNode in childConditionListNodes)
             {
@@ -167,7 +168,7 @@ namespace SimpleBot
             return childConditions;
         }
 
-        private ConditionConfig extractTerminalConditions(string conditionTypeStr, JsonNode terminalConditonNode)
+        private ConditionConfig extractTerminalConditions(string conditionTypeStr, JsonAccessor terminalConditonNode)
         {
             string conditionFeild = "";
             List<Pair> arguments = new List<Pair>();
