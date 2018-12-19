@@ -17,7 +17,7 @@ public class IntentIdentifierTest {
     }
 
     [Test]
-    public void IdentifyIntentWithVervatimOnCapitalCaseTest()
+    public void IdentifyIntentWithVerbatimOnCapitalCaseTest()
     {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "Aho" }, new Dictionary<string, string>()).Build();
         var identifier = new IntentIdentifier(config);

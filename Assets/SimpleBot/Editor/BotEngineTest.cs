@@ -22,7 +22,7 @@ public class BotEngineTest {
 
 
     [Test]
-    public void NotMatchCondition()
+    public void NotMatchConditionWithDefault()
     {
         var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
                                                AddResponds("foobar", new List<string>() { "baz" }).
@@ -34,6 +34,23 @@ public class BotEngineTest {
                                                Build();
         var engine = new BotEngine(config);
         Assert.AreEqual("foo", engine.ReplySentence("aho is not a researcher."));
+    }
+
+    [Test]
+    public void NotMatchConditionWithoutDefault()
+    {
+        var config = new ConfigurationBuilder().AddIntent("foobar", "verbatim", new List<string>() { "aho" }, new Dictionary<string, string>()).
+                                               AddResponds("foobar", new List<string>() { "baz" }).
+                                               AddCondition(new ConditionConfig("must",
+                                                                                  new List<ConditionConfig>() {
+                                                                                  new ConditionConfig("term", "feel", new List<Pair>() { new Pair("happy", "dummy") })
+                                                                                })).
+                                               Build();
+        var engine = new BotEngine(config);
+
+        Assert.That(() => engine.ReplySentence("aho is not a researcher."),
+                    Throws.TypeOf<System.InvalidOperationException>());
+
     }
 
     [Test]

@@ -202,7 +202,9 @@ settings for the each target intent defined in `intents` block.
 
 The following configuration, one intent `repeat` is defined in `intents` block.
 The `responders` section has two block, for `repeat` and `default` targets. `repeat` target is applied when
-the `BotEngine` detect the intent of inputs as `repeat`. `default` target is called when no intent is detected.
+the `BotEngine` detect the intent of inputs as `repeat`. `default` target is a special target, which is called when no intent is detected.
+
+NOTE: When configuration file does not `default` intent, BotEngine.replySentence throw System.InvalidOperationException.
 
 ```
 {
