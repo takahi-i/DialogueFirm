@@ -204,7 +204,7 @@ The following configuration, one intent `repeat` is defined in `intents` block.
 The `responders` section has two block, for `repeat` and `default` targets. `repeat` target is applied when
 the `BotEngine` detect the intent of inputs as `repeat`. `default` target is a special target, which is called when no intent is detected.
 
-NOTE: When configuration file does not `default` intent, BotEngine.replySentence throw System.InvalidOperationException.
+NOTE: When configuration file does not `default` intent, BotEngine.replySentence throws System.InvalidOperationException.
 
 ```
 {
@@ -481,7 +481,12 @@ The method loads the file and pass the string content to the constructor of BotE
 
 ==== ReplySentence
 
-`ReplySentence` returns the sentence for input sentences. The following function, `Reply` loads the input
+`ReplySentence` returns the sentence for input sentences following the specified configuration file.
+Note that `ReplySentence` throws `InvalidOperationException` when the input sentence does not match
+any defined intent and the `default` intent does not registered in the configuration files.
+
+
+The following function, `Reply` loads the input
 from inputField (InputField) and then gets the reply sentence by bot (`BotEngine` object) putting the input sentence.
 
 ```
