@@ -397,12 +397,13 @@ The following table shows the supported types of range conditions.
 |Equal to
 |===
 
-`condition` is useful, but it is inadequate to express complex condition. SimpleBot
-supports `boolean condition` to express complex conditions.
+`condition` is useful for controlling the discourse between SimpleBot and users, but it
+is still inadequate to express complex condition. SimpleBot supports `boolean condition` to
+express complex conditions.
 
 ==== Boolean conditions
 
-SimpleBot supports the combinations of other conditions with boolean conditions (`should` and `must`).
+`SimpleBot` supports the combinations of conditions with boolean conditions (`should` and `must`).
 The following table shows the descriptions of supported boolean conditions.
 
 [cols="1,2", options="header"]
@@ -416,9 +417,9 @@ The following table shows the descriptions of supported boolean conditions.
 |All sub-conditions must be satisfied
 |===
 
-Using boolean conditions, we can make more complicated conditions. In the following setting,
+Using boolean conditions, we can express more complicated conditions. In the following setting,
 a respond sentence with condition ``"Oh my god... Project looks chaos ..."`` is responded
-when one of the conditions in the `should` block.
+when one of the conditions in the `should` block which have two child conditions.
 
 ```
 "responders" : {
@@ -463,7 +464,7 @@ Basically we only use few objects in `SimpleBot` package.
 
 ==== Constructor
 
-The constructor of BotEngine takes a string parameter which contains the configuration of SimpleBot.
+The constructor of `BotEngine` takes a string parameter which contains the configuration of SimpleBot.
 
 The following is a sample to create a BotEngine instance.
 
@@ -500,7 +501,7 @@ public void Reply()
 ==== State
 
 `BotEngine` has a method to return the `State` object which contains the status of `BotEngine`.
-The following sample calls the `State` method to switches the images of an application.
+The following sample calls the `State` method to switch the images of an application.
 
 ```
 public void Reply()
@@ -531,7 +532,7 @@ In the next section, we go through the usage of `State` object.
 
 === State
 
-State object returned from `BotEngine.State` method have several methods to access the status of `BotEngine`.
+`State` objects returned from `BotEngine.State` method have several methods to access the status of `BotEngine`.
 
 [cols="1,2,3", options="header"]
 .methods of State object
@@ -542,7 +543,7 @@ State object returned from `BotEngine.State` method have several methods to acce
 
 |HasKey
 |key (string)
-|Return True when the state attribute (key) is defined. Otherwise returns False.
+|Return True when the state attribute (key) is defined. Otherwise returns False
 
 | SetInt
 | key (string), value (int)
@@ -718,7 +719,7 @@ The following setting contains two intents `failed` and `succeeded`. They match 
 }
 ```
 
-A feature of the above setting is `effects` in the `intents` block. When the bot get
+A feature of the above setting is `effects` in the `intents` block. When the bot gets
 inputs which match `failed` intent, state `anger-level` incremented.
 
 The state `anger-level` is used in a responder section. When anger level is greater than equals to `3`,
