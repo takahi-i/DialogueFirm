@@ -485,7 +485,7 @@ The method loads the file and pass the string content to the constructor of BotE
 Note that `ReplySentence` throws `InvalidOperationException` when the input sentence does not match
 any defined intent and the `default` intent does not registered in the configuration files.
 
-
+ca
 The following function, `Reply` loads the input
 from inputField (InputField) and then gets the reply sentence by bot (`BotEngine` object) putting the input sentence.
 
