@@ -1,4 +1,4 @@
-= SimpleBot Documentation
+= DialogFirm Documentation
 :doctype: book
 :source-highlighter: coderay
 :listing-caption: Listing
@@ -10,20 +10,20 @@
 
 == Overview
 
-SimpleBot is a simple chat bot engine for the Unity platform. Given input sentences, SimpleBot detects
+DialogFirm is a simple chat bot engine for the Unity platform. Given input sentences, DialogFirm detects
 the intent and then reply the reply sentence. Simple bot provides an Amazon Alexa styled JSON configuration.
 In addition, functions for practical applications such as state transitions or slot type matching are provided.
 
 == Basic Usage
 
-SimpleBot has `Simple.BotEngine` which manages the dialogue with the user following
+DialogFirm has `Simple.BotEngine` which manages the dialogue with the user following
 specified configuration file. We can create a `BotEngine` specifying a configuration file.
 The following is a sample of creating a `BotEngine` object.
 
 ```
 void CreateBot()
 {
-    string settingFilePath = Application.dataPath + "/SimpleBot/Scenes/simple-bot-conf.json";
+    string settingFilePath = Application.dataPath + "/DialogFirm/Scenes/simple-bot-conf.json";
     string setting = File.ReadAllText(settingFilePath);
     this.bot = new BotEngine(setting);
 }
@@ -41,11 +41,11 @@ public void RespondToInput(string input)
 }
 ```
 
-In the following sections, we learn the configurations and practical usage of the SimpleBot framework.
+In the following sections, we learn the configurations and practical usage of the DialogFirm framework.
 
 == Configurations
 
-This section starts from the simple SimpleBot configuration. SimpleBot has a JSON
+This section starts from the simple DialogFirm configuration. DialogFirm has a JSON
 formatted configuration file. The following is a tiny example.
 
 ```
@@ -118,7 +118,7 @@ The following is a plain setting to identify if the user input is about weather.
 
 As we see intents block is a list and contains one intent block. The intent block has three elements `name`, `match`.
 In the `match` block, we specify the matching expressions. `match` has two types of matching type. We specify matching
-type in `type` element. SimpleBot provides two types of matching. `verbatim` and `template`. Next section shows the
+type in `type` element. DialogFirm provides two types of matching. `verbatim` and `template`. Next section shows the
 types of intent matching.
 
 ==== Verbatim matching
@@ -142,7 +142,7 @@ The following is the example shown in the previous section.
 
 NOTE: elements of expressions are automatically normalized into lowercase
 
-With the `expressions` settings, SimpleBot can tell if the input is about weather when input
+With the `expressions` settings, DialogFirm can tell if the input is about weather when input
 contains registered expressions `forcast` or `weather`.
 
 ==== Template matching
@@ -236,7 +236,7 @@ Each respond block contains `responds` element which has a list of respond sente
 
 === Handling State
 
-SimpleBot support state of dialogue. We can add the settings of state,
+DialogFirm support state of dialogue. We can add the settings of state,
 combining `effects` and `condition` blocks.
 
 ==== Effect
@@ -281,7 +281,7 @@ the intent. `effects` has the following elements.
 ```
 
 In the above example, every time identifying the whether intent, the `angry-level` increased.
-SimpleBot support the following types of effect.
+DialogFirm support the following types of effect.
 
 [cols="1,2", options="header"]
 .types of effect
@@ -369,7 +369,7 @@ two responders both of them have `condition` block which
 defines `range` condition. If the `failed-num` is less then or equals `1` first
 respond is applied otherwise the second one is applied.
 
-SimpleBot supports two types of conditions (`range` and `term`).
+DialogFirm supports two types of conditions (`range` and `term`).
 
 [cols="1,2", options="header"]
 .types of conditions
@@ -397,13 +397,13 @@ The following table shows the supported types of range conditions.
 |Equal to
 |===
 
-`condition` is useful for controlling the discourse between SimpleBot and users, but it
-is still inadequate to express complex condition. SimpleBot supports `boolean condition` to
+`condition` is useful for controlling the discourse between DialogFirm and users, but it
+is still inadequate to express complex condition. DialogFirm supports `boolean condition` to
 express complex conditions.
 
 ==== Boolean conditions
 
-`SimpleBot` supports the combinations of conditions with boolean conditions (`should` and `must`).
+`DialogFirm` supports the combinations of conditions with boolean conditions (`should` and `must`).
 The following table shows the descriptions of supported boolean conditions.
 
 [cols="1,2", options="header"]
@@ -455,23 +455,23 @@ when one of the conditions in the `should` block which have two child conditions
 
 == Class and APIs
 
-This section describes the public classes and the usage provided by SimpleBot package.
-Basically we only use few objects in `SimpleBot` package.
+This section describes the public classes and the usage provided by DialogFirm package.
+Basically we only use few objects in `DialogFirm` package.
 
 === BotEngine
 
-`BotEngine` has the main role in the SimpleBot package. This object accepts input sentence and returns reply sentences.
+`BotEngine` has the main role in the DialogFirm package. This object accepts input sentence and returns reply sentences.
 
 ==== Constructor
 
-The constructor of `BotEngine` takes a string parameter which contains the configuration of SimpleBot.
+The constructor of `BotEngine` takes a string parameter which contains the configuration of DialogFirm.
 
 The following is a sample to create a BotEngine instance.
 
 ```
 BotEngine LoadConfig()
 {
-    string settingFilePath = this.GetStreamingAssetsPath("SimpleBot/Guide/guide-conf.json");
+    string settingFilePath = this.GetStreamingAssetsPath("DialogFirm/Guide/guide-conf.json");
     string settingString = File.ReadAllText(settingFilePath);
     return new BotEngine(settingString);
 }
@@ -577,8 +577,8 @@ public void SetUserName(String name)
 
 == Samples
 
-In this section, we go through sample configurations of SimpleBot though two chat bot examples.
-Both examples are bundled in this SimpleBot package as scenes.
+In this section, we go through sample configurations of DialogFirm though two chat bot examples.
+Both examples are bundled in this DialogFirm package as scenes.
 
 === Guide
 
@@ -637,7 +637,7 @@ This conference uses two rooms (134 and 445) in a building. The following is the
 }
 ```
 
-In the above settings, SimpleBot returns the schedule of the room which is specified by the users.
+In the above settings, DialogFirm returns the schedule of the room which is specified by the users.
 There is one intent (`room-schedule`) which is a `template` matching using slot named `roomIds`.
 This template matches `tell me the schedule of room`. In responders section, two responders
 (`room-schedule` and `default`) are registered. `room-schedule` is applied when the inputs from users
@@ -728,7 +728,7 @@ When the bot get the input matches the `succeeded` intent, the `anger-level` is 
 
 ## Summary
 
-This article describes how to make settings of SimpleBot. As we see, we can make complicated application
+This article describes how to make settings of DialogFirm. As we see, we can make complicated application
 using `condition` and `effect` features.
 
 If you have any questions or feature request, please let us know through forum of Unity Assets markets.
