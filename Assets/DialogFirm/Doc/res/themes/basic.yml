@@ -115,7 +115,7 @@ title_page:
     line_height: 0.9
   subtitle:
     font_size: $heading_h3_font_size
-    font_style: bold_italic
+    font_style: bold
     line_height: 1
   authors:
     margin_top: $base_font_size * 1.25

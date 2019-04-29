@@ -1,4 +1,5 @@
-= DialogFirm Documentation
+[separator=::]
+= Documentation of DialogFirm :: a chat bot platform for Unity
 :doctype: book
 :source-highlighter: coderay
 :listing-caption: Listing
