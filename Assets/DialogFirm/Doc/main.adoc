@@ -39,6 +39,12 @@ void CreateBot()
 }
 ```
 
+This example reads configuration stored in file `Application.dataPath + "/DialogFirm/Scenes/simple-bot-conf.json"` and then load the settings to a string `setting`.
+Then it creates the BotEngine object.
+
+NOTE: configuration files of BotEngine are stored as `Streaming Assets`. Details of `Streaming Assets`, please see the https://docs.unity3d.com/2018.3/Documentation/Manual/StreamingAssets.html[manual].
+
+
 After we create a `BotEngine` instance, the instance is ready to get input sentence.
 Adding input sentence (string type),  `BotEngine` returns the reply sentence following the given setting file.
 
