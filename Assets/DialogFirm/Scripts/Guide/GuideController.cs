@@ -17,8 +17,8 @@ public class GuideController : MonoBehaviour {
 
     public void Start()
     {
-        confusedSprite = Resources.Load<Sprite>("DialogFirm/Guide/bulter-confused") as Sprite;
-        happySprite = Resources.Load<Sprite>("DialogFirm/Guide/bulter-smile") as Sprite;
+        confusedSprite = Resources.Load<Sprite>("DialogFirm/Guide/butler-confused") as Sprite;
+        happySprite = Resources.Load<Sprite>("DialogFirm/Guide/butler-smile") as Sprite;
         defaultSprite = Resources.Load<Sprite>("DialogFirm/Guide/butler-default") as Sprite;
         guideImage.sprite = defaultSprite;
         this.LoadConfig();
