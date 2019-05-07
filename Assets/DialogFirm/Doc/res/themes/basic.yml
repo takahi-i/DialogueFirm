@@ -118,7 +118,7 @@ title_page:
     font_style: bold
     line_height: 1
   authors:
-    margin_top: $base_font_size * 1.25
+    margin_top: $base_font_size * 10.0
     font_size: $base_font_size_large
     font_color: 181818
   revision:

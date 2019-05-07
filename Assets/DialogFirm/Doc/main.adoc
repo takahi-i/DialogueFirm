@@ -5,12 +5,14 @@
 :listing-caption: Listing
 :pdf-page-size: Letter
 :author: Takahiko Ito
+:title-logo-image:: image::./res/butler.png[width=100, align=right]
 :revnumber: 0.8
 :revdate: 05-01-2019
 :toc: right
 :toc-title: Table of Contents
 :toclevels: 4
 :imagesdir: ./
+
 
 == Colophon
 
