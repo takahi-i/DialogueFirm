@@ -674,7 +674,10 @@ please see the details of the configuration file.
 === Release Manager
 
 Next example is `Release Manager` who is manager of a software product and checks the release messages.
-When the release messages does not contains errors, he or she is satisfied, but when there are errors, he get nervous.
+When the release messages does not contains errors, he is satisfied, but when there are errors, he get nervous.
+The following image show the state transition of the manager. His state is changed when he got messages from the users.
+
+image::res/manager-transitions.jpeg[]
 
 The following setting contains two intents `failed` and `succeeded`. They match keywords `fail` and `fix` respectively.
 
