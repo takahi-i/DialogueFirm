@@ -26,6 +26,11 @@ DialogFirm is a simple chat bot engine for the Unity platform. Given input sente
 the intent and then reply the reply sentence. Simple bot provides an Amazon Alexa styled JSON configuration.
 In addition, functions for practical applications such as state transitions or slot type matching are provided.
 
+The following image shows the an image of the state transitions. In the image, we can see the state of guide changed
+by input sentence from users.
+
+image::res/state-transitions.jpeg[]
+
 == Basic Usage
 
 DialogFirm has `Simple.BotEngine` which manages the dialogue with the user following
