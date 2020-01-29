@@ -46,6 +46,8 @@ formatted configuration file. The following is a tiny example.
 }
 ```
 
+For more details, see [the DialoguFirm docuement](https://github.com/takahi-i/DialogueFirm/blob/master/Assets/DialogFirm/Doc/main.adoc).
+
 
 ## Basic Usage
 
