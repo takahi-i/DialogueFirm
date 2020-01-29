@@ -1,9 +1,8 @@
 
 /Applications/Unity/Unity.app/Contents/Mono/bin/smcs \
-    -recurse:'Assets/SimpleBot/Library/*.cs' \
+    -recurse:'Assets/DialogFirm/Library/*.cs' \
     -lib:/Applications/Unity/Unity.app/Contents/Managed/ \
     -r:UnityEngine \
     -r:UnityEditor \
     -target:library \
-    -out:Assets/SimpleBot/Lib/SimpleBot.dll
-    
+    -out:Assets/DialogFirm/Lib/DialogueFirm.dll
