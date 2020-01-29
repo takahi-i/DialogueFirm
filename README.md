@@ -15,6 +15,38 @@ by input sentence from users.
 
 ![state transition](Assets/DialogFirm/Doc/res/manager-transitions.jpeg)
 
+## Basic Configuration
+
+This section starts from the simple DialogFirm configuration. DialogFirm has a JSON
+formatted configuration file. The following is a tiny example.
+
+```
+{
+  "intents": [
+    {
+      "name": "repeat",
+      "match": {
+        "type": "verbatim",
+        "expressions": [ "repeat", "pardon me?" ]
+      }
+    }
+  ],
+  "responders":
+  {
+    "repeat": [
+      {
+        "responds": [ "Go straight." ],
+      }
+    ],
+    "default": [{
+      "target": "default",
+      "responds": [ "Sorry I do not understand what you mean." ]
+    }]
+  }
+}
+```
+
+
 ## Basic Usage
 
 DialogFirm has `BotEngine` which manages the dialogue with the user following
