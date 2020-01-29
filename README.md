@@ -7,13 +7,14 @@ In addition, functions for practical applications such as state transitions or s
 The following image shows the an image of the state transitions. In the image, we can see the state of guide changed
 by input sentence from users.
 
+![state transition](Assets/DialogFirm/Doc/res/manager-transitions.jpeg)
 
 ## Features
 
 * Simple configuration with JSON (AWS Alexa style)
 * Support state transistions
 
-![state transition](Assets/DialogFirm/Doc/res/manager-transitions.jpeg)
+![demo](guide-sample.png)
 
 ## Basic Usage
 
