@@ -8,9 +8,16 @@ The following image shows the an image of the state transitions. In the image, w
 by input sentence from users.
 
 
+## Features
+
+* Simple configuration with JSON (AWS Alexa style)
+* Support state transistions
+
+![state transition](Assets/DialogFirm/Doc/res/manager-transitions.jpeg)
+
 ## Basic Usage
 
-DialogFirm has `Simple.BotEngine` which manages the dialogue with the user following
+DialogFirm has `BotEngine` which manages the dialogue with the user following
 specified configuration file. We can create a `BotEngine` specifying a configuration file.
 The following is a sample of creating a `BotEngine` object.
 
